@@ -34,6 +34,9 @@
     {% else %}
       {{ page.title }} | {{ title }}
     {% endif %}
+  {% elsif page.url == '/' and page.role %}
+    {% comment %} Home page: name plus role, so searches for his field or university match too. {% endcomment %}
+    {{ title }} | {{ page.role }}
   {% else %}
     {{ title }}
   {% endif %}

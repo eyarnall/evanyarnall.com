@@ -6,6 +6,7 @@
 require "bibtex"
 require "date"
 require "json"
+require "time"
 
 module StructuredData
   MONTHS = %w[jan feb mar apr may jun jul aug sep oct nov dec].freeze
@@ -115,7 +116,11 @@ module StructuredData
       "givenName" => site.config["first_name"],
       "familyName" => site.config["last_name"],
       "url" => "#{id[:base]}/",
-      "image" => "#{id[:base]}/assets/img/prof_pic.jpg",
+      "image" => {
+        "@type" => "ImageObject",
+        "url" => "#{id[:base]}/assets/img/prof_pic.jpg",
+        "caption" => cv["name"] || full_name(site),
+      },
       "jobTitle" => cv["label"],
       "description" => site.config["description"],
       "affiliation" => { "@id" => id[:lab] },
@@ -124,6 +129,8 @@ module StructuredData
       "alumniOf" => alumni,
       "knowsAbout" => facts["knows_about"],
       "award" => awards,
+      "hasOccupation" => occupation(cv),
+      "hasCredential" => credentials(cv),
       "sameAs" => same_as,
     }.reject { |_, v| v.nil? || v == [] }
   end
@@ -149,6 +156,47 @@ module StructuredData
     { "@type" => type, "@id" => node_id }.merge(facts || {}).merge(extra)
   end
 
+  # Current role, from the first position in cv.yml ("Graduate Researcher, DEMR Lab" -> "Graduate Researcher").
+  def occupation(cv)
+    title = (cv["experience"] || []).first&.dig("position").to_s.split(",").first.to_s.strip
+    title.empty? ? nil : { "@type" => "Occupation", "name" => title }
+  end
+
+  # Completed degrees and certificates from cv.yml.
+  def credentials(cv)
+    degrees = (cv["education"] || []).reject { |e| e["expected"] }.map do |e|
+      {
+        "@type" => "EducationalOccupationalCredential",
+        "credentialCategory" => "degree",
+        "name" => e["degree"],
+        "recognizedBy" => { "@type" => "CollegeOrUniversity", "name" => e["institution"].to_s.split(",").first.strip },
+      }
+    end
+    certificates = (cv["certificates"] || []).map do |c|
+      {
+        "@type" => "EducationalOccupationalCredential",
+        "credentialCategory" => "certificate",
+        "name" => c["name"],
+        "recognizedBy" => { "@type" => "Organization", "name" => c["issuer"] },
+        "dateCreated" => c["date"].to_s,
+      }
+    end
+    degrees + certificates
+  end
+
+  # Home > page, or Home > Research > project for project pages.
+  def breadcrumb(site, page, id)
+    trail = [["Home", "#{id[:base]}/"]]
+    trail << ["Research", "#{id[:base]}/research/"] if page["collection"] == "projects"
+    trail << [page["title"], "#{id[:base]}#{page['url']}"]
+    {
+      "@type" => "BreadcrumbList",
+      "itemListElement" => trail.each_with_index.map do |(name, url), i|
+        { "@type" => "ListItem", "position" => i + 1, "name" => name, "item" => url }
+      end,
+    }
+  end
+
   def page_node(site, page, id)
     url = "#{id[:base]}#{page['url']}"
     home = page["url"] == "/"
@@ -165,6 +213,7 @@ module StructuredData
     if home
       node["@type"] = "ProfilePage"
       node["mainEntity"] = { "@id" => id[:person] }
+      node["dateModified"] = site.time.iso8601
     elsif page["url"] == "/publications/"
       node["@type"] = "CollectionPage"
       node["hasPart"] = (site.data["papers"] || []).map { |p| work(site, p, id) }
@@ -177,6 +226,7 @@ module StructuredData
         "member" => [{ "@id" => id[:person] }, { "@id" => id[:ferre] }],
       }
     end
+    node["breadcrumb"] = breadcrumb(site, page, id) unless home || page["title"].to_s.empty?
     node
   end
 
