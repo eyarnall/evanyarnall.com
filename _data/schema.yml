@@ -1,0 +1,64 @@
+# Facts about the people and organizations around Evan, for search engines and AI tools.
+# _plugins/structured_data.rb turns these, plus _data/cv.yml, _data/socials.yml and papers.bib, into the
+# schema.org data in every page's <head>. Checked against the DEMR Lab, BU and ORCID sites in October 2026.
+
+# Topics Evan works on (schema.org "knowsAbout").
+knows_about:
+  - Rehabilitation science
+  - Cerebral palsy
+  - Unilateral cerebral palsy
+  - Sensorimotor development
+  - Infant motor development
+  - Bimanual coordination
+  - Online motor control
+  - Functional near-infrared spectroscopy (fNIRS)
+  - Transcranial magnetic stimulation (TMS)
+  - Behavioral video coding
+  - Wearable motion sensors (IMUs)
+
+lab:
+  name: Development, Experience, & Motor Recovery Lab
+  alternateName: DEMR Lab
+  url: https://sites.bu.edu/demrlab/
+  description: >-
+    Boston University research lab that studies motor skills in infants and children to develop new therapies for
+    children with cerebral palsy.
+  email: demrlab@bu.edu
+  telephone: "+1-617-353-7492"
+  address:
+    streetAddress: 635 Commonwealth Ave
+    addressLocality: Boston
+    addressRegion: MA
+    postalCode: "02215"
+    addressCountry: US
+  sameAs:
+    - https://www.instagram.com/demrlab/
+
+ferre:
+  name: Claudio L. Ferre
+  givenName: Claudio
+  familyName: Ferre
+  honorificSuffix: PhD
+  jobTitle: Assistant Professor of Occupational Therapy
+  description: >-
+    Director of the Development, Experience, & Motor Recovery (DEMR) Lab at Boston University, and Evan Yarnall's
+    PhD advisor.
+  url: https://www.bu.edu/sargent/profile/claudio-ferre/
+  sameAs:
+    - https://orcid.org/0000-0002-4370-6965
+    - https://www.bu.edu/neurophotonics/profile/claudio-ferre/
+    - https://sites.bu.edu/demrlab/people/
+
+sargent:
+  name: Boston University Sargent College of Health & Rehabilitation Sciences
+  url: https://www.bu.edu/sargent/
+
+neurophotonics:
+  name: Boston University Neurophotonics Center
+  url: https://www.bu.edu/neurophotonics/
+
+bu:
+  name: Boston University
+  url: https://www.bu.edu/
+  sameAs:
+    - https://en.wikipedia.org/wiki/Boston_University

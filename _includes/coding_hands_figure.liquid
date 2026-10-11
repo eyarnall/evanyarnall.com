@@ -1,0 +1,373 @@
+{% comment %}
+  "Which hand?" Second behavioral coding demo (used on _projects/3_measuring_movement.md).
+  Visitors code each moment as Left, Right or Both. The clip is a drawn, simulated pair of hands seen
+  from above and behind the infant; the "trained coder" record is the exact contact times from the simulation.
+  Reuses the .cy-* styles from coding_figure.liquid.
+{% endcomment %}
+<figure class="lab-figure lab-figure-live cy-figure cb-figure" id="cb-figure">
+  <div class="cy-head">
+    <p class="cy-status" aria-live="polite">Ready</p>
+    <p class="cy-clock" aria-hidden="true">0.0 s</p>
+  </div>
+  <svg class="cy-scene cb-scene" viewBox="0 0 600 250" role="img" aria-label="Two drawn infant hands, seen from above, reaching for a rattle."></svg>
+
+  <div class="cy-controls cb-controls">
+    <button type="button" class="cy-start"></button>
+    <div class="cb-keys" role="group" aria-label="Hold to code which hand is touching the rattle">
+      <button type="button" class="cy-hold cb-hold cb-left" data-code="L" disabled aria-pressed="false">Left</button>
+      <button type="button" class="cy-hold cb-hold cb-both" data-code="B" disabled aria-pressed="false">Both</button>
+      <button type="button" class="cy-hold cb-hold cb-right" data-code="R" disabled aria-pressed="false">Right</button>
+    </div>
+    <span class="cy-hint">or hold ← ↓ →</span>
+  </div>
+
+  <svg class="cy-timeline cb-timeline" viewBox="0 0 600 104" role="img" aria-label="Timeline of your coding compared with the trained coder's coding, colored by hand."></svg>
+  <p class="cy-result" aria-live="polite"></p>
+
+  <figcaption>
+    <b>Fig. 3b.</b> Code which hand is touching the rattle. Hold <i>Left</i>, <i>Right</i> or <i>Both</i> while it happens
+    (holding Left and Right together also counts as Both). The view is from above and behind the infant, so the infant's
+    left hand is on the left. The clip is simulated.
+  </figcaption>
+</figure>
+
+<script>
+  (function () {
+    var fig = document.getElementById("cb-figure");
+    if (!fig) return;
+    var scene = fig.querySelector(".cb-scene");
+    var tl = fig.querySelector(".cb-timeline");
+    var statusEl = fig.querySelector(".cy-status");
+    var clockEl = fig.querySelector(".cy-clock");
+    var startBtn = fig.querySelector(".cy-start");
+    var holdBtns = Array.prototype.slice.call(fig.querySelectorAll(".cb-hold"));
+    var resultEl = fig.querySelector(".cy-result");
+    var NS = "http://www.w3.org/2000/svg";
+
+    // ---------- The clip: each hand's progress toward the rattle (0 = resting, 1 = touching) ----------
+    var DUR = 15;
+    var RIGHT = [
+      [0, 0], [1.0, 0], [1.8, 1], [3.4, 1], [4.0, 0], [6.3, 0], [7.0, 1], [9.0, 1], [9.6, 0],
+      [10.0, 0], [10.4, 1], [10.7, 1], [11.0, 0], [12.6, 0], [13.1, 1], [14.0, 1], [14.6, 0], [DUR, 0],
+    ];
+    var LEFT = [
+      [0, 0], [2.0, 0], [2.5, 0.86], [2.9, 0.86], [3.3, 0], [3.8, 0], [4.5, 1], [5.8, 1], [6.3, 0.45], [6.8, 1],
+      [9.0, 1], [9.6, 0], [11.2, 0], [11.8, 1], [14.0, 1], [14.6, 0], [DUR, 0],
+    ];
+    function smooth(x) { return x * x * (3 - 2 * x); }
+    function track(keys, t) {
+      for (var i = 0; i < keys.length - 1; i++) {
+        var a = keys[i], b = keys[i + 1];
+        if (t <= b[0]) return a[1] + (b[1] - a[1]) * smooth((t - a[0]) / (b[0] - a[0] || 1));
+      }
+      return 0;
+    }
+    function codeAt(t) {
+      var l = track(LEFT, t) >= 0.999, r = track(RIGHT, t) >= 0.999;
+      return l && r ? "B" : l ? "L" : r ? "R" : "";
+    }
+
+    // ---------- Drawing ----------
+    function el(parent, name, attrs, text) {
+      var e = document.createElementNS(NS, name);
+      for (var k in attrs) e.setAttribute(k, attrs[k]);
+      if (text != null) e.textContent = text;
+      parent.appendChild(e);
+      return e;
+    }
+    function clear(svg) { while (svg.firstChild) svg.removeChild(svg.firstChild); }
+
+    var TOY = { x: 300, y: 62, r: 34 };
+    // Resting and touching positions of each fingertip (top of the hand).
+    var POS = {
+      L: { rest: [185, 142], touch: [TOY.x - TOY.r - 2, TOY.y + 14], shoulder: [150, 300] },
+      R: { rest: [415, 142], touch: [TOY.x + TOY.r + 2, TOY.y + 14], shoulder: [450, 300] },
+    };
+    function handAt(side, p) {
+      var a = POS[side].rest, b = POS[side].touch;
+      return [a[0] + (b[0] - a[0]) * p, a[1] + (b[1] - a[1]) * p];
+    }
+    function drawHand(side, p, t) {
+      var tip = handAt(side, p), sh = POS[side].shoulder;
+      var bob = p > 0.999 ? 0 : Math.sin(t * 3.7 + (side === "L" ? 0 : 1.7)) * 2;
+      var x = tip[0], y = tip[1] + bob;
+      // Direction from shoulder to fingertip, for orienting the hand.
+      var dx = x - sh[0], dy = y - sh[1], len = Math.sqrt(dx * dx + dy * dy);
+      var ux = dx / len, uy = dy / len;
+      var ang = (Math.atan2(uy, ux) * 180) / Math.PI + 90;
+      var wx = x - ux * 60, wy = y - uy * 60; // wrist
+      var arm = "M " + sh[0] + " " + sh[1] + " L " + wx + " " + wy;
+      el(scene, "path", { d: arm, class: "cy-arm-outline" });
+      el(scene, "path", { d: arm, class: "cy-arm" });
+      // Sleeve cuff with the side label.
+      var cx = wx + (sh[0] - wx) * 0.32, cy = wy + (sh[1] - wy) * 0.32;
+      var g = el(scene, "g", { transform: "translate(" + x + " " + y + ") rotate(" + ang + ")" });
+      // Hand drawn pointing up (negative y) in local coordinates, with the longest fingertip at 0.
+      [[-13, 22], [-5, 28], [3, 27], [11, 21]].forEach(function (f) {
+        el(g, "rect", { x: f[0] - 3.5, y: 28 - f[1], width: 7.5, height: f[1], rx: 3.75, class: "cy-finger" });
+      });
+      el(g, "rect", { x: -19, y: 22, width: 38, height: 40, rx: 13, class: "cy-palm" });
+      var thumbX = side === "L" ? 19 : -19;
+      el(g, "ellipse", {
+        cx: thumbX, cy: 42, rx: 6.5, ry: 12, transform: "rotate(" + (side === "L" ? 28 : -28) + " " + thumbX + " 42)", class: "cy-thumb",
+      });
+      el(scene, "circle", { cx: cx, cy: cy, r: 13, class: "cb-cuff cb-cuff-" + side });
+      el(scene, "text", { x: cx, y: cy + 4.5, class: "cb-cuff-label", "text-anchor": "middle" }, side);
+    }
+    function drawScene(t) {
+      clear(scene);
+      el(scene, "rect", { x: 0, y: 0, width: 600, height: 250, class: "cb-surface" });
+      var held = codeAt(t);
+      var wob = held ? Math.sin(t * 18) * (held === "B" ? 2 : 4) : 0;
+      var g = el(scene, "g", { transform: "rotate(" + wob + " " + TOY.x + " " + TOY.y + ")" });
+      el(g, "circle", { cx: TOY.x, cy: TOY.y, r: TOY.r, class: "cy-toy" });
+      el(g, "circle", { cx: TOY.x, cy: TOY.y, r: TOY.r - 13, class: "cb-toy-ring" });
+      [0, 60, 120].forEach(function (a) {
+        el(g, "line", {
+          x1: TOY.x, y1: TOY.y - TOY.r + 4, x2: TOY.x, y2: TOY.y + TOY.r - 4, class: "cb-toy-bead",
+          transform: "rotate(" + a + " " + TOY.x + " " + TOY.y + ")",
+        });
+      });
+      drawHand("L", track(LEFT, t), t);
+      drawHand("R", track(RIGHT, t), t);
+      var ly = narrow ? 38 : 20;
+      el(scene, "text", { x: narrow ? 108 : 12, y: ly, class: "cb-side" }, "infant's left");
+      el(scene, "text", { x: narrow ? 492 : 588, y: ly, class: "cb-side", "text-anchor": "end" }, "infant's right");
+    }
+
+    // ---------- Coding record and timeline ----------
+    var BIN = 0.1, NBINS = Math.round(DUR / BIN), CODES = ["L", "R", "B"];
+    var NAMES = { L: "Left", R: "Right", B: "Both" };
+    var truth = [];
+    for (var i = 0; i < NBINS; i++) truth.push(codeAt((i + 0.5) * BIN));
+    var heldTime, binTime;
+    function resetRecord() {
+      heldTime = [];
+      binTime = new Array(NBINS).fill(0);
+      for (var i = 0; i < NBINS; i++) heldTime.push({ L: 0, R: 0, B: 0 });
+    }
+    // A bin gets whichever code was held for most of it, if any code was held for over half of it.
+    function userCode() {
+      return binTime.map(function (bt, i) {
+        if (!bt) return "";
+        var best = "", most = 0;
+        CODES.forEach(function (c) { if (heldTime[i][c] > most) { most = heldTime[i][c]; best = c; } });
+        return most / bt > 0.5 ? best : "";
+      });
+    }
+
+    var TL_W = 600, TL_L = 110, TL_R = 570, ROW_H = 18, narrow = false;
+    function measure() {
+      TL_W = Math.max(260, Math.round(tl.getBoundingClientRect().width || 600));
+      narrow = TL_W < 480;
+      TL_L = narrow ? 50 : 110;
+      TL_R = TL_W - (narrow ? 14 : 30);
+      tl.setAttribute("viewBox", "0 0 " + TL_W + " 104");
+      scene.setAttribute("viewBox", narrow ? "100 20 400 230" : "0 0 600 250");
+    }
+    var bx = function (i) { return TL_L + (i / NBINS) * (TL_R - TL_L); };
+    function runs(code) {
+      var out = [], s = 0;
+      for (var i = 1; i <= code.length; i++) {
+        if (i === code.length || code[i] !== code[s]) {
+          if (code[s]) out.push([s, i, code[s]]);
+          s = i;
+        }
+      }
+      return out;
+    }
+    function drawRow(y, label, code, upTo) {
+      el(tl, "text", { x: 0, y: y + 13, class: "cy-row-label" }, label);
+      el(tl, "rect", { x: TL_L, y: y, width: TL_R - TL_L, height: ROW_H, class: "cy-row-bg" });
+      runs(code.slice(0, upTo)).forEach(function (r) {
+        el(tl, "rect", { x: bx(r[0]), y: y, width: bx(r[1]) - bx(r[0]), height: ROW_H, class: "cb-bar cb-bar-" + r[2] });
+      });
+    }
+    function drawTimeline(t, reveal) {
+      clear(tl);
+      // Legend.
+      var lx = TL_L;
+      CODES.forEach(function (c) {
+        el(tl, "rect", { x: lx, y: 2, width: 12, height: 12, class: "cb-bar cb-bar-" + c });
+        el(tl, "text", { x: lx + 17, y: 12, class: "cy-tick" }, NAMES[c]);
+        lx += narrow ? 62 : 74;
+      });
+      var upTo = Math.min(NBINS, Math.ceil(t / BIN));
+      drawRow(24, "You", userCode(), upTo);
+      drawRow(50, narrow ? "Coder" : "Trained coder", truth, reveal ? NBINS : 0);
+      if (!reveal) el(tl, "text", { x: TL_L + 8, y: 63, class: "cy-row-note" }, narrow ? "shown at the end" : "revealed when the clip ends");
+      var step = narrow ? 5 : 3;
+      for (var s = 0; s <= DUR; s += step) {
+        el(tl, "line", { x1: bx(s / BIN), y1: 76, x2: bx(s / BIN), y2: 81, class: "cy-axis" });
+        el(tl, "text", { x: bx(s / BIN), y: 96, class: "cy-tick", "text-anchor": "middle" }, s + " s");
+      }
+      el(tl, "line", { x1: TL_L, y1: 76, x2: TL_R, y2: 76, class: "cy-axis" });
+      if (t > 0 && t < DUR) el(tl, "line", { x1: bx(t / BIN), y1: 20, x2: bx(t / BIN), y2: 76, class: "cy-cursor" });
+    }
+
+    // ---------- Scoring: agreement, Cohen's kappa across categories, per-category agreement ----------
+    function score(code) {
+      var n = NBINS, agree = 0, pe = 0, cats = ["", "L", "R", "B"];
+      for (var i = 0; i < n; i++) if (code[i] === truth[i]) agree++;
+      cats.forEach(function (c) {
+        var a = 0, b = 0;
+        for (var i = 0; i < n; i++) { if (code[i] === c) a++; if (truth[i] === c) b++; }
+        pe += (a / n) * (b / n);
+      });
+      var po = agree / n;
+      var per = {};
+      CODES.forEach(function (c) {
+        var tot = 0, hit = 0;
+        for (var i = 0; i < n; i++) if (truth[i] === c) { tot++; if (code[i] === c) hit++; }
+        per[c] = tot ? hit / tot : 1;
+      });
+      return { po: po, kappa: pe >= 1 ? 1 : (po - pe) / (1 - pe), per: per };
+    }
+    function kappaWord(k) {
+      if (k < 0.2) return "slight";
+      if (k < 0.4) return "fair";
+      if (k < 0.6) return "moderate";
+      if (k < 0.8) return "substantial";
+      return "almost perfect";
+    }
+    function share(code, from, to, fn) {
+      var n = 0, hit = 0;
+      for (var i = Math.floor(from / BIN); i < Math.ceil(to / BIN); i++) { n++; if (fn(code[i])) hit++; }
+      return n ? hit / n : 0;
+    }
+    function tricky(code) {
+      var notes = [];
+      // Near miss: left hand hovers by the rattle (2.5-2.9 s) while only the right hand holds it.
+      notes.push(share(code, 2.5, 2.9, function (c) { return c === "L" || c === "B"; }) > 0.5
+        ? "At 2.5 s the left hand only hovered next to the rattle, so that moment is still Right."
+        : "You weren't fooled by the left hand hovering next to the rattle at 2.5 s.");
+      // Brief right tap at 10.4-10.7 s.
+      notes.push(share(code, 10.4, 10.7, function (c) { return c === "R"; }) >= 0.5
+        ? "You caught the quick right-hand tap at 10.5 s."
+        : "You missed the quick right-hand tap at 10.5 s.");
+      // Switch from Left to Both when the right hand joins at 13.1 s.
+      notes.push(share(code, 13.2, 14.0, function (c) { return c === "B"; }) >= 0.6
+        ? "You switched to Both when the right hand joined at 13.1 s."
+        : "At 13.1 s the right hand joins, so Left becomes Both.");
+      return notes.join(" ");
+    }
+
+    // ---------- Input: which buttons or keys are held ----------
+    var held = { L: false, R: false, B: false };
+    var KEYS = { ArrowLeft: "L", a: "L", A: "L", ArrowRight: "R", d: "R", D: "R", ArrowDown: "B", s: "B", S: "B", " ": "B" };
+    function currentCode() {
+      if (state !== "coding") return "";
+      if (held.B || (held.L && held.R)) return "B";
+      return held.L ? "L" : held.R ? "R" : "";
+    }
+    function refreshButtons() {
+      var c = currentCode();
+      holdBtns.forEach(function (b) {
+        var on = b.dataset.code === c || (c === "B" && held[b.dataset.code]);
+        b.classList.toggle("is-down", on);
+        b.setAttribute("aria-pressed", on ? "true" : "false");
+      });
+    }
+    function setHeld(code, on) {
+      held[code] = on;
+      refreshButtons();
+    }
+    function releaseAll() {
+      held.L = held.R = held.B = false;
+      refreshButtons();
+    }
+
+    // ---------- Flow ----------
+    var state = "ready", raf = null, t0 = 0, last = 0;
+    var RETRY_ICON =
+      '<svg viewBox="0 0 16 16" aria-hidden="true" class="mt-icon-stroke"><path d="M13.2 8.6A5.3 5.3 0 1 1 11.6 4"/><path d="M12.4 1.6v3.2H9.2"/></svg>';
+    var PLAY_ICON = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 2.8v10.4L13 8z"/></svg>';
+
+    function tick(now) {
+      if (state === "countdown") {
+        var left = 3 - Math.floor((now - t0) / 600);
+        if (left <= 0) {
+          state = "coding";
+          t0 = last = now;
+          statusEl.textContent = "Coding: which hand?";
+          refreshButtons();
+        } else {
+          statusEl.textContent = "Starting in " + left + "…";
+        }
+        raf = requestAnimationFrame(tick);
+        return;
+      }
+      var t = Math.min(DUR, (now - t0) / 1000);
+      var dt = (now - last) / 1000;
+      last = now;
+      var b = Math.min(NBINS - 1, Math.floor(t / BIN));
+      binTime[b] += dt;
+      var c = currentCode();
+      if (c) heldTime[b][c] += dt;
+      drawScene(t);
+      drawTimeline(t, false);
+      clockEl.textContent = t.toFixed(1) + " s";
+      if (t >= DUR) return finish();
+      raf = requestAnimationFrame(tick);
+    }
+
+    function start() {
+      resetRecord();
+      releaseAll();
+      resultEl.textContent = "";
+      state = "countdown";
+      t0 = performance.now();
+      holdBtns.forEach(function (b) { b.disabled = false; });
+      startBtn.disabled = true;
+      drawScene(0);
+      drawTimeline(0, false);
+      raf = requestAnimationFrame(tick);
+    }
+
+    function finish() {
+      state = "done";
+      releaseAll();
+      holdBtns.forEach(function (b) { b.disabled = true; });
+      startBtn.disabled = false;
+      startBtn.innerHTML = RETRY_ICON + "<span>Try again</span>";
+      statusEl.textContent = "Done";
+      drawTimeline(DUR, true);
+      var code = userCode(), s = score(code);
+      resultEl.innerHTML =
+        "<b>" + Math.round(s.po * 100) + "% agreement</b>, <b>Cohen’s κ = " + s.kappa.toFixed(2) + "</b> (" + kappaWord(s.kappa) + "). " +
+        "By category: Left " + Math.round(s.per.L * 100) + "%, Right " + Math.round(s.per.R * 100) + "%, Both " +
+        Math.round(s.per.B * 100) + "% of the coder's time matched. " + tricky(code);
+      startBtn.focus();
+    }
+
+    holdBtns.forEach(function (b) {
+      var code = b.dataset.code;
+      b.addEventListener("pointerdown", function (e) { e.preventDefault(); setHeld(code, true); });
+      ["pointerup", "pointerleave", "pointercancel"].forEach(function (ev) {
+        b.addEventListener(ev, function () { setHeld(code, false); });
+      });
+      b.addEventListener("contextmenu", function (e) { e.preventDefault(); });
+    });
+    document.addEventListener("keydown", function (e) {
+      if ((state !== "coding" && state !== "countdown") || !(e.key in KEYS)) return;
+      e.preventDefault();
+      if (!e.repeat) setHeld(KEYS[e.key], true);
+    });
+    document.addEventListener("keyup", function (e) {
+      if (e.key in KEYS) setHeld(KEYS[e.key], false);
+    });
+    window.addEventListener("blur", releaseAll);
+    window.addEventListener("resize", function () {
+      measure();
+      if (state === "done") drawTimeline(DUR, true);
+      else if (state !== "coding") drawTimeline(0, false);
+    });
+
+    measure();
+    startBtn.addEventListener("click", start);
+    startBtn.innerHTML = PLAY_ICON + "<span>Start</span>";
+    resetRecord();
+    drawScene(0);
+    drawTimeline(0, false);
+  })();
+</script>

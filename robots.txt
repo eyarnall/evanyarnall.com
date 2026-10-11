@@ -1,0 +1,9 @@
+---
+permalink: /robots.txt
+---
+# All crawlers are welcome, including search engines and AI tools.
+# A plain-text summary of the site for AI tools: /llms.txt
+User-agent: *
+Disallow:
+
+Sitemap: {{ site.baseurl | prepend: site.url }}/sitemap.xml

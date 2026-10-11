@@ -1,0 +1,17 @@
+# Co-authors whose names link somewhere in publication lists. Keyed by lowercase last name;
+# "firstname" lists every form of the first name used in _bibliography/papers.bib.
+"ferre":
+  - firstname: ["Claudio", "C.", "C. L.", "Claudio L.", "Claudio Luis"]
+    url: https://sites.bu.edu/demrlab/people/
+
+"kelly":
+  - firstname: ["Marie", "M."]
+    url: https://sites.bu.edu/demrlab/people/
+
+"kim":
+  - firstname: ["HyunJoon", "H."]
+    url: https://sites.bu.edu/demrlab/people/
+
+"su":
+  - firstname: ["Xiwen", "X."]
+    url: https://sites.bu.edu/demrlab/people/

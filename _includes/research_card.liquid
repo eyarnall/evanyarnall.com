@@ -1,0 +1,29 @@
+{% comment %}
+  One research card ("Fig. N"), used on the home page and the research page.
+  Params: project, index, heading (h2 or h3, default h3). Optional project front matter:
+    teaser: short line shown at the bottom of the card
+    teaser_type: interactive | figures   (interactive gets the accent color and a play icon)
+{% endcomment %}
+{% assign rc_p = include.project %}
+{% assign rc_h = include.heading | default: 'h3' %}
+<a class="lab-fig" href="{{ rc_p.url | relative_url }}">
+  {% if rc_p.img %}
+    {% include figure.liquid path=rc_p.img sizes="300px" alt=rc_p.title class="lab-fig-img" %}
+  {% endif %}
+  <p class="lab-fig-num">Fig. {{ include.index }}</p>
+  <{{ rc_h }}>{{ rc_p.title }}</{{ rc_h }}>
+  <p>{{ rc_p.description }}</p>
+  {% if rc_p.teaser %}
+    <span class="lab-teaser lab-teaser-{{ rc_p.teaser_type | default: 'figures' }}">
+      {% if rc_p.teaser_type == 'interactive' %}
+        <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7"/><path d="M6.4 4.9v6.2L11.3 8z"/></svg>
+        <span class="lab-teaser-kind">Interactive</span>
+      {% else %}
+        <svg viewBox="0 0 16 16" aria-hidden="true">
+          <rect x="1.5" y="2.5" width="13" height="11" rx="1.5"/><path d="M3.5 11l3-3.5 2.2 2.3 1.6-1.6 2.2 2.8"/>
+        </svg>
+      {% endif %}
+      <span>{{ rc_p.teaser }}</span>
+    </span>
+  {% endif %}
+</a>

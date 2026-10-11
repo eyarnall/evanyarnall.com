@@ -1,0 +1,117 @@
+# Evan's CV. This one file feeds the CV page (/cv/) and the CV PDF (bash _cv/build.sh).
+# Publications and presentations are NOT listed here: they come from _bibliography/papers.bib.
+# Dates: YYYY or YYYY-MM. end_date can be "present". expected: true marks a future date as expected.
+cv:
+  name: Evan Yarnall
+  label: PhD Candidate, Rehabilitation Science
+  affiliation: Boston University, Sargent College
+  email: eyarnall@bu.edu
+  website: evanyarnall.com
+  orcid: 0000-0001-9155-3070
+  linkedin: linkedin.com/in/evanyarnall
+  location: Boston, MA
+
+  interests: >-
+    Sensorimotor development and integration in infants and children with or at risk for cerebral palsy; development
+    of bimanual skills and their cortical correlates; corticospinal connectivity and online motor control, using fNIRS,
+    TMS and behavioral coding.
+
+  education:
+    - degree: PhD, Rehabilitation Science
+      institution: Boston University, Sargent College
+      location: Boston, MA
+      start_date: 2023
+      end_date: 2028
+      expected: true
+      note: >-
+        Development, Experience, and Motor Recovery (DEMR) Lab. Advisor: Claudio L. Ferre, PhD. Dissertation: a
+        longitudinal study of sensorimotor development in infants at risk for cerebral palsy.
+    - degree: BS, Kinesiology (Pre-Physical Therapy)
+      institution: Temple University, College of Public Health
+      location: Philadelphia, PA
+      start_date: 2015
+      end_date: 2019
+
+  experience:
+    - position: Graduate Researcher, DEMR Lab
+      organization: Boston University, Sargent College
+      start_date: 2023
+      end_date: present
+      highlights:
+        - Study sensorimotor integration in children with unilateral cerebral palsy, combining fNIRS and TMS to assess corticospinal connectivity and sensory cortical responses during reaching.
+        - Analyze (R, MATLAB, Python) a longitudinal sensorimotor dataset following typically developing infants and infants at risk for cerebral palsy from 6 to 24 months (dissertation dataset).
+        - Designed a moving-target reaching apparatus for testing online motor control, built with lead engineer Julia Zayas (BU College of Engineering).
+        - Develop and maintain behavioral coding pipelines in Datavyu (Ruby, Python), including inter-rater reliability workflows.
+    - position: Research Technician, Laboratory for Human Neurobiology
+      organization: Boston University School of Medicine
+      start_date: 2022
+      end_date: 2023
+      highlights:
+        - Used wearable technology and behavioral coding to measure behavior in children with atopic dermatitis.
+        - Led outreach to local healthcare facilities to recruit study participants.
+    - position: Research Technician (part-time)
+      organization: Symmetry Science Consulting
+      start_date: 2022
+      end_date: 2023
+      highlights:
+        - Processed wearable device data (Apple Watch, actigraphy) and participant-reported sleep and skin quality surveys.
+    - position: Clinical Research Coordinator
+      organization: Shriners Hospitals for Children, Philadelphia, PA
+      start_date: 2021
+      end_date: 2022
+      highlights:
+        - Managed industry-funded clinical trials on adolescent orthopedic conditions and spinal cord injury.
+        - Prepared IRB submissions for FDA-regulated studies and contributed to grant writing.
+    - position: Research Assistant, Virtual Environment and Postural Orientation (VEPO) Lab
+      organization: Temple University
+      start_date: 2018
+      end_date: 2018
+      highlights:
+        - Supported EEG data collection and analysis and processed motion capture data for research on postural orientation.
+    - position: Research Assistant, Temple Research Immersive Balance and Locomotion (TRIBAL) Lab
+      organization: Temple University
+      start_date: 2016
+      end_date: 2017
+      highlights:
+        - Set up motion capture (Vicon) markers and cameras and performed preliminary analysis of movement data.
+        - Supported participant-facing study procedures, including explaining experimental protocols.
+
+  awards:
+    - title: Student Scholarship
+      awarder: American Academy for Cerebral Palsy and Developmental Medicine
+      date: 2025
+
+  volunteer:
+    - position: Volunteer
+      organization: CP Soccer New England
+      url: https://www.cpsoccer.us/
+      start_date: 2024
+      end_date: present
+      note: Soccer programs for kids with cerebral palsy and other neurological conditions.
+    - position: Community outreach
+      organization: DEMR Lab, Boston University
+      url: https://sites.bu.edu/demrlab/news/
+      start_date: 2024
+      end_date: present
+      note: Hands-on brain and movement activities for families at Science on State Street (Framingham State University), Open Streets Boston (Allston/Brighton, Roxbury), and Play to Thrive.
+
+  skills:
+    - name: Neuroimaging & neurophysiology
+      keywords: fNIRS, TMS, EEG
+    - name: Movement & behavior
+      keywords: Motion capture (Vicon), wearable technology, behavioral video coding (Datavyu)
+    - name: Analysis & programming
+      keywords: Statistical data analysis (linear mixed-effects models), inter-rater reliability; R, Python, MATLAB, Ruby
+    - name: Clinical research
+      keywords: Human subjects research, clinical trials, Good Clinical Practice (GCP), IRB submissions for FDA-regulated studies, regulatory compliance, participant recruitment and support, grant writing
+
+  certificates:
+    - name: RCR Foundations (Responsible Conduct of Research)
+      issuer: CITI Program
+      date: 2024
+    - name: Biomedical Research
+      issuer: CITI Program
+      date: 2022
+    - name: Good Clinical Practice (GCP)
+      issuer: CITI Program
+      date: 2021

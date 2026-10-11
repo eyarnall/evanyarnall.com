@@ -1,0 +1,117 @@
+{% comment %}
+  The CV, built from _data/cv.yml and _bibliography/papers.bib.
+  Used by the CV page (_pages/cv.md) and the printable page that becomes the PDF (_pages/cv-print.html).
+  Param: print (true on the printable page, which adds the name and contact header).
+{% endcomment %}
+{% assign cv = site.data.cv.cv %}
+<div class="cv-doc{% if include.print %} is-print{% endif %}">
+  {% if include.print %}
+    <header class="cv-head">
+      <div>
+        <h1>{{ cv.name }}</h1>
+        <p class="cv-title">{{ cv.label }}<br>{{ cv.affiliation }}</p>
+      </div>
+      <p class="cv-contact">
+        <b>email</b> {{ cv.email }}<br>
+        <b>web</b> {{ cv.website }}<br>
+        <b>orcid</b> {{ cv.orcid }}<br>
+        <b>linkedin</b> {{ cv.linkedin }}
+      </p>
+    </header>
+  {% endif %}
+
+  <section>
+    <h2>Research interests</h2>
+    <p>{{ cv.interests }}</p>
+  </section>
+
+  <section>
+    <h2>Education</h2>
+    {% for e in cv.education %}
+      <div class="cv-entry">
+        <div><span class="cv-what">{{ e.degree }}</span> <span class="cv-where">· {{ e.institution }}{% if e.location %}, {{ e.location }}{% endif %}</span></div>
+        <div class="cv-when">{{ e.start_date }} – {{ e.end_date }}{% if e.expected %} (expected){% endif %}</div>
+        {% if e.note %}<p class="cv-note">{{ e.note }}</p>{% endif %}
+      </div>
+    {% endfor %}
+  </section>
+
+  <section>
+    <h2>Research experience</h2>
+    {% for e in cv.experience %}
+      <div class="cv-entry">
+        <div><span class="cv-what">{{ e.position }}</span> <span class="cv-where">· {{ e.organization }}</span></div>
+        <div class="cv-when">{% if e.start_date == e.end_date %}{{ e.start_date }}{% else %}{{ e.start_date }} – {{ e.end_date }}{% endif %}</div>
+        {% if e.highlights %}
+          <ul>
+            {% for h in e.highlights %}<li>{{ h }}</li>{% endfor %}
+          </ul>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </section>
+
+  <section class="cv-pubs">
+    <h2>Publications</h2>
+    <p class="cv-key">Underline: Evan Yarnall.</p>
+    <h3>Peer-reviewed</h3>
+    {% bibliography --template cv_entry --group_by none --query @article %}
+    <h3>Under review</h3>
+    {% bibliography --template cv_entry --group_by none --query @unpublished[status=review] %}
+    <h3>In preparation</h3>
+    {% bibliography --template cv_entry --group_by none --query @unpublished[status=preparation] %}
+  </section>
+
+  <section class="cv-talks">
+    <h2>Conference presentations</h2>
+    <p class="cv-key">AACPDM: American Academy for Cerebral Palsy and Developmental Medicine. ASNR: American Society of Neurorehabilitation.</p>
+    {% bibliography --template cv_entry --group_by none --query @inproceedings %}
+  </section>
+
+  <section>
+    <h2>Awards</h2>
+    {% for a in cv.awards %}
+      <div class="cv-entry">
+        <div><span class="cv-what">{{ a.title }}</span> <span class="cv-where">· {{ a.awarder }}</span></div>
+        <div class="cv-when">{{ a.date }}</div>
+      </div>
+    {% endfor %}
+  </section>
+
+  {% if cv.volunteer %}
+    <section>
+      <h2>Outreach and volunteering</h2>
+      {% for v in cv.volunteer %}
+        <div class="cv-entry">
+          <div><span class="cv-what">{{ v.position }}</span> <span class="cv-where">· {{ v.organization }}</span></div>
+          <div class="cv-when">{{ v.start_date }} – {{ v.end_date }}</div>
+          {% if v.note %}<p class="cv-note">{{ v.note }}</p>{% endif %}
+        </div>
+      {% endfor %}
+    </section>
+  {% endif %}
+
+  <section>
+    <h2>Skills</h2>
+    <dl class="cv-skills">
+      {% for sk in cv.skills %}
+        <dt>{{ sk.name }}</dt>
+        <dd>{{ sk.keywords }}</dd>
+      {% endfor %}
+    </dl>
+  </section>
+
+  <section>
+    <h2>Certifications</h2>
+    {% for c in cv.certificates %}
+      <div class="cv-entry">
+        <div><span class="cv-what">{{ c.name }}</span> <span class="cv-where">· {{ c.issuer }}</span></div>
+        <div class="cv-when">{{ c.date }}</div>
+      </div>
+    {% endfor %}
+  </section>
+
+  {% if include.print %}
+    <footer class="cv-foot">{{ cv.website }}, updated {{ site.time | date: '%B %Y' }}</footer>
+  {% endif %}
+</div>

@@ -1,0 +1,13 @@
+{% comment %}
+  "Take part in research" callout linking to the DEMR Lab's recruiting page.
+  Optional param: text (overrides the default sentence).
+{% endcomment %}
+<aside class="lab-callout" aria-label="Take part in research">
+  <p class="lab-callout-text">
+    <strong>For families.</strong>
+    {% if include.text %}{{ include.text }}{% else %}The DEMR Lab at Boston University is enrolling families with infants (2–12 months) and
+    children and teens (6–17 years), including children with cerebral palsy. Visits are child-friendly, and families are
+    compensated for their time and travel.{% endif %}
+  </p>
+  <a class="lab-callout-link" href="https://sites.bu.edu/demrlab/we-are-recruiting-2/">See the lab's current studies</a>
+</aside>

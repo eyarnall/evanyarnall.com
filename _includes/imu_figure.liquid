@@ -1,0 +1,268 @@
+{% comment %}
+  "Video vs. wearable sensor" demo (used on _projects/3_measuring_movement.md).
+  A drawn infant (seen from above) makes spontaneous arm movements while wearing a wrist sensor (IMU).
+  The video coder marks movement bouts; the sensor's acceleration only becomes "movement" above a threshold,
+  which the visitor sets. Includes a small movement the sensor can miss and a sensor bump it can over-count.
+  Simulated data.
+{% endcomment %}
+<figure class="lab-figure lab-figure-live cy-figure iv-figure" id="iv-figure">
+  <div class="iv-panels">
+    <svg class="iv-scene" viewBox="0 0 200 200" role="img" aria-label="A drawn infant lying on their back, seen from above, moving one arm while wearing a sensor bracelet on the wrist."></svg>
+    <svg class="iv-chart" viewBox="0 0 600 236" role="img" aria-label="Timelines of the video coder's movement bouts, the wrist sensor's acceleration with a threshold line, and the movement bouts the sensor detects above that threshold."></svg>
+  </div>
+
+  <div class="iv-controls">
+    <button type="button" class="mt-play iv-play"></button>
+    <label class="iv-thr" for="iv-threshold">
+      <span class="fn-label">sensor threshold</span>
+      <input type="range" id="iv-threshold" min="0.02" max="0.4" step="0.005" value="0.15">
+      <output class="iv-thr-val" for="iv-threshold">0.150 g</output>
+    </label>
+  </div>
+  <p class="iv-result" aria-live="polite"></p>
+
+  <figcaption>
+    <b>Fig. 3c.</b> One movement, two ways of measuring it. The video coder marks when the infant's arm is moving; the
+    wrist sensor (IMU) records acceleration continuously, but needs a threshold to decide what counts as movement. Drag
+    the threshold to see how well the sensor agrees with video coding. Simulated data.
+  </figcaption>
+</figure>
+
+<script>
+  (function () {
+    var fig = document.getElementById("iv-figure");
+    if (!fig) return;
+    var scene = fig.querySelector(".iv-scene");
+    var chart = fig.querySelector(".iv-chart");
+    var btn = fig.querySelector(".iv-play");
+    var thrInput = fig.querySelector("#iv-threshold");
+    var thrOut = fig.querySelector(".iv-thr-val");
+    var result = fig.querySelector(".iv-result");
+    var NS = "http://www.w3.org/2000/svg";
+    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    // ---------- Simulated recording ----------
+    var DUR = 12, FS = 50, N = DUR * FS;
+    var BOUTS = [
+      { s: 1.0, e: 2.6, amp: 1.0, f: 2.2 },
+      { s: 3.9, e: 4.8, amp: 0.2, f: 1.8 }, // small, subtle movement
+      { s: 6.0, e: 8.2, amp: 0.85, f: 1.8 },
+      { s: 9.4, e: 10.2, amp: 0.55, f: 2.6 },
+    ];
+    var BUMP = 11.2; // the sensor gets bumped; the arm doesn't move
+    function smooth(x) { x = Math.max(0, Math.min(1, x)); return x * x * (3 - 2 * x); }
+    function angle(t) {
+      var a = 0.45;
+      BOUTS.forEach(function (b) {
+        if (t < b.s || t > b.e) return;
+        var env = smooth(Math.min((t - b.s) / 0.25, (b.e - t) / 0.25));
+        a += 0.9 * b.amp * env * Math.sin(2 * Math.PI * b.f * (t - b.s));
+      });
+      return a;
+    }
+    var SH = [128, 92], ARM = 58;
+    function wrist(t) { var a = angle(t); return [SH[0] + ARM * Math.cos(a), SH[1] + ARM * Math.sin(a)]; }
+    var seed = 11;
+    function rand() { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; }
+    function gauss() { return Math.sqrt(-2 * Math.log(rand() + 1e-9)) * Math.cos(2 * Math.PI * rand()); }
+
+    var acc = [], dt = 1 / FS, maxA = 0;
+    for (var i = 0; i < N; i++) {
+      var t = i * dt, p0 = wrist(t - dt), p1 = wrist(t), p2 = wrist(t + dt);
+      var ax = (p2[0] - 2 * p1[0] + p0[0]) / (dt * dt), ay = (p2[1] - 2 * p1[1] + p0[1]) / (dt * dt);
+      acc.push(Math.sqrt(ax * ax + ay * ay));
+      maxA = Math.max(maxA, acc[i]);
+    }
+    acc = acc.map(function (v, i) {
+      var t = i * dt, bump = t > BUMP ? 0.9 * Math.exp(-(t - BUMP) / 0.05) : 0;
+      return Math.max(0, (v / maxA) * 1.0 + 0.035 * Math.abs(gauss()) + bump);
+    });
+    // Smoothed signal (0.2 s moving average) is what the threshold is applied to.
+    var sm = acc.map(function (_, i) {
+      var s = 0, n = 0;
+      for (var k = -5; k <= 5; k++) { var j = i + k; if (j >= 0 && j < N) { s += acc[j]; n++; } }
+      return s / n;
+    });
+
+    var BIN = 0.1, NB = Math.round(DUR / BIN);
+    var truth = [];
+    for (var b = 0; b < NB; b++) {
+      var c = (b + 0.5) * BIN;
+      truth.push(BOUTS.some(function (x) { return c >= x.s && c <= x.e; }));
+    }
+    function detect(thr) {
+      var out = [];
+      for (var b = 0; b < NB; b++) {
+        var on = 0;
+        for (var k = 0; k < BIN * FS; k++) if (sm[Math.round(b * BIN * FS) + k] > thr) on++;
+        out.push(on / (BIN * FS) > 0.5);
+      }
+      // Bridge gaps shorter than 0.3 s between detected bouts.
+      for (var i = 1; i < NB - 1; i++) {
+        if (!out[i]) {
+          for (var g = 1; g <= 3 && i + g < NB; g++) {
+            if (out[i - 1] && out[i + g]) { for (var q = i; q < i + g; q++) out[q] = true; break; }
+          }
+        }
+      }
+      // Ignore "bouts" shorter than 0.4 s (brief spikes such as a bump to the sensor).
+      for (var i = 0; i < NB; ) {
+        if (!out[i]) { i++; continue; }
+        var j = i;
+        while (j < NB && out[j]) j++;
+        if ((j - i) * BIN < 0.4) for (var q = i; q < j; q++) out[q] = false;
+        i = j;
+      }
+      return out;
+    }
+    function score(code) {
+      var agree = 0, yu = 0, yt = 0;
+      for (var i = 0; i < NB; i++) { if (code[i] === truth[i]) agree++; if (code[i]) yu++; if (truth[i]) yt++; }
+      var po = agree / NB, pe = (yu / NB) * (yt / NB) + (1 - yu / NB) * (1 - yt / NB);
+      return { po: po, kappa: pe >= 1 ? 1 : (po - pe) / (1 - pe) };
+    }
+    function anyIn(code, a, b) { for (var i = Math.floor(a / BIN); i < Math.ceil(b / BIN); i++) if (code[i]) return true; return false; }
+
+    // ---------- Drawing ----------
+    function el(parent, name, attrs, text) {
+      var e = document.createElementNS(NS, name);
+      for (var k in attrs) e.setAttribute(k, attrs[k]);
+      if (text != null) e.textContent = text;
+      parent.appendChild(e);
+      return e;
+    }
+    function clear(svg) { while (svg.firstChild) svg.removeChild(svg.firstChild); }
+
+    function drawScene(t) {
+      clear(scene);
+      el(scene, "rect", { x: 0, y: 0, width: 200, height: 200, class: "iv-mat" });
+      // Legs, body, head (infant lying on their back, head at the top).
+      el(scene, "path", { d: "M 88 150 Q 70 170 66 192 M 112 150 Q 130 170 134 192", class: "iv-limb-outline" });
+      el(scene, "path", { d: "M 88 150 Q 70 170 66 192 M 112 150 Q 130 170 134 192", class: "iv-limb" });
+      el(scene, "path", { d: "M 72 92 L 40 128", class: "iv-limb-outline" });
+      el(scene, "path", { d: "M 72 92 L 40 128", class: "iv-limb" });
+      el(scene, "circle", { cx: 38, cy: 131, r: 7, class: "iv-skin" });
+      var w = wrist(t);
+      el(scene, "path", { d: "M " + SH[0] + " " + SH[1] + " L " + w[0] + " " + w[1], class: "iv-limb-outline" });
+      el(scene, "path", { d: "M " + SH[0] + " " + SH[1] + " L " + w[0] + " " + w[1], class: "iv-limb" });
+      el(scene, "rect", { x: 70, y: 80, width: 60, height: 80, rx: 26, class: "iv-skin" });
+      el(scene, "circle", { cx: 100, cy: 52, r: 27, class: "iv-skin" });
+      // Wrist sensor bracelet and hand.
+      var a = angle(t), bx = SH[0] + (ARM - 8) * Math.cos(a), by = SH[1] + (ARM - 8) * Math.sin(a);
+      el(scene, "rect", { x: bx - 7, y: by - 5, width: 14, height: 10, rx: 3, class: "iv-sensor", transform: "rotate(" + (a * 180) / Math.PI + " " + bx + " " + by + ")" });
+      el(scene, "circle", { cx: w[0], cy: w[1], r: 7, class: "iv-skin" });
+      el(scene, "text", { x: 6, y: 16, class: "iv-tiny" }, "IMU on wrist");
+    }
+
+    var L = 104, R = 588, X = function (s) { return L + (s / DUR) * (R - L); };
+    var ROW = { video: 14, trace: [44, 150], imu: 160, axis: 192 };
+    var TY = function (v) { return ROW.trace[1] - (Math.min(v, 1.25) / 1.25) * (ROW.trace[1] - ROW.trace[0]); };
+    var thr = parseFloat(thrInput.value), detected = detect(thr);
+
+    function bars(code, y, cls) {
+      var s = -1;
+      for (var i = 0; i <= NB; i++) {
+        if (i < NB && code[i] && s < 0) s = i;
+        if ((i === NB || !code[i]) && s >= 0) {
+          el(chart, "rect", { x: X(s * BIN), y: y, width: X(i * BIN) - X(s * BIN), height: 16, class: cls });
+          s = -1;
+        }
+      }
+    }
+    function drawChart(t) {
+      clear(chart);
+      // Row labels
+      el(chart, "text", { x: 0, y: ROW.video + 12, class: "iv-label" }, "Video coding");
+      el(chart, "text", { x: 0, y: ROW.trace[0] + 12, class: "iv-label" }, "Wrist sensor");
+      el(chart, "text", { x: 0, y: ROW.trace[0] + 27, class: "iv-tiny" }, "acceleration (g)");
+      el(chart, "text", { x: 0, y: ROW.imu + 12, class: "iv-label" }, "Sensor says");
+      // Row backgrounds
+      [ROW.video, ROW.imu].forEach(function (y) { el(chart, "rect", { x: L, y: y, width: R - L, height: 16, class: "iv-row" }); });
+      bars(truth, ROW.video, "iv-bar-video");
+      bars(detected, ROW.imu, "iv-bar-imu");
+      // Trace
+      var pts = [];
+      for (var i = 0; i < N; i += 2) pts.push(X(i * dt).toFixed(1) + "," + TY(acc[i]).toFixed(1));
+      el(chart, "line", { x1: L, y1: ROW.trace[1], x2: R, y2: ROW.trace[1], class: "iv-axis" });
+      el(chart, "polyline", { points: pts.join(" "), class: "iv-trace" });
+      el(chart, "line", { x1: L, y1: TY(thr), x2: R, y2: TY(thr), class: "iv-threshold" });
+      el(chart, "text", { x: L - 4, y: TY(thr) + 3, class: "iv-tiny iv-thr-text", "text-anchor": "end" }, "threshold");
+      // Annotations for the two tricky moments
+      el(chart, "text", { x: X(4.35), y: ROW.trace[0] + 2, class: "iv-tiny", "text-anchor": "middle" }, "small movement");
+      el(chart, "text", { x: X(BUMP + 0.05), y: ROW.trace[0] + 2, class: "iv-tiny", "text-anchor": "middle" }, "sensor bump");
+      // Time axis
+      el(chart, "line", { x1: L, y1: ROW.axis, x2: R, y2: ROW.axis, class: "iv-axis" });
+      for (var s = 0; s <= DUR; s += 2) {
+        el(chart, "line", { x1: X(s), y1: ROW.axis, x2: X(s), y2: ROW.axis + 4, class: "iv-axis" });
+        el(chart, "text", { x: X(s), y: ROW.axis + 18, class: "iv-tiny", "text-anchor": "middle" }, s + " s");
+      }
+      if (t > 0 && t < DUR) el(chart, "line", { x1: X(t), y1: 8, x2: X(t), y2: ROW.axis, class: "iv-cursor" });
+    }
+    function updateResult() {
+      var sc = score(detected);
+      var missed = !anyIn(detected, 3.9, 4.8), bumped = anyIn(detected, BUMP - 0.05, BUMP + 0.45);
+      var note;
+      if (missed && bumped) note = "At this threshold the sensor misses the small movement at 4.3 s and also counts the bump at 11.2 s.";
+      else if (missed) note = "At this threshold the sensor misses the small movement at 4.3 s that the video coder saw.";
+      else if (bumped) note = "At this threshold the sensor also counts the bump at 11.2 s, which wasn't a movement.";
+      else note = "Good balance: the sensor catches the small movement at 4.3 s and ignores the bump at 11.2 s.";
+      result.innerHTML = "<b>" + Math.round(sc.po * 100) + "% agreement</b> with video coding, <b>κ = " + sc.kappa.toFixed(2) + "</b>. " + note;
+    }
+
+    // ---------- Playback: plays once, then Replay ----------
+    var ICONS = {
+      pause: '<svg viewBox="0 0 16 16" aria-hidden="true"><rect x="3.5" y="3" width="3" height="10"/><rect x="9.5" y="3" width="3" height="10"/></svg>',
+      play: '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 2.8v10.4L13 8z"/></svg>',
+      replay: '<svg viewBox="0 0 16 16" aria-hidden="true" class="mt-icon-stroke"><path d="M13.2 8.6A5.3 5.3 0 1 1 11.6 4"/><path d="M12.4 1.6v3.2H9.2"/></svg>',
+    };
+    var LABELS = { pause: "Pause", play: "Play", replay: "Replay" };
+    var action = "play", t = DUR, playing = false, raf = null, last = 0, started = false;
+    function setButton(a) {
+      action = a;
+      btn.innerHTML = ICONS[a] + "<span>" + LABELS[a] + "</span>";
+      btn.setAttribute("aria-label", LABELS[a] + " animation");
+    }
+    function render() { drawScene(t); drawChart(t); }
+    function loop(now) {
+      if (!last) last = now;
+      t = Math.min(DUR, t + (now - last) / 1000);
+      last = now;
+      render();
+      if (t >= DUR) { playing = false; raf = null; last = 0; setButton("replay"); return; }
+      raf = requestAnimationFrame(loop);
+    }
+    function play() {
+      if (t >= DUR) t = 0;
+      playing = true;
+      last = 0;
+      setButton("pause");
+      if (!raf) raf = requestAnimationFrame(loop);
+    }
+    function pause() {
+      playing = false;
+      if (raf) cancelAnimationFrame(raf);
+      raf = null;
+      last = 0;
+      setButton("play");
+    }
+    btn.addEventListener("click", function () { if (action === "pause") pause(); else play(); });
+    thrInput.addEventListener("input", function () {
+      thr = parseFloat(thrInput.value);
+      thrOut.textContent = thr.toFixed(3) + " g";
+      detected = detect(thr);
+      updateResult();
+      if (!playing) render();
+    });
+
+    // Initial state: the full recording drawn; play once when the figure scrolls into view.
+    updateResult();
+    render();
+    setButton("replay");
+    if (!reduce && "IntersectionObserver" in window) {
+      var io = new IntersectionObserver(function (entries) {
+        if (entries[0].isIntersecting && !started) { started = true; io.disconnect(); t = 0; play(); }
+      }, { threshold: 0.4 });
+      io.observe(fig);
+    }
+  })();
+</script>

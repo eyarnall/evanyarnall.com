@@ -1,0 +1,2392 @@
+/*******************************************************************************
+ * Lab Notebook theme for evanyarnall.com
+ *
+ * Graph-paper background, IBM Plex Sans + Mono, navy ink with an orange accent.
+ * Loaded last from assets/css/main.scss, so these rules sit on top of al-folio's.
+ * Colors live in the tokens below; change them here and both themes follow.
+ ******************************************************************************/
+
+$lab-sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+$lab-mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+
+:root {
+  --lab-paper: #f5f0e3;
+  --lab-grid: #e6dcc4;
+  --lab-ink: #0c0a3e;
+  --lab-muted: #4a4868;
+  --lab-accent: #8a2f6b; // plum, text-safe (6.8:1 on paper)
+  --lab-accent-bright: #a8478a; // plum marks and rules
+  --lab-card: #fbf8f0;
+  --lab-rule: #d6c9a8;
+  --lab-left: #005f73; // teal: left-hand color in the coding demo
+
+  --global-bg-color: var(--lab-paper);
+  --global-text-color: var(--lab-ink);
+  --global-text-color-light: var(--lab-muted);
+  --global-theme-color: var(--lab-accent);
+  --global-hover-color: var(--lab-accent);
+  --global-hover-text-color: #ffffff;
+  --global-divider-color: var(--lab-rule);
+  --global-card-bg-color: var(--lab-card);
+  --global-highlight-color: var(--lab-accent);
+  --global-footer-bg-color: var(--lab-paper);
+  --global-footer-text-color: var(--lab-muted);
+  --global-footer-link-color: var(--lab-ink);
+}
+
+html[data-theme="dark"] {
+  --lab-paper: #0c0a3e;
+  --lab-grid: #17144f;
+  --lab-ink: #e9dfc4;
+  --lab-muted: #b3a98e;
+  --lab-accent: #e79ccc;
+  --lab-accent-bright: #e79ccc;
+  --lab-card: #14114d;
+  --lab-rule: #2c2866;
+  --lab-left: #6cc3d5;
+
+  --global-bg-color: var(--lab-paper);
+  --global-text-color: var(--lab-ink);
+  --global-text-color-light: var(--lab-muted);
+  --global-theme-color: var(--lab-accent);
+  --global-hover-color: var(--lab-accent);
+  --global-hover-text-color: #0c0a3e;
+  --global-divider-color: var(--lab-rule);
+  --global-card-bg-color: var(--lab-card);
+  --global-highlight-color: var(--lab-accent);
+  --global-footer-bg-color: var(--lab-paper);
+  --global-footer-text-color: var(--lab-muted);
+  --global-footer-link-color: var(--lab-ink);
+}
+
+/* ---------------------------------------------------------------------------
+ * Paper and type
+ * ------------------------------------------------------------------------- */
+
+body {
+  font-family: $lab-sans;
+  font-weight: 400;
+  color: var(--lab-ink);
+  background-color: var(--lab-paper);
+  background-image:
+    linear-gradient(var(--lab-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--lab-grid) 1px, transparent 1px);
+  background-size: 24px 24px;
+  background-attachment: fixed;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: $lab-sans;
+  color: var(--lab-ink);
+  text-wrap: balance;
+}
+
+code,
+pre,
+kbd {
+  font-family: $lab-mono;
+}
+
+a {
+  color: var(--lab-accent);
+  text-underline-offset: 0.18em;
+}
+
+a:hover {
+  color: var(--lab-accent);
+}
+
+// Links inside running text are underlined so they don't rely on color alone.
+.lab-prose a,
+.lab-spec a,
+.lab-plot a,
+.contact-note a,
+.post-description a,
+.post article p a,
+footer a {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--lab-accent-bright);
+  outline-offset: 2px;
+}
+
+/* ---------------------------------------------------------------------------
+ * Navbar and footer
+ * ------------------------------------------------------------------------- */
+
+.navbar {
+  background-color: var(--lab-paper);
+  opacity: 1;
+  border-bottom: 1px solid var(--lab-ink);
+  font-size: 0.95rem;
+
+  .navbar-brand {
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--lab-ink);
+  }
+
+  .nav-link {
+    color: var(--lab-muted);
+    text-transform: lowercase;
+  }
+
+  .nav-item.active > .nav-link,
+  .nav-link:hover {
+    color: var(--lab-accent);
+    font-weight: 500;
+  }
+}
+
+// Home page: the navbar name fades in after the big name scrolls away.
+.navbar .lab-brand {
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.2s ease,
+    visibility 0.2s;
+
+  &.is-shown {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .navbar .lab-brand {
+    transition: none;
+  }
+}
+
+footer.sticky-bottom,
+footer.fixed-bottom {
+  font-size: 0.85rem;
+  color: var(--lab-muted);
+  border-top: 1px solid var(--lab-rule);
+  background-color: var(--lab-paper);
+}
+
+/* ---------------------------------------------------------------------------
+ * Page headers (research, publications, CV)
+ * ------------------------------------------------------------------------- */
+
+.post-header {
+  margin-bottom: 2rem;
+
+  .post-title {
+    font-weight: 600;
+    letter-spacing: -0.015em;
+  }
+
+  .post-description {
+    color: var(--lab-muted);
+  }
+}
+
+/* ---------------------------------------------------------------------------
+ * Home page
+ * ------------------------------------------------------------------------- */
+
+.lab-home {
+  padding-top: 1.5rem;
+}
+
+.lab-label,
+.lab-fig-num,
+.lab-spec dt {
+  font-family: $lab-mono;
+  font-size: 0.8rem;
+  letter-spacing: 0.03em;
+}
+
+.lab-label {
+  color: var(--lab-accent);
+  margin: 0 0 0.75rem;
+}
+
+.lab-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
+  grid-template-areas:
+    "text side"
+    "plot side";
+  column-gap: 2.5rem;
+  row-gap: 2rem;
+  align-items: start;
+  margin-bottom: 3rem;
+}
+
+.lab-hero-text {
+  grid-area: text;
+}
+
+.lab-plot {
+  grid-area: plot;
+}
+
+.lab-side {
+  grid-area: side;
+}
+
+.lab-name-row {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  margin: 0 0 0.6rem;
+}
+
+.lab-avatar {
+  display: none; // shown on phones, where it replaces the large portrait
+  width: 64px;
+  height: 64px;
+  flex: none;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--lab-ink);
+}
+
+.lab-name {
+  font-size: clamp(2.2rem, 5vw, 3.1rem);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+// Role line directly under the name.
+.lab-role {
+  margin: 0.45rem 0 1.4rem;
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: var(--lab-muted);
+}
+
+.lab-headline {
+  font-size: clamp(1.25rem, 2.4vw, 1.5rem);
+  font-weight: 500;
+  line-height: 1.3;
+  margin: 0 0 1rem;
+  color: var(--lab-ink);
+}
+
+.lab-lede {
+  color: var(--lab-muted);
+  font-size: 1.05rem;
+  max-width: 54ch;
+  margin: 0;
+}
+
+/* Fig. 0: career trajectory plot */
+
+.lab-plot {
+  margin: 0;
+  padding: 0.9rem 1rem 0.8rem;
+  background: var(--lab-card);
+  border: 1px solid var(--lab-rule);
+
+  svg {
+    display: block;
+    width: 100%;
+    overflow: visible;
+  }
+
+  .plot-axis {
+    stroke: var(--lab-muted);
+    stroke-width: 1;
+  }
+
+  .plot-tick {
+    font-family: $lab-mono;
+    font-size: 11px;
+    fill: var(--lab-muted);
+  }
+
+  .plot-band {
+    fill: var(--lab-accent-bright);
+    opacity: 0.12;
+  }
+
+  .plot-line {
+    fill: none;
+    stroke: var(--lab-ink);
+    stroke-width: 2;
+    stroke-linecap: round;
+  }
+
+  .plot-line-proj {
+    stroke-dasharray: 5 5;
+    stroke: var(--lab-muted);
+  }
+
+  .plot-now {
+    stroke: var(--lab-accent-bright);
+    stroke-width: 1;
+    stroke-dasharray: 2 3;
+  }
+
+  .plot-now-label {
+    fill: var(--lab-accent);
+  }
+
+  .plot-pt {
+    cursor: pointer;
+    outline: none;
+
+    .plot-hit {
+      fill: transparent;
+    }
+
+    .plot-dot {
+      fill: var(--lab-card);
+      stroke: var(--lab-ink);
+      stroke-width: 2;
+      transition: r 0.15s ease;
+    }
+
+    &:not(.is-expected) .plot-dot {
+      fill: var(--lab-ink);
+    }
+
+    &.is-expected .plot-dot {
+      stroke: var(--lab-muted);
+      stroke-dasharray: 2 2;
+    }
+
+    &:hover .plot-dot,
+    &:focus-visible .plot-dot,
+    &.is-active .plot-dot {
+      r: 7;
+      fill: var(--lab-accent-bright);
+      stroke: var(--lab-accent-bright);
+    }
+  }
+
+  .lab-plot-readout {
+    margin: 0.5rem 0 0;
+    min-height: 1.5em;
+    font-size: 0.92rem;
+
+    span {
+      font-family: $lab-mono;
+      font-size: 0.8rem;
+      color: var(--lab-accent);
+      margin-right: 0.35rem;
+    }
+  }
+
+  figcaption {
+    margin-top: 0.4rem;
+    font-size: 0.78rem;
+    line-height: 1.45;
+    color: var(--lab-muted);
+
+    b {
+      font-family: $lab-mono;
+      font-weight: 500;
+      color: var(--lab-ink);
+    }
+  }
+}
+
+.lab-side {
+  display: grid;
+  gap: 1rem;
+}
+
+// The portrait is mounted like a figure plate: matted, with a caption in the site's "Fig." style.
+.lab-portrait {
+  justify-self: start;
+  width: max-content;
+  max-width: 100%;
+  margin: 0;
+  padding: 10px 10px 9px;
+  background: var(--lab-card);
+  border: 1px solid var(--lab-ink);
+
+  img {
+    display: block;
+    width: 218px;
+    max-width: 100%;
+    height: auto;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: 0;
+  }
+
+  figcaption {
+    max-width: 218px;
+    margin-top: 0.5rem;
+    font-size: 0.75rem;
+    line-height: 1.4;
+    color: var(--lab-muted);
+
+    b {
+      font-family: $lab-mono;
+      font-weight: 500;
+      color: var(--lab-ink);
+    }
+  }
+}
+
+.lab-spec {
+  margin: 0;
+  padding: 1rem 1.1rem;
+  background: var(--lab-card);
+  border: 1px solid var(--lab-ink);
+  font-size: 0.88rem;
+  line-height: 1.45;
+  display: grid;
+  gap: 0.45rem;
+
+  div {
+    display: grid;
+    grid-template-columns: 6.5rem 1fr;
+    gap: 0.75rem;
+  }
+
+  dt {
+    color: var(--lab-accent);
+    font-weight: 500;
+  }
+
+  dd {
+    margin: 0;
+  }
+}
+
+.lab-section {
+  margin-top: 3rem;
+}
+
+.lab-section-title {
+  font-size: 1.35rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--lab-ink);
+  border-bottom: 1px solid var(--lab-rule);
+  padding-bottom: 0.45rem;
+  margin-bottom: 1.1rem;
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: var(--lab-accent);
+  }
+}
+
+.lab-prose p {
+  max-width: 68ch;
+  line-height: 1.7;
+}
+
+/* Numbered figure cards (home page and research page) */
+
+.lab-figs {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.lab-fig {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 1rem 1.1rem 1.15rem;
+  background: var(--lab-card);
+  border: 1px solid var(--lab-rule);
+  color: var(--lab-ink);
+  text-decoration: none;
+  transition:
+    border-color 0.15s ease,
+    transform 0.15s ease;
+
+  &:hover {
+    border-color: var(--lab-ink);
+    color: var(--lab-ink);
+    text-decoration: none;
+    transform: translateY(-2px);
+  }
+
+  h2,
+  h3 {
+    font-size: 1.02rem;
+    font-weight: 600;
+    line-height: 1.3;
+    margin: 0;
+  }
+
+  p {
+    margin: 0;
+    font-size: 0.92rem;
+    color: var(--lab-muted);
+    line-height: 1.5;
+  }
+
+  .lab-fig-num {
+    color: var(--lab-accent);
+    font-weight: 500;
+  }
+
+  img {
+    width: 100%;
+    border: 1px solid var(--lab-rule);
+    margin-bottom: 0.4rem;
+  }
+}
+
+/* Teaser tag at the bottom of a research card (front matter: teaser, teaser_type) */
+
+.lab-fig .lab-teaser {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-top: auto; // pins the tag to the bottom so tags line up across cards
+  padding-top: 0.7rem;
+  border-top: 1px dashed var(--lab-rule);
+  font-size: 0.82rem;
+  line-height: 1.35;
+  color: var(--lab-muted);
+
+  span {
+    color: inherit;
+  }
+
+  svg {
+    flex: none;
+    width: 1rem;
+    height: 1rem;
+    overflow: visible;
+  }
+}
+
+.lab-teaser-interactive {
+  flex-wrap: wrap;
+  row-gap: 0.3rem;
+
+  > span:last-child {
+    flex-basis: 100%;
+  }
+}
+
+.lab-fig > p:last-of-type {
+  margin-bottom: 0.2rem;
+}
+
+.lab-teaser-figures svg {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.3;
+  stroke-linejoin: round;
+}
+
+.lab-teaser-interactive {
+  color: var(--lab-accent) !important;
+
+  .lab-teaser-kind {
+    flex: none;
+    white-space: nowrap;
+    font-weight: 600;
+  }
+
+  svg circle {
+    fill: var(--lab-accent-bright);
+  }
+
+  svg path {
+    fill: #ffffff;
+  }
+}
+
+.lab-fig:hover .lab-teaser-interactive span:last-child {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+/* "For families" callout linking to the lab's recruiting page */
+
+.lab-callout {
+  display: grid;
+  gap: 0.35rem;
+  margin: 1.5rem 0;
+  padding: 1rem 1.2rem;
+  background: var(--lab-card);
+  border: 1px solid var(--lab-ink);
+
+  p {
+    margin: 0;
+  }
+
+  .lab-callout-text strong {
+    color: var(--lab-ink);
+    font-weight: 600;
+  }
+
+  .lab-callout-text {
+    max-width: 62ch;
+    line-height: 1.55;
+  }
+
+  .lab-callout-link {
+    justify-self: start;
+    margin-top: 0.3rem;
+    padding: 0.35rem 0.8rem;
+    font-size: 0.875rem;
+    text-decoration: none;
+    border: 1px solid var(--lab-ink);
+    color: var(--lab-ink);
+
+    &:hover {
+      background: var(--lab-ink);
+      color: var(--lab-paper);
+    }
+  }
+}
+
+/* 404 page: "Fig. 404. Specimen not found." */
+
+.lab-404 {
+  svg {
+    display: block;
+    width: 100%;
+    max-width: 34rem;
+    height: auto;
+    margin: 0 auto;
+  }
+
+  .nf-table {
+    stroke: var(--lab-ink);
+    stroke-width: 2;
+  }
+
+  .nf-ghost {
+    fill: none;
+    stroke: var(--lab-muted);
+    stroke-width: 2;
+    stroke-dasharray: 6 5;
+  }
+
+  .nf-ghost-text {
+    font-family: $lab-mono;
+    font-size: 30px;
+    fill: var(--lab-muted);
+  }
+
+  .nf-target {
+    fill: var(--lab-accent-bright);
+    stroke: var(--lab-ink);
+    stroke-width: 2;
+  }
+
+  .nf-target-text {
+    font-family: $lab-mono;
+    font-size: 20px;
+    font-weight: 600;
+    fill: var(--lab-card);
+  }
+
+  .nf-arrow {
+    fill: none;
+    stroke: var(--lab-accent-bright);
+    stroke-width: 2;
+    stroke-dasharray: 4 4;
+  }
+
+  .nf-arm-outline {
+    stroke: var(--lab-ink);
+    stroke-width: 30;
+    stroke-linecap: round;
+  }
+
+  .nf-arm {
+    stroke: var(--lab-card);
+    stroke-width: 26;
+    stroke-linecap: round;
+  }
+
+  .nf-hand {
+    fill: var(--lab-card);
+    stroke: var(--lab-ink);
+    stroke-width: 1.8;
+  }
+}
+
+.nf-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+
+  a {
+    padding: 0.35rem 0.9rem;
+    font-family: $lab-mono;
+    font-size: 0.85rem;
+    text-decoration: none;
+    border: 1px solid var(--lab-ink);
+    color: var(--lab-ink);
+
+    &:hover {
+      background: var(--lab-ink);
+      color: var(--lab-paper);
+    }
+  }
+}
+
+/* CV page */
+
+.cv-actions {
+  margin: 0 0 1rem;
+}
+
+.cv-download {
+  display: inline-block;
+  padding: 0.4rem 0.9rem;
+  font-size: 0.9rem;
+  text-decoration: none !important;
+  border: 1px solid var(--lab-ink);
+  color: var(--lab-ink);
+
+  &:hover {
+    background: var(--lab-ink);
+    color: var(--lab-paper);
+  }
+}
+
+/* News list */
+
+.lab-home .news table {
+  font-size: 0.95rem;
+
+  th {
+    font-family: $lab-mono;
+    font-weight: 500;
+    font-size: 0.82rem;
+    color: var(--lab-muted);
+    white-space: nowrap;
+    padding-right: 1.25rem;
+  }
+}
+
+/* Contact */
+
+.lab-contact {
+  .contact-icons {
+    font-size: 1.6rem;
+    text-align: left;
+
+    a {
+      color: var(--lab-ink);
+      margin-right: 0.6rem;
+    }
+
+    a:hover {
+      color: var(--lab-accent);
+    }
+  }
+
+  .contact-note {
+    color: var(--lab-muted);
+    max-width: 60ch;
+    margin-top: 0.75rem;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+ * Publications
+ * ------------------------------------------------------------------------- */
+
+// Plain-language summary under each paper and talk (bib field "summary").
+.plain-summary {
+  max-width: 62ch;
+  margin: 0.4rem 0 0.3rem;
+  font-size: 0.92rem;
+  line-height: 1.5;
+  color: var(--lab-muted);
+}
+
+.plain-summary-label {
+  margin-right: 0.25rem;
+  font-style: italic;
+  font-weight: 600;
+  color: var(--lab-ink);
+}
+
+.publications {
+  // Section headings (Journal articles, Conference presentations): large, with a heavy rule.
+  h2.bibliography-section {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    margin: 3rem 0 0.25rem;
+    padding-top: 0.9rem;
+    border-top: 2px solid var(--lab-ink);
+    font-family: $lab-sans;
+    font-size: 1.45rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    text-transform: none;
+    color: var(--lab-ink);
+    text-align: left;
+
+    .lab-section-count {
+      margin-left: auto;
+      font-family: $lab-mono;
+      font-size: 0.78rem;
+      font-weight: 400;
+      letter-spacing: 0.03em;
+      color: var(--lab-muted);
+    }
+  }
+
+  h2.bibliography-section:first-of-type {
+    margin-top: 1.75rem;
+  }
+
+  // Year headings: small mono labels with a dotted rule, clearly secondary.
+  h2.bibliography {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin: 1.6rem 0 0.9rem;
+    padding: 0;
+    border: none;
+    font-family: $lab-mono;
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    color: var(--lab-accent);
+    text-align: left;
+
+    &::after {
+      content: "";
+      flex: 1;
+      border-top: 1px dashed var(--lab-rule);
+    }
+  }
+
+  .abbr abbr.badge,
+  .badge {
+    font-family: $lab-mono;
+    font-weight: 500;
+    border-radius: 0 !important;
+    letter-spacing: 0.02em;
+  }
+
+  // Conference badges share the ink color, which matches the dark page; outline them there.
+  html[data-theme="dark"] & .abbr abbr.badge {
+    box-shadow: inset 0 0 0 1px var(--lab-muted);
+  }
+
+  .title {
+    font-weight: 600;
+  }
+
+  .author em,
+  .author b,
+  em,
+  b {
+    color: inherit;
+  }
+
+  .links a.btn {
+    font-size: 0.8rem;
+    border-radius: 0;
+    border: 1px solid var(--lab-ink);
+    color: var(--lab-ink);
+  }
+
+  .links a.btn:hover {
+    background: var(--lab-ink);
+    color: var(--lab-paper);
+  }
+}
+
+/* Figures on project pages */
+
+.lab-figure {
+  margin: 1.75rem 0;
+  padding: 0.75rem;
+  background: #ffffff; // figures from posters have white backgrounds, even in dark mode
+  border: 1px solid var(--lab-rule);
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 32rem;
+    object-fit: contain;
+  }
+
+  figcaption {
+    margin-top: 0.6rem;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: #4a4868;
+
+    b {
+      font-family: $lab-mono;
+      font-weight: 500;
+      color: #0c0a3e;
+    }
+
+    a {
+      color: #8a2f6b;
+    }
+  }
+}
+
+/* Fig. 2a: animated moving-target trial (theme-aware, unlike the poster images) */
+
+.lab-figure-live {
+  background: var(--lab-card);
+
+  figcaption {
+    color: var(--lab-muted);
+
+    b {
+      color: var(--lab-ink);
+    }
+  }
+
+  .mt-panels {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  svg {
+    display: block;
+    width: 100%;
+    max-width: 30rem;
+    height: auto;
+    margin: 0 auto;
+  }
+
+  .mt-board {
+    fill: var(--lab-paper);
+    stroke: var(--lab-ink);
+    stroke-width: 1.5;
+  }
+
+  .mt-rail {
+    stroke: var(--lab-muted);
+    stroke-width: 3;
+  }
+
+  .mt-home {
+    fill: var(--lab-ink);
+  }
+
+  .mt-trigger {
+    stroke: var(--lab-accent-bright);
+    stroke-width: 1;
+    stroke-dasharray: 3 4;
+  }
+
+  .mt-ghost {
+    stroke: var(--lab-muted);
+    stroke-width: 1.5;
+    stroke-dasharray: 5 5;
+  }
+
+  .mt-target {
+    fill: var(--lab-accent-bright);
+
+    &.is-hit {
+      stroke: var(--lab-ink);
+      stroke-width: 3;
+    }
+  }
+
+  .mt-target-ghost {
+    fill: none;
+    stroke: var(--lab-accent-bright);
+    stroke-width: 1.5;
+    stroke-dasharray: 3 3;
+  }
+
+  .mt-shift {
+    stroke: var(--lab-accent-bright);
+    stroke-width: 1.5;
+  }
+
+  .mt-path {
+    fill: none;
+    stroke: var(--lab-ink);
+    stroke-width: 2.5;
+    stroke-linecap: round;
+  }
+
+  .mt-hand {
+    fill: var(--lab-card);
+    stroke: var(--lab-ink);
+    stroke-width: 2.5;
+  }
+
+  .mt-label,
+  .mt-tick,
+  .mt-phase {
+    font-family: $lab-mono;
+    fill: var(--lab-muted);
+  }
+
+  .mt-label {
+    font-size: 12.5px;
+  }
+
+  .mt-tick {
+    font-size: 12.5px;
+  }
+
+  .mt-phase {
+    font-size: 14px;
+    font-weight: 500;
+    fill: var(--lab-ink);
+  }
+
+  .mt-accent {
+    fill: var(--lab-accent);
+  }
+
+  .mt-axis {
+    stroke: var(--lab-muted);
+  }
+
+  .mt-zero {
+    stroke: var(--lab-rule);
+    stroke-dasharray: 2 3;
+  }
+
+  .mt-trace-target {
+    fill: none;
+    stroke: var(--lab-accent-bright);
+    stroke-width: 2.5;
+  }
+
+  .mt-trace-hand {
+    fill: none;
+    stroke: var(--lab-ink);
+    stroke-width: 2.5;
+  }
+
+  .mt-event {
+    stroke: var(--lab-accent-bright);
+    stroke-dasharray: 2 3;
+  }
+
+  .mt-bracket {
+    stroke: var(--lab-ink);
+    stroke-width: 1.5;
+    marker-start: none;
+  }
+
+  .mt-cursor {
+    stroke: var(--lab-muted);
+    stroke-width: 1;
+    opacity: 0.5;
+  }
+
+  .mt-hit-dot {
+    fill: var(--lab-ink);
+  }
+
+  // Timeline: play/pause, scrubber with numbered step ticks, current time.
+  .mt-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    margin-top: 0.9rem;
+  }
+
+  .mt-play {
+    flex: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    min-width: 5.6rem;
+    padding: 0.3rem 0.65rem;
+    font-size: 0.85rem;
+    border: 1px solid var(--lab-ink);
+    border-radius: 0;
+    background: transparent;
+    color: var(--lab-ink);
+    cursor: pointer;
+
+    // al-folio colors every span directly, so the label has to opt back in to the button's color.
+    span {
+      color: inherit;
+    }
+
+    svg {
+      width: 0.8rem;
+      height: 0.8rem;
+      flex: none;
+      fill: currentColor;
+    }
+
+    .mt-icon-stroke {
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    &:hover {
+      background: var(--lab-ink);
+      color: var(--lab-paper);
+    }
+  }
+
+  .mt-scrub {
+    position: relative;
+    flex: 1;
+    padding-bottom: 1.1rem; // room for the step numbers under the track
+  }
+
+  .mt-range {
+    --fill: 100%;
+    display: block;
+    width: 100%;
+    height: 22px;
+    margin: 0;
+    background: transparent;
+    appearance: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+
+    &::-webkit-slider-runnable-track {
+      height: 4px;
+      background: linear-gradient(to right, var(--lab-ink) var(--fill), var(--lab-rule) var(--fill));
+    }
+
+    &::-moz-range-track {
+      height: 4px;
+      background: linear-gradient(to right, var(--lab-ink) var(--fill), var(--lab-rule) var(--fill));
+    }
+
+    &::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 14px;
+      height: 14px;
+      margin-top: -5px;
+      background: var(--lab-accent-bright);
+      border: 2px solid var(--lab-card);
+      box-shadow: 0 0 0 1px var(--lab-ink);
+    }
+
+    &::-moz-range-thumb {
+      width: 14px;
+      height: 14px;
+      border-radius: 0;
+      background: var(--lab-accent-bright);
+      border: 2px solid var(--lab-card);
+      box-shadow: 0 0 0 1px var(--lab-ink);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--lab-accent-bright);
+      outline-offset: 3px;
+    }
+  }
+
+  // Tick positions follow the thumb's travel (inset by half the 14px thumb).
+  .mt-ticks {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 100%;
+    pointer-events: none;
+  }
+
+  .mt-tick-mark {
+    position: absolute;
+    top: 20px;
+    left: calc(7px + var(--p) * (100% - 14px));
+    transform: translateX(-50%);
+    font-family: $lab-mono;
+    font-size: 0.68rem;
+    line-height: 1;
+    color: var(--lab-muted);
+
+    &::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: -9px;
+      width: 1px;
+      height: 6px;
+      background: var(--lab-muted);
+    }
+  }
+
+  .mt-time {
+    flex: none;
+    min-width: 3.6rem;
+    font-family: $lab-mono;
+    font-size: 0.78rem;
+    color: var(--lab-muted);
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .mt-steps {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin: 0.5rem 0 0.2rem;
+  }
+
+  .mt-step {
+    padding: 0.25rem 0.6rem;
+    font-family: $lab-sans;
+    font-size: 0.8rem;
+    border: 1px solid var(--lab-rule);
+    border-radius: 0;
+    background: transparent;
+    color: var(--lab-muted);
+    cursor: pointer;
+
+    span {
+      font-family: $lab-mono;
+      color: var(--lab-accent);
+      margin-right: 0.15rem;
+    }
+
+    &:hover {
+      border-color: var(--lab-ink);
+      color: var(--lab-ink);
+    }
+
+    &.is-current {
+      border-color: var(--lab-ink);
+      color: var(--lab-ink);
+      background: var(--lab-paper);
+    }
+  }
+}
+
+/* Fig. 3a: "Can you code it?" behavioral coding demo */
+
+.cy-figure {
+  .cy-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+  }
+
+  .cy-status,
+  .cy-clock {
+    margin: 0;
+    font-family: $lab-mono;
+    font-size: 0.8rem;
+    color: var(--lab-muted);
+  }
+
+  .cy-status {
+    color: var(--lab-accent);
+  }
+
+  .cy-clock {
+    font-variant-numeric: tabular-nums;
+  }
+
+  svg.cy-scene,
+  svg.cy-timeline {
+    display: block;
+    width: 100%;
+    max-width: 40rem;
+    overflow: hidden;
+    height: auto;
+    margin: 0.4rem auto 0;
+  }
+
+  svg.cy-timeline {
+    overflow: visible;
+  }
+
+  .cy-table {
+    stroke: var(--lab-ink);
+    stroke-width: 2;
+  }
+
+  .cy-toy {
+    fill: var(--lab-accent-bright);
+    stroke: var(--lab-ink);
+    stroke-width: 2;
+  }
+
+  .cy-toy-letter {
+    font-family: $lab-mono;
+    font-size: 34px;
+    font-weight: 600;
+    fill: var(--lab-card);
+  }
+
+  .cy-arm-outline {
+    stroke: var(--lab-ink);
+    stroke-width: 30;
+    stroke-linecap: round;
+  }
+
+  .cy-arm {
+    stroke: var(--lab-card);
+    stroke-width: 26;
+    stroke-linecap: round;
+  }
+
+  .cy-palm,
+  .cy-thumb {
+    fill: var(--lab-card);
+    stroke: var(--lab-ink);
+    stroke-width: 2;
+  }
+
+  .cy-finger {
+    fill: var(--lab-card);
+    stroke: var(--lab-ink);
+    stroke-width: 1.8;
+  }
+
+  .cy-controls {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+    margin: 0.75rem 0 0.25rem;
+  }
+
+  .cy-start,
+  .cy-hold {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.875rem;
+    border: 1px solid var(--lab-ink);
+    border-radius: 0;
+    background: transparent;
+    color: var(--lab-ink);
+    cursor: pointer;
+
+    span {
+      color: inherit;
+    }
+
+    svg {
+      width: 0.8rem;
+      height: 0.8rem;
+      fill: currentColor;
+    }
+
+    .mt-icon-stroke {
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    &:hover:not(:disabled) {
+      background: var(--lab-ink);
+      color: var(--lab-paper);
+    }
+
+    &:disabled {
+      opacity: 0.45;
+      cursor: default;
+    }
+  }
+
+  .cy-hold {
+    min-width: 9rem;
+    justify-content: center;
+    padding: 0.6rem 1rem;
+    border-width: 2px;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: none;
+
+    &.is-down {
+      background: var(--lab-accent-bright);
+      border-color: var(--lab-accent-bright);
+      color: #ffffff;
+    }
+  }
+
+  .cy-hint {
+    font-size: 0.8rem;
+    color: var(--lab-muted);
+
+    // No space bar on touchscreens.
+    @media (hover: none) and (pointer: coarse) {
+      display: none;
+    }
+  }
+
+  .cy-row-label,
+  .cy-tick,
+  .cy-row-note {
+    font-family: $lab-mono;
+    font-size: 12px;
+    fill: var(--lab-muted);
+  }
+
+  .cy-row-label {
+    fill: var(--lab-ink);
+  }
+
+  .cy-row-bg {
+    fill: var(--lab-paper);
+    stroke: var(--lab-rule);
+  }
+
+  .cy-bar-you {
+    fill: var(--lab-ink);
+  }
+
+  .cy-bar-truth {
+    fill: var(--lab-accent-bright);
+  }
+
+  .cy-axis {
+    stroke: var(--lab-muted);
+  }
+
+  .cy-cursor {
+    stroke: var(--lab-accent-bright);
+    stroke-width: 1.5;
+  }
+
+  .cy-result {
+    min-height: 1.5em;
+    margin: 0.4rem 0 0;
+    font-size: 0.92rem;
+    line-height: 1.55;
+  }
+}
+
+/* Fig. 3b: "Which hand?" coding demo (builds on the .cy-* styles) */
+
+.cb-figure {
+  .cb-surface {
+    fill: var(--lab-paper);
+  }
+
+  .cb-toy-ring {
+    fill: none;
+    stroke: var(--lab-card);
+    stroke-width: 3;
+  }
+
+  .cb-toy-bead {
+    stroke: var(--lab-card);
+    stroke-width: 2;
+    stroke-dasharray: 2 7;
+    stroke-linecap: round;
+  }
+
+  .cb-cuff {
+    stroke: var(--lab-ink);
+    stroke-width: 2;
+  }
+
+  .cb-cuff-L {
+    fill: var(--lab-left);
+  }
+
+  .cb-cuff-R {
+    fill: var(--lab-accent-bright);
+  }
+
+  .cb-cuff-label {
+    font-family: $lab-mono;
+    font-size: 13px;
+    font-weight: 600;
+    fill: #ffffff;
+  }
+
+  .cb-side {
+    font-family: $lab-mono;
+    font-size: 12px;
+    fill: var(--lab-muted);
+  }
+
+  .cb-bar-L {
+    fill: var(--lab-left);
+  }
+
+  .cb-bar-R {
+    fill: var(--lab-accent-bright);
+  }
+
+  .cb-bar-B {
+    fill: var(--lab-ink);
+  }
+
+  .cb-keys {
+    display: inline-flex;
+    gap: 0.4rem;
+  }
+
+  .cb-hold {
+    min-width: 5.2rem;
+  }
+
+  .cb-left.is-down {
+    background: var(--lab-left);
+    border-color: var(--lab-left);
+  }
+
+  .cb-both.is-down {
+    background: var(--lab-ink);
+    border-color: var(--lab-ink);
+    color: var(--lab-paper);
+  }
+}
+
+@media (max-width: 560px) {
+  .cb-figure .cb-keys {
+    order: 3;
+    width: 100%;
+
+    .cb-hold {
+      flex: 1;
+      min-width: 0;
+      padding: 0.8rem 0.4rem;
+    }
+  }
+}
+
+/* Fig. 1c: "Squeeze and watch" fNIRS demo */
+
+.fn-figure {
+  // Head map in a narrower column than the chart, side by side until phone widths.
+  .mt-panels.fn-panels {
+    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+    align-items: center;
+  }
+
+  .fn-panels svg {
+    max-width: 30rem;
+  }
+
+  .fn-panels svg.fn-map {
+    max-width: 17rem;
+  }
+
+  .fn-head {
+    fill: none;
+    stroke: var(--lab-ink);
+    stroke-width: 2;
+  }
+
+  .fn-scalp {
+    fill: var(--lab-paper);
+  }
+
+  .fn-channel {
+    stroke: var(--lab-ink);
+    stroke-width: 1;
+  }
+
+  .fn-cz {
+    fill: var(--lab-muted);
+  }
+
+  .fn-tiny,
+  .fn-tick {
+    font-family: $lab-mono;
+    font-size: 12px;
+    fill: var(--lab-muted);
+  }
+
+  .fn-band {
+    fill: var(--lab-muted);
+    opacity: 0.14;
+  }
+
+  .fn-axis {
+    stroke: var(--lab-muted);
+  }
+
+  .fn-zero {
+    stroke: var(--lab-rule);
+    stroke-dasharray: 2 3;
+  }
+
+  .fn-trace-left {
+    fill: none;
+    stroke: var(--lab-ink);
+    stroke-width: 2.5;
+    stroke-linejoin: round;
+  }
+
+  .fn-trace-right {
+    fill: none;
+    stroke: var(--lab-accent-bright);
+    stroke-width: 2.5;
+    stroke-linejoin: round;
+  }
+
+  .fn-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 1.5rem;
+    margin-top: 0.9rem;
+  }
+
+  .fn-group {
+    display: grid;
+    gap: 0.25rem;
+  }
+
+  .fn-label {
+    font-family: $lab-mono;
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+    color: var(--lab-accent);
+  }
+
+  .fn-seg {
+    display: inline-flex;
+
+    button {
+      padding: 0.3rem 0.7rem;
+      font-family: $lab-sans;
+      font-size: 0.82rem;
+      border: 1px solid var(--lab-rule);
+      border-radius: 0;
+      background: transparent;
+      color: var(--lab-muted);
+      cursor: pointer;
+
+      & + button {
+        border-left: none;
+      }
+
+      &:hover {
+        color: var(--lab-ink);
+      }
+
+      &.is-current {
+        background: var(--lab-ink);
+        border-color: var(--lab-ink);
+        color: var(--lab-paper);
+      }
+    }
+  }
+
+  .fn-action {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 0.8rem;
+  }
+
+  .fn-squeeze {
+    min-width: 11rem;
+    justify-content: center;
+    padding: 0.65rem 1rem;
+    border-width: 2px;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: none;
+  }
+
+  .fn-note {
+    min-height: 1.5em;
+    margin: 0.6rem 0 0;
+    font-size: 0.92rem;
+    line-height: 1.55;
+  }
+}
+
+@media (max-width: 1100px) {
+  .fn-figure .mt-panels.fn-panels {
+    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .fn-figure .mt-panels.fn-panels {
+    grid-template-columns: 1fr;
+  }
+
+  .fn-figure .fn-panels svg.fn-map {
+    max-width: 13rem;
+  }
+}
+
+@media (max-width: 560px) {
+  .fn-figure .fn-squeeze {
+    width: 100%;
+    padding: 0.85rem;
+  }
+}
+
+/* Fig. 2a: the DEMR Lab's corticospinal tract diagram with TMS animations on top */
+
+.pw-figure {
+  --pw-mature: #2c3a9e;
+  --pw-immature: #5b66b5;
+  --pw-atypical: #f0624a;
+
+  .pw-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .pw-tabs button {
+    padding: 0.3rem 0.7rem;
+    font-family: $lab-sans;
+    font-size: 0.82rem;
+    border: 1px solid var(--lab-rule);
+    border-radius: 0;
+    background: transparent;
+    color: var(--lab-muted);
+    cursor: pointer;
+
+    &:hover {
+      color: var(--lab-ink);
+      border-color: var(--lab-ink);
+    }
+
+    &.is-current {
+      background: var(--lab-ink);
+      border-color: var(--lab-ink);
+      color: var(--lab-paper);
+    }
+  }
+
+  // The diagram keeps its white background in both themes.
+  svg.pw-svg {
+    display: block;
+    width: 100%;
+    max-width: 25rem;
+    height: auto;
+    margin: 0.5rem auto 0;
+    background: #ffffff;
+    border: 1px solid var(--lab-rule);
+  }
+
+  .pw-guide {
+    fill: none;
+    stroke: none;
+  }
+
+  .pw-pulse {
+    fill: #ffd23f;
+    stroke: #1d1d1f;
+    stroke-width: 3;
+    filter: drop-shadow(0 0 6px rgba(255, 196, 0, 0.9));
+
+    &.is-atypical {
+      fill: #ffd23f;
+    }
+  }
+
+  .pw-coil circle {
+    fill: rgba(255, 255, 255, 0.6);
+    stroke: #1d1d1f;
+    stroke-width: 6;
+  }
+
+  .pw-flash {
+    fill: none;
+    stroke: #ffc400;
+    stroke-width: 5;
+    animation: pw-flash 0.7s ease-out forwards;
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+
+  .pw-hand-ring {
+    fill: rgba(255, 210, 63, 0.08);
+    stroke: #ffc400;
+    stroke-width: 4;
+    stroke-dasharray: 10 8;
+
+    &.is-pulsing {
+      animation: pw-ring 0.6s ease-out;
+      transform-box: fill-box;
+      transform-origin: center;
+    }
+  }
+
+  .pw-mep-line {
+    fill: none;
+    stroke: #a8478a;
+    stroke-width: 5;
+    stroke-linejoin: round;
+  }
+
+  .pw-mep-text {
+    font-family: $lab-mono;
+    font-size: 24px;
+    font-weight: 600;
+    fill: #a8478a;
+  }
+
+  .fn-label {
+    font-family: $lab-mono;
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+    color: var(--lab-accent);
+  }
+
+  .pw-desc,
+  .pw-result {
+    margin: 0.5rem 0 0;
+    font-size: 0.92rem;
+    line-height: 1.55;
+  }
+
+  .pw-result {
+    min-height: 1.5em;
+    color: var(--lab-accent);
+  }
+
+  .pw-tms {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.6rem;
+    margin-top: 0.8rem;
+
+    .cy-hold {
+      min-width: 0;
+    }
+  }
+
+  .pw-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 1.2rem;
+    margin-top: 0.7rem;
+    font-size: 0.8rem;
+    color: var(--lab-muted);
+
+    span {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      color: inherit;
+    }
+  }
+
+  .pw-key {
+    display: inline-block;
+    width: 26px;
+    height: 0;
+    border-top: 3px solid var(--pw-mature);
+  }
+
+  .pw-key-immature {
+    border-top: 3px dashed var(--pw-immature);
+  }
+
+  .pw-key-atypical {
+    border-top: 3px dashed var(--pw-atypical);
+  }
+}
+
+@media (max-width: 560px) {
+  .pw-figure {
+    svg.pw-svg {
+      max-width: 16.5rem;
+    }
+
+    .pw-tabs button {
+      padding: 0.25rem 0.55rem;
+      font-size: 0.78rem;
+    }
+
+    .pw-tms {
+      gap: 0.4rem;
+    }
+
+    .pw-tms .cy-hold {
+      min-width: 0;
+      padding: 0.4rem 0.6rem;
+      font-size: 0.74rem;
+    }
+
+    .pw-desc,
+    .pw-result {
+      font-size: 0.88rem;
+    }
+
+    .pw-legend {
+      font-size: 0.74rem;
+    }
+  }
+}
+
+@keyframes pw-flash {
+  from { transform: scale(1); opacity: 1; }
+  to { transform: scale(5); opacity: 0; }
+}
+
+@keyframes pw-ring {
+  from { transform: scale(0.7); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pw-figure .pw-flash {
+    animation: none;
+    opacity: 0;
+  }
+}
+
+/* Fig. 3c: video coding vs. wrist sensor (IMU) */
+
+.iv-figure {
+  .iv-panels {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 3.2fr);
+    gap: 1rem;
+    align-items: center;
+  }
+
+  svg.iv-scene,
+  svg.iv-chart {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  svg.iv-scene {
+    max-width: 12rem;
+    margin: 0 auto;
+    border: 1px solid var(--lab-rule);
+  }
+
+  .iv-mat {
+    fill: var(--lab-paper);
+  }
+
+  .iv-skin {
+    fill: var(--lab-card);
+    stroke: var(--lab-ink);
+    stroke-width: 1.8;
+  }
+
+  .iv-limb-outline {
+    fill: none;
+    stroke: var(--lab-ink);
+    stroke-width: 16;
+    stroke-linecap: round;
+  }
+
+  .iv-limb {
+    fill: none;
+    stroke: var(--lab-card);
+    stroke-width: 12.5;
+    stroke-linecap: round;
+  }
+
+  .iv-sensor {
+    fill: var(--lab-accent-bright);
+    stroke: var(--lab-ink);
+    stroke-width: 1.2;
+  }
+
+  .iv-label {
+    font-family: $lab-sans;
+    font-size: 13px;
+    font-weight: 600;
+    fill: var(--lab-ink);
+  }
+
+  .iv-tiny {
+    font-family: $lab-mono;
+    font-size: 11px;
+    fill: var(--lab-muted);
+  }
+
+  .iv-thr-text {
+    fill: var(--lab-accent);
+  }
+
+  .iv-row {
+    fill: var(--lab-paper);
+    stroke: var(--lab-rule);
+  }
+
+  .iv-bar-video {
+    fill: var(--lab-ink);
+  }
+
+  .iv-bar-imu {
+    fill: var(--lab-accent-bright);
+  }
+
+  .iv-axis {
+    stroke: var(--lab-muted);
+  }
+
+  .iv-trace {
+    fill: none;
+    stroke: var(--lab-ink);
+    stroke-width: 1.4;
+    stroke-linejoin: round;
+  }
+
+  .iv-threshold {
+    stroke: var(--lab-accent-bright);
+    stroke-width: 1.5;
+    stroke-dasharray: 5 4;
+  }
+
+  .iv-cursor {
+    stroke: var(--lab-accent-bright);
+    stroke-width: 1.5;
+  }
+
+  .iv-controls {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem 1.25rem;
+    margin-top: 0.8rem;
+  }
+
+  .iv-thr {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.6rem;
+    flex: 1;
+    min-width: 14rem;
+
+    input {
+      flex: 1;
+      min-width: 8rem;
+      accent-color: var(--lab-accent-bright);
+    }
+  }
+
+  .iv-thr-val {
+    font-family: $lab-mono;
+    font-size: 0.8rem;
+    color: var(--lab-muted);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .iv-result {
+    min-height: 1.5em;
+    margin: 0.5rem 0 0;
+    font-size: 0.92rem;
+    line-height: 1.55;
+  }
+}
+
+@media (max-width: 640px) {
+  .iv-figure .iv-panels {
+    grid-template-columns: 1fr;
+  }
+
+  .iv-figure svg.iv-scene {
+    max-width: 9rem;
+  }
+}
+
+@media (max-width: 1100px) {
+  .lab-figure-live .mt-panels {
+    grid-template-columns: 1fr;
+  }
+}
+
+.publications .abstract p {
+  text-align: left;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  max-width: 70ch;
+}
+
+.lab-funding {
+  font-size: 0.85rem;
+  color: var(--lab-muted);
+}
+
+/* Publication filters (year, type, first author) */
+
+.bibsearch-form-input {
+  font-family: $lab-sans;
+  border: 1px solid var(--lab-ink);
+  border-radius: 0;
+  background: var(--lab-card);
+  color: var(--lab-ink);
+}
+
+.lab-filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 0.75rem 1.25rem;
+  margin: 0.9rem 0 0.5rem;
+  font-size: 0.9rem;
+}
+
+.lab-filter {
+  display: grid;
+  gap: 0.2rem;
+
+  label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--lab-ink);
+  }
+
+  select {
+    font-family: $lab-sans;
+    font-size: 0.9rem;
+    padding: 0.35rem 1.8rem 0.35rem 0.6rem;
+    min-width: 9rem;
+    border: 1px solid var(--lab-ink);
+    border-radius: 0;
+    background-color: var(--lab-card);
+    color: var(--lab-ink);
+  }
+}
+
+.lab-filter-check {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding-bottom: 0.4rem;
+  cursor: pointer;
+
+  input {
+    width: 1.05rem;
+    height: 1.05rem;
+    accent-color: var(--lab-accent-bright);
+  }
+}
+
+.lab-filter-count {
+  margin: 0 0 0.4rem auto;
+  font-family: $lab-mono;
+  font-size: 0.78rem;
+  color: var(--lab-muted);
+}
+
+.lab-filter-clear {
+  margin-bottom: 0.25rem;
+  padding: 0.3rem 0.7rem;
+  font-size: 0.85rem;
+  border: 1px solid var(--lab-ink);
+  border-radius: 0;
+  background: transparent;
+  color: var(--lab-ink);
+  cursor: pointer;
+
+  &:hover {
+    background: var(--lab-ink);
+    color: var(--lab-paper);
+  }
+}
+
+.publications .lab-filtered,
+.publications .lab-empty {
+  display: none !important;
+}
+
+/* ---------------------------------------------------------------------------
+ * CV
+ * ------------------------------------------------------------------------- */
+
+.cv {
+  b,
+  strong,
+  td,
+  th {
+    color: var(--lab-ink);
+  }
+
+  .card {
+    background: var(--lab-card);
+    border: 1px solid var(--lab-ink);
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .card-title {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--lab-ink);
+  }
+
+  .badge {
+    font-family: $lab-mono;
+    font-weight: 500 !important;
+    border-radius: 0;
+    background-color: var(--lab-ink) !important;
+    color: var(--lab-paper) !important;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+ * Small screens
+ * ------------------------------------------------------------------------- */
+
+@media (max-width: 760px) {
+  // Phone order: name and avatar, headline, key facts, then Fig. 0.
+  .lab-home {
+    padding-top: 0.5rem;
+  }
+
+  .lab-hero {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "text"
+      "side"
+      "plot";
+    row-gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .lab-avatar {
+    display: block;
+  }
+
+  .lab-portrait {
+    display: none;
+  }
+
+  .lab-name {
+    font-size: 2.1rem;
+  }
+
+  .lab-headline {
+    font-size: 1.2rem;
+  }
+
+  .lab-lede {
+    font-size: 1rem;
+  }
+
+  .lab-spec {
+    font-size: 0.85rem;
+    padding: 0.85rem 0.9rem;
+
+    div {
+      grid-template-columns: 5.6rem 1fr;
+      gap: 0.6rem;
+    }
+  }
+
+  .lab-plot {
+    padding: 0.75rem 0.75rem 0.7rem;
+  }
+
+  .lab-section {
+    margin-top: 2.25rem;
+  }
+
+  // Venue badges sit inline above each entry instead of spanning the full width.
+  .publications .abbr {
+    margin-bottom: 0.35rem;
+
+    abbr.badge {
+      display: inline-block;
+      max-width: max-content; // Tailwind's layered w-100 wins over width overrides
+      padding: 0.2rem 0.55rem;
+    }
+  }
+
+  // The floating back-to-top button covers text on small screens.
+  #back-to-top {
+    display: none !important;
+  }
+
+  .lab-home .news table th {
+    white-space: normal;
+    width: 6.5rem !important;
+    padding-right: 0.75rem;
+  }
+
+  .lab-figs {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lab-plot .plot-dot {
+    transition: none;
+  }
+
+  .lab-fig {
+    transition: none;
+
+    &:hover {
+      transform: none;
+    }
+  }
+}
+
+/* ---------------------------------------------------------------------------
+ * Reading measure and browser surfaces
+ * ------------------------------------------------------------------------- */
+
+// Figure captions are smaller type, so they can run a little wider.
+.lab-figure figcaption,
+.lab-plot figcaption {
+  max-width: 68ch;
+}
+
+// Keep running text under about 75 characters a line (Plex's "ch" is wider than an average letter).
+.lab-prose p,
+.lab-prose li,
+.post article > p,
+.post article > ul li,
+.post article > ol li {
+  max-width: 58ch;
+}
+
+// The parts the browser draws carry the palette too.
+::selection {
+  background: color-mix(in srgb, var(--lab-accent-bright) 24%, transparent);
+  color: var(--lab-ink);
+}
+
+html {
+  caret-color: var(--lab-accent);
+  accent-color: var(--lab-accent-bright);
+  scrollbar-color: var(--lab-rule) var(--lab-paper);
+}
+
+::placeholder {
+  color: var(--lab-muted);
+  opacity: 1;
+}
+
+/* ---------------------------------------------------------------------------
+ * Publication thumbnails: mounted like the portrait plate (mat + ink border)
+ * ------------------------------------------------------------------------- */
+
+ol.bibliography .preview {
+  padding: 5px;
+  background: var(--lab-card);
+  border: 1px solid var(--lab-ink);
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}

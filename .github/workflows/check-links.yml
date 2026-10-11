@@ -1,0 +1,46 @@
+name: Check links
+
+# Builds the site and looks for broken links after every change, and again every Monday for
+# outside pages that have moved or disappeared. If it finds any, the run fails, GitHub sends an
+# email, and the run's summary page lists each broken link. Sites that block link checkers are
+# listed in .lycheeignore.
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  schedule:
+    - cron: "0 13 * * 1" # Mondays, early morning Boston time
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  links:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.3.5"
+          bundler-cache: true
+      - name: Build site
+        run: JEKYLL_ENV=production bundle exec jekyll build
+      - name: Check links
+        uses: lycheeverse/lychee-action@v2
+        with:
+          # 403 and 429 mean a site refused the checker, not that the page is gone.
+          args: >-
+            --root-dir ${{ github.workspace }}/_site
+            --accept 200..=299,403,429
+            --max-retries 3
+            --timeout 30
+            --no-progress
+            '_site/**/*.html'
+          fail: true

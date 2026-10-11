@@ -1,0 +1,328 @@
+{% comment %}
+  "Squeeze and watch" fNIRS demo (used on _projects/1_infant_sensorimotor.md).
+  Holding Squeeze switches on simulated motor activity; the oxygenated-hemoglobin (HbO) signal is that activity
+  convolved with a canonical hemodynamic response, so it rises ~5 s late. The hemisphere opposite the squeezing hand
+  (contralateral) responds more, and the same-side (ipsilateral) share shrinks with age, following the pattern on
+  Evan's AACPDM 2026 poster (SP20).
+  Everything here is simulated and illustrative.
+{% endcomment %}
+<figure class="lab-figure lab-figure-live cy-figure fn-figure" id="fn-figure">
+  <div class="mt-panels fn-panels">
+    <svg class="fn-map" viewBox="0 0 300 290" role="img" aria-labelledby="fn-map-title">
+      <title id="fn-map-title">
+        Head map seen from above, nose at the top, with fNIRS channels over the left and right sensorimotor cortex.
+        Channels turn red as oxygenated blood increases.
+      </title>
+    </svg>
+    <svg class="fn-chart" viewBox="0 0 420 290" role="img" aria-labelledby="fn-chart-title">
+      <title id="fn-chart-title">
+        Oxygenated hemoglobin over the last 30 seconds for the left and right hemispheres, with squeeze periods shaded.
+      </title>
+    </svg>
+  </div>
+
+  <div class="fn-controls">
+    <div class="fn-group">
+      <span class="fn-label" id="fn-hand-label">squeezing hand</span>
+      <div class="fn-seg" role="radiogroup" aria-labelledby="fn-hand-label">
+        <button type="button" role="radio" data-hand="L">Left hand</button>
+        <button type="button" role="radio" data-hand="R">Right hand</button>
+      </div>
+    </div>
+    <div class="fn-group">
+      <span class="fn-label" id="fn-age-label">age</span>
+      <div class="fn-seg" role="radiogroup" aria-labelledby="fn-age-label">
+        <button type="button" role="radio" data-age="6">6 mo</button>
+        <button type="button" role="radio" data-age="12">12 mo</button>
+        <button type="button" role="radio" data-age="18">18–24 mo</button>
+      </div>
+    </div>
+  </div>
+  <div class="fn-action">
+    <button type="button" class="cy-hold fn-squeeze" aria-pressed="false">Hold to squeeze</button>
+    <span class="cy-hint">or hold the space bar</span>
+  </div>
+  <p class="fn-note" aria-live="polite"></p>
+
+  <figcaption>
+    <b>Fig. 1c.</b> Hold the button to "squeeze" with one hand, then watch the fNIRS signal: oxygenated blood (HbO) rises
+    seconds after the movement starts. Early in life, the brain has connections to both hands: <i>ipsilateral</i>
+    (same side) and <i>contralateral</i> (opposite side). As the brain matures in typical development, only the
+    contralateral connections remain, which is why each hemisphere controls the opposite hand. In unilateral cerebral
+    palsy, an early injury to one hemisphere can change this: the uninjured hemisphere may keep ipsilateral connections
+    to the affected hand. Change the age to watch the response become contralateral, the pattern in our AACPDM 2026
+    poster. Simulated, not real data.
+  </figcaption>
+</figure>
+
+<script>
+  (function () {
+    var fig = document.getElementById("fn-figure");
+    if (!fig) return;
+    var map = fig.querySelector(".fn-map");
+    var chart = fig.querySelector(".fn-chart");
+    var btn = fig.querySelector(".fn-squeeze");
+    var note = fig.querySelector(".fn-note");
+    var handBtns = Array.prototype.slice.call(fig.querySelectorAll("[data-hand]"));
+    var ageBtns = Array.prototype.slice.call(fig.querySelectorAll("[data-age]"));
+    var NS = "http://www.w3.org/2000/svg";
+
+    // ---------- Model ----------
+    var DT = 0.1; // seconds per sample
+    var WINDOW = 30; // seconds shown on the chart
+    var KERNEL = 30; // seconds of hemodynamic response to keep
+    // Canonical double-gamma hemodynamic response (peak ~5 s, small undershoot), scaled so a long block plateaus at 1.
+    function gammaPdf(t, a) {
+      if (t <= 0) return 0;
+      var g = 1;
+      for (var i = 2; i < a; i++) g *= i; // (a-1)! for integer a
+      return (Math.pow(t, a - 1) * Math.exp(-t)) / g;
+    }
+    var hrf = [], sum = 0;
+    for (var k = 0; k < KERNEL / DT; k++) {
+      var t = k * DT, v = gammaPdf(t, 6) - gammaPdf(t, 16) / 6;
+      hrf.push(v);
+      sum += v;
+    }
+    hrf = hrf.map(function (v) { return v / sum; });
+
+    // How strongly the hemisphere on the same side as the squeezing hand responds, by age (contralateral = 1).
+    var IPSI = { 6: 0.85, 12: 0.45, 18: 0.28 };
+    var AGE_NOTE = {
+      6: "At 6 months, both hemispheres respond almost equally: ipsilateral (same-side) connections are still active.",
+      12: "By 12 months, the contralateral (opposite-side) hemisphere responds more as ipsilateral connections fade.",
+      18: "By 18–24 months, the response is mostly contralateral, as in the mature brain.",
+    };
+    var hand = "R", age = 12;
+
+    var N = Math.round((KERNEL + WINDOW) / DT);
+    var drive = [], resp = []; // neural activity (0/1) and the base hemodynamic response, oldest first
+    for (var i = 0; i < N; i++) { drive.push(0); resp.push(0); }
+    function step(on) {
+      drive.push(on ? 1 : 0);
+      drive.shift();
+      var r = 0;
+      for (var k = 0; k < hrf.length; k++) r += drive[drive.length - 1 - k] * hrf[k];
+      resp.push(r);
+      resp.shift();
+    }
+    function weights() {
+      // Returns [left hemisphere, right hemisphere] multipliers.
+      var ipsi = IPSI[age];
+      return hand === "R" ? [1, ipsi] : [ipsi, 1];
+    }
+
+    // Example squeeze already on the chart when the page loads (6 s, starting 13 s ago), so the map is lit on arrival.
+    var pre = Math.round(KERNEL / DT);
+    for (var s = 0; s < pre; s++) step(false);
+    for (var s2 = 0; s2 < Math.round(WINDOW / DT); s2++) step(s2 >= 170 && s2 < 230);
+
+    // ---------- Drawing helpers ----------
+    function el(parent, name, attrs, text) {
+      var e = document.createElementNS(NS, name);
+      for (var k in attrs) e.setAttribute(k, attrs[k]);
+      if (text != null) e.textContent = text;
+      parent.appendChild(e);
+      return e;
+    }
+    function clear(svg) {
+      var keep = svg.querySelector("title");
+      while (svg.lastChild && svg.lastChild !== keep) svg.removeChild(svg.lastChild);
+    }
+    function hexToRgb(h) {
+      h = h.trim().replace("#", "");
+      if (h.length === 3) h = h.split("").map(function (c) { return c + c; }).join("");
+      return [parseInt(h.slice(0, 2), 16), parseInt(h.slice(2, 4), 16), parseInt(h.slice(4, 6), 16)];
+    }
+    function mix(a, b, f) {
+      return "rgb(" + a.map(function (v, i) { return Math.round(v + (b[i] - v) * f); }).join(",") + ")";
+    }
+    var RED = [192, 57, 43], BLUE = [59, 111, 182];
+    function color(v) {
+      var neutral = hexToRgb(getComputedStyle(fig).getPropertyValue("--lab-card") || "#ffffff");
+      return v >= 0 ? mix(neutral, RED, Math.min(1, v)) : mix(neutral, BLUE, Math.min(1, -v * 3));
+    }
+
+    // ---------- Head map ----------
+    var HEAD = { x: 150, y: 140, r: 108 };
+    var PATCH = { L: [96, 146], R: [204, 146] };
+    var GRID = [-1, 0, 1];
+    function drawMap(left, right) {
+      clear(map);
+      el(map, "path", { d: "M 136 36 L 150 16 L 164 36", class: "fn-head" });
+      el(map, "path", { d: "M 44 120 q -14 20 0 40", class: "fn-head" });
+      el(map, "path", { d: "M 256 120 q 14 20 0 40", class: "fn-head" });
+      el(map, "circle", { cx: HEAD.x, cy: HEAD.y, r: HEAD.r, class: "fn-head fn-scalp" });
+      el(map, "text", { x: 150, y: 12, class: "fn-tiny", "text-anchor": "middle" }, "front");
+      [["L", left], ["R", right]].forEach(function (pv) {
+        var c = PATCH[pv[0]];
+        GRID.forEach(function (gx) {
+          GRID.forEach(function (gy) {
+            var w = 1 - 0.16 * Math.sqrt(gx * gx + gy * gy);
+            el(map, "circle", { cx: c[0] + gx * 23, cy: c[1] + gy * 23, r: 10, fill: color(pv[1] * w), class: "fn-channel" });
+          });
+        });
+        el(map, "text", { x: c[0], y: c[1] + 52, class: "fn-tiny", "text-anchor": "middle" }, pv[0] === "L" ? "C3" : "C4");
+      });
+      el(map, "circle", { cx: 150, cy: 146, r: 2.5, class: "fn-cz" });
+      el(map, "text", { x: 150, y: 132, class: "fn-tiny", "text-anchor": "middle" }, "Cz");
+      el(map, "text", { x: 22, y: 236, class: "fn-tiny" }, "left");
+      el(map, "text", { x: 278, y: 236, class: "fn-tiny", "text-anchor": "end" }, "right");
+      // Color bar.
+      var cbx = 95, cbw = 110;
+      for (var i = 0; i < 22; i++) {
+        var v = -0.33 + (i / 21) * 1.33;
+        el(map, "rect", { x: cbx + (i * cbw) / 22, y: 262, width: cbw / 22 + 0.5, height: 8, fill: color(v) });
+      }
+      el(map, "text", { x: cbx - 4, y: 270, class: "fn-tiny", "text-anchor": "end" }, "−");
+      el(map, "text", { x: cbx + cbw + 4, y: 270, class: "fn-tiny" }, "+");
+      el(map, "text", { x: 150, y: 287, class: "fn-tiny", "text-anchor": "middle" }, "HbO change");
+    }
+
+    // ---------- Chart ----------
+    var W = 420, H = 290, PL = 46, PR = 12, PT = 30, PB = 46, YMIN = -0.4, YMAX = 1.2;
+    var px = function (sec) { return PL + ((sec + WINDOW) / WINDOW) * (W - PL - PR); }; // sec in [-WINDOW, 0]
+    var py = function (v) { return PT + ((YMAX - v) / (YMAX - YMIN)) * (H - PT - PB); };
+    function drawChart(wt) {
+      clear(chart);
+      var n = Math.round(WINDOW / DT), off = resp.length - n;
+      // Squeeze periods.
+      var startIdx = -1;
+      for (var i = 0; i <= n; i++) {
+        var on = i < n && drive[off + i] === 1;
+        if (on && startIdx < 0) startIdx = i;
+        if (!on && startIdx >= 0) {
+          var x1 = px(-WINDOW + startIdx * DT), x2 = px(-WINDOW + i * DT);
+          el(chart, "rect", { x: x1, y: PT, width: Math.max(1, x2 - x1), height: H - PT - PB, class: "fn-band" });
+          if (x2 - x1 > 34) el(chart, "text", { x: x1 + 4, y: PT + 12, class: "fn-tiny" }, "squeeze");
+          startIdx = -1;
+        }
+      }
+      // Axes.
+      el(chart, "line", { x1: PL, y1: PT, x2: PL, y2: H - PB, class: "fn-axis" });
+      el(chart, "line", { x1: PL, y1: py(0), x2: W - PR, y2: py(0), class: "fn-zero" });
+      el(chart, "line", { x1: PL, y1: H - PB, x2: W - PR, y2: H - PB, class: "fn-axis" });
+      [-30, -20, -10, 0].forEach(function (s) {
+        el(chart, "text", { x: px(s), y: H - PB + 17, class: "fn-tick", "text-anchor": s === 0 ? "end" : "middle" }, s === 0 ? "now" : s + " s");
+      });
+      [0, 0.5, 1].forEach(function (v) {
+        el(chart, "text", { x: PL - 7, y: py(v) + 4, class: "fn-tick", "text-anchor": "end" }, v);
+      });
+      el(chart, "text", { x: (PL + W - PR) / 2, y: H - 8, class: "fn-tiny", "text-anchor": "middle" }, "time (s)");
+      el(chart, "text", { x: -(PT + (H - PT - PB) / 2), y: 13, class: "fn-tiny", "text-anchor": "middle", transform: "rotate(-90)" }, "HbO change (a.u.)");
+      // Traces.
+      [["fn-trace-left", wt[0]], ["fn-trace-right", wt[1]]].forEach(function (tr) {
+        var pts = [];
+        for (var i = 0; i < n; i++) pts.push(px(-WINDOW + (i + 1) * DT).toFixed(1) + "," + py(resp[off + i] * tr[1]).toFixed(1));
+        el(chart, "polyline", { points: pts.join(" "), class: tr[0] });
+      });
+      // Legend.
+      el(chart, "line", { x1: PL + 4, y1: 12, x2: PL + 20, y2: 12, class: "fn-trace-left" });
+      el(chart, "text", { x: PL + 24, y: 16, class: "fn-tiny" }, "left hemisphere (C3)");
+      el(chart, "line", { x1: PL + 190, y1: 12, x2: PL + 206, y2: 12, class: "fn-trace-right" });
+      el(chart, "text", { x: PL + 210, y: 16, class: "fn-tiny" }, "right (C4)");
+    }
+
+    function render() {
+      var wt = weights(), r = resp[resp.length - 1];
+      drawMap(r * wt[0], r * wt[1]);
+      drawChart(wt);
+    }
+
+    // ---------- Notes ----------
+    var peakMsg = "";
+    function updateNote() {
+      var contra = hand === "R" ? "left" : "right";
+      note.innerHTML =
+        "<b>" + (hand === "R" ? "Right" : "Left") + " hand → " + contra + " hemisphere (contralateral).</b> " + AGE_NOTE[age] + (peakMsg ? " " + peakMsg : "");
+    }
+
+    // ---------- Live loop: runs while squeezing and until the response settles ----------
+    var pressed = false, raf = null, lastNow = 0, acc = 0, idleSince = 0, squeezeStart = -1, peak = 0, peakAt = 0, clock = 0;
+    var episode = [];
+    function loop(now) {
+      if (!lastNow) lastNow = now;
+      acc += Math.min(0.25, (now - lastNow) / 1000);
+      lastNow = now;
+      while (acc >= DT) {
+        acc -= DT;
+        clock += DT;
+        step(pressed);
+        if (squeezeStart >= 0) {
+          // Response to this squeeze alone, so earlier squeezes don't confuse the peak time.
+          episode.push(pressed ? 1 : 0);
+          var r = 0;
+          for (var k = 0; k < Math.min(episode.length, hrf.length); k++) r += episode[episode.length - 1 - k] * hrf[k];
+          if (r > peak + 1e-5) { peak = r; peakAt = clock; }
+          else if (!pressed && r < peak * 0.85 && clock - peakAt > 0.5) {
+            peakMsg = "This time the signal peaked " + (peakAt - squeezeStart).toFixed(1) +
+              " s after you started squeezing: fNIRS measures blood flow, which lags behind the brain activity that drives it.";
+            squeezeStart = -1;
+            updateNote();
+          }
+        }
+      }
+      render();
+      if (pressed) idleSince = now;
+      if (pressed || now - idleSince < (KERNEL + 2) * 1000) raf = requestAnimationFrame(loop);
+      else { raf = null; lastNow = 0; }
+    }
+    function setPressed(p) {
+      if (p === pressed) return;
+      pressed = p;
+      btn.classList.toggle("is-down", p);
+      btn.setAttribute("aria-pressed", p ? "true" : "false");
+      btn.textContent = p ? "Squeezing…" : "Hold to squeeze";
+      if (p) {
+        squeezeStart = clock;
+        episode = [];
+        peak = 0;
+        idleSince = performance.now();
+        if (!raf) raf = requestAnimationFrame(loop);
+      }
+    }
+
+    btn.addEventListener("pointerdown", function (e) { e.preventDefault(); setPressed(true); });
+    ["pointerup", "pointerleave", "pointercancel"].forEach(function (ev) {
+      btn.addEventListener(ev, function () { setPressed(false); });
+    });
+    btn.addEventListener("contextmenu", function (e) { e.preventDefault(); });
+    // Space bar squeezes when the Squeeze button has focus, or when the pointer is over the figure and no other
+    // control has focus (so Space still selects the hand and age buttons from the keyboard).
+    function spaceActive() {
+      var a = document.activeElement;
+      if (a === btn) return true;
+      var busy = a && a !== document.body && (a.tagName === "BUTTON" || a.tagName === "INPUT" || a.tagName === "A");
+      return fig.matches(":hover") && !busy;
+    }
+    document.addEventListener("keydown", function (e) {
+      if ((e.code === "Space" || e.key === " ") && spaceActive()) {
+        e.preventDefault();
+        if (!e.repeat) setPressed(true);
+      }
+    });
+    document.addEventListener("keyup", function (e) {
+      if (e.code === "Space" || e.key === " ") setPressed(false);
+    });
+    window.addEventListener("blur", function () { setPressed(false); });
+
+    function choose(btns, attr, val) {
+      btns.forEach(function (b) {
+        var on = b.dataset[attr] === String(val);
+        b.classList.toggle("is-current", on);
+        b.setAttribute("aria-checked", on ? "true" : "false");
+      });
+    }
+    handBtns.forEach(function (b) {
+      b.addEventListener("click", function () { hand = b.dataset.hand; choose(handBtns, "hand", hand); updateNote(); render(); });
+    });
+    ageBtns.forEach(function (b) {
+      b.addEventListener("click", function () { age = +b.dataset.age; choose(ageBtns, "age", age); updateNote(); render(); });
+    });
+
+    choose(handBtns, "hand", hand);
+    choose(ageBtns, "age", age);
+    updateNote();
+    render();
+  })();
+</script>

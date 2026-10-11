@@ -1,0 +1,55 @@
+---
+# Styles for the printable CV page (/cv/print/), which _cv/build.sh turns into the PDF.
+---
+@use "cv-doc";
+
+@page {
+  size: letter;
+  margin: 0.5in 0.6in;
+}
+
+html {
+  background: #ffffff;
+}
+
+body.cv-print {
+  margin: 0;
+  font-family: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+  font-size: 9.1pt;
+  line-height: 1.27;
+  color: #0c0a3e;
+  background: #ffffff;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+// Slightly tighter spacing than on the web page, to keep the PDF to two pages.
+body.cv-print .cv-doc {
+  line-height: 1.27;
+
+  section {
+    margin-top: 0.85em;
+  }
+
+  .cv-entry {
+    margin-bottom: 0.35em;
+  }
+
+  ol.bibliography li {
+    margin-bottom: 0.35em;
+  }
+
+  dl.cv-skills {
+    grid-template-columns: 18em 1fr;
+    gap: 0.2em 1.2em;
+  }
+}
+
+// On screen, show the page at a readable width with paper-like margins.
+@media screen {
+  body.cv-print {
+    max-width: 8.5in;
+    margin: 0 auto;
+    padding: 0.5in 0.6in;
+  }
+}

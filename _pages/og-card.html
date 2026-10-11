@@ -1,0 +1,123 @@
+---
+layout: null
+permalink: /og-card/
+sitemap: false
+---
+{%- comment -%}
+  Link-preview card (Open Graph image) for evanyarnall.com, 1200 x 630. GitHub screenshots this page into
+  assets/img/og-card.png on every deploy (_og/build.sh). The title and headline come from the home page
+  (_pages/about.md), the photo from assets/img/prof_pic.jpg.
+{%- endcomment -%}
+{%- assign home = site.pages | where: "permalink", "/" | first -%}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="robots" content="noindex">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+    <style>
+      html,
+      body {
+        margin: 0;
+        width: 1200px;
+        height: 630px;
+        overflow: hidden;
+      }
+
+      body {
+        position: relative;
+        font-family: "IBM Plex Sans", Arial, sans-serif;
+        color: #0c0a3e;
+        background-color: #f5f0e3;
+        background-image: linear-gradient(#e6dcc4 1px, transparent 1px), linear-gradient(90deg, #e6dcc4 1px, transparent 1px);
+        background-size: 30px 30px;
+      }
+
+      .card {
+        position: absolute;
+        inset: 54px 60px;
+        display: grid;
+        grid-template-columns: 1fr 300px;
+        gap: 56px;
+        align-items: center;
+      }
+
+      .label {
+        margin: 0 0 28px;
+        font-size: 27px;
+        font-weight: 500;
+        color: #4a4868;
+        text-wrap: balance;
+      }
+
+      h1 {
+        margin: 0 0 18px;
+        font-size: 92px;
+        font-weight: 600;
+        letter-spacing: -0.02em;
+        line-height: 1;
+      }
+
+      .headline {
+        margin: 0 0 28px;
+        font-size: 36px;
+        font-weight: 500;
+        line-height: 1.25;
+      }
+
+      .meta {
+        margin: 0;
+        font-family: "IBM Plex Mono", Menlo, monospace;
+        font-size: 24px;
+        line-height: 1.6;
+        color: #4a4868;
+      }
+
+      .meta b {
+        font-weight: 500;
+        color: #8a2f6b;
+      }
+
+      .photo {
+        width: 300px;
+        height: 300px;
+        object-fit: cover;
+        border: 2px solid #0c0a3e;
+      }
+
+      .rule {
+        position: absolute;
+        left: 60px;
+        right: 60px;
+        bottom: 40px;
+        height: 3px;
+        background: #0c0a3e;
+      }
+
+      .url {
+        position: absolute;
+        right: 60px;
+        bottom: 54px;
+        font-family: "IBM Plex Mono", Menlo, monospace;
+        font-size: 24px;
+        font-weight: 500;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <div>
+        <h1>{{ site.first_name }} {{ site.last_name }}</h1>
+        <p class="label">{{ home.role }}</p>
+        <p class="headline">{{ home.headline }}</p>
+        <p class="meta">
+          <b>lab</b> DEMR Lab, Boston University<br>
+          <b>methods</b> fNIRS, TMS, behavioral coding
+        </p>
+      </div>
+      <img class="photo" src="{{ '/assets/img/prof_pic.jpg' | relative_url }}" alt="">
+    </div>
+    <div class="url">evanyarnall.com</div>
+    <div class="rule"></div>
+  </body>
+</html>

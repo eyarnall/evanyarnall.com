@@ -1,0 +1,63 @@
+---
+layout: null
+permalink: /llms.txt
+sitemap: false
+---
+{%- comment -%}
+  A plain-text summary of the site for AI tools (see https://llmstxt.org). Built from _data/cv.yml,
+  _data/schema.yml, the project pages and _bibliography/papers.bib, so it never needs editing by hand.
+{%- endcomment -%}
+{%- assign cv = site.data.cv.cv -%}
+{%- assign facts = site.data.schema -%}
+{%- assign phd = cv.education | where: "expected", true | first -%}
+# {{ cv.name }}
+
+> {{ site.description }}
+
+- Position: {{ cv.label }}, {{ facts.sargent.name }}{% if phd %} (PhD expected {{ phd.end_date }}){% endif %}
+- Lab: {{ facts.lab.name }} ({{ facts.lab.alternateName }}): {{ facts.lab.url }}
+- Advisor: {{ facts.ferre.name }}, {{ facts.ferre.honorificSuffix }}, {{ facts.ferre.jobTitle }}: {{ facts.ferre.url }}
+- Research interests: {{ cv.interests }}
+{%- for e in cv.education %}
+- Education: {{ e.degree }}, {{ e.institution }}, {{ e.start_date }}–{{ e.end_date }}{% if e.expected %} (expected){% endif %}
+{%- endfor %}
+- ORCID: https://orcid.org/{{ site.data.socials.orcid_id }}
+- LinkedIn: https://www.linkedin.com/in/{{ site.data.socials.linkedin_username }}
+- CV (PDF): {{ '/assets/pdf/Yarnall_CV.pdf' | absolute_url }}
+
+## Pages
+
+- [About]({{ '/' | absolute_url }}): bio, current research, news and selected work
+- [Research]({{ '/research/' | absolute_url }}): overview of current projects
+{%- assign projects = site.projects | sort: "importance" %}
+{%- for project in projects %}
+- [{{ project.title }}]({{ project.url | absolute_url }}): {{ project.meta_description | default: project.description }}
+{%- endfor %}
+- [Publications]({{ '/publications/' | absolute_url }}): journal articles, manuscripts and conference presentations, each with a plain-language summary
+- [CV]({{ '/cv/' | absolute_url }}): education, research experience, publications, presentations, awards and outreach
+
+## Journal articles and manuscripts
+{% for p in site.data.papers %}{% unless p.type == "inproceedings" %}
+- {{ p.author_list }}. "{{ p.title }}."
+  {%- if p.type == "article" %} {{ p.journal }}{% if p.volume %} {{ p.volume }}{% if p.number %}({{ p.number }}){% endif %}{% endif %}{% if p.pages %}: {{ p.pages }}{% endif %}, {{ p.year }}.{% if p.doi %} https://doi.org/{{ p.doi }}{% endif %}
+  {%- else %} {{ p.note }}.{% endif %}
+  {%- if p.summary %}
+  In plain words: {{ p.summary }}
+  {%- endif %}
+{%- endunless %}{% endfor %}
+
+## Conference presentations
+{% for p in site.data.papers %}{% if p.type == "inproceedings" %}
+- {{ p.author_list }}. "{{ p.title }}." {{ p.booktitle }}, {{ p.address }}, {{ p.month_name }} {{ p.year }}. {{ p.note }}.
+  {%- if p.summary %}
+  In plain words: {{ p.summary }}
+  {%- endif %}
+  {%- if p.poster %}
+  Poster (PDF): {{ p.poster | prepend: '/assets/pdf/' | absolute_url }}
+  {%- endif %}
+{%- endif %}{% endfor %}
+
+## For families
+
+The DEMR Lab at Boston University enrolls infants and children, including children with cerebral palsy, in its
+studies. Current studies and how to take part: https://sites.bu.edu/demrlab/we-are-recruiting-2/

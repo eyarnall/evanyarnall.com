@@ -1,0 +1,11 @@
+# Links the "Check links" workflow skips, one regular expression per line.
+# Add a site here if it works in a browser but keeps failing the check.
+
+# LinkedIn blocks automated checkers
+^https://(www\.)?linkedin\.com/
+
+# The site's own address appears in page metadata. Links between pages are checked against the build instead
+^https?://(www\.)?evanyarnall\.com
+
+# Font server address used only as a connection hint
+^https://fonts\.gstatic\.com/?$

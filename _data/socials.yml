@@ -1,0 +1,8 @@
+# Social and contact links, shown in this order on the home page.
+# Supported keys: https://github.com/george-gca/jekyll-socials
+email: eyarnall@bu.edu
+linkedin_username: evanyarnall
+github_username: eyarnall
+orcid_id: 0000-0001-9155-3070
+# scholar_userid: # add the "user=" value from a Google Scholar profile URL to show the Scholar link
+cv_pdf: /assets/pdf/Yarnall_CV.pdf

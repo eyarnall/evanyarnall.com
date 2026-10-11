@@ -1,0 +1,404 @@
+{% comment %}
+  Animated schematic of the moving-target reaching task (used on _projects/2_fnirs_tms_cp.md).
+  Left: top-down view of one trial. Right: lateral position over time for the target and the hand.
+  Geometry follows the DP26 poster and abstract: target shifts ~10 cm when the hand is 35% of the way there.
+  The timing values below are illustrative, not measured data.
+{% endcomment %}
+<figure class="lab-figure lab-figure-live" id="mt-figure">
+  <div class="mt-panels">
+    <svg class="mt-top" viewBox="0 0 420 300" role="img" aria-labelledby="mt-top-title">
+      <title id="mt-top-title">
+        Top-down view of one trial: the hand leaves the home button, the target jumps 10 centimeters sideways when the
+        hand is 35 percent of the way there, and the hand path bends to reach the target's new position.
+      </title>
+    </svg>
+    <svg class="mt-plot" viewBox="0 0 420 300" role="img" aria-labelledby="mt-plot-title">
+      <title id="mt-plot-title">
+        Lateral position over time. The target trace steps sideways, and after a short correction latency the hand trace
+        follows it to the target's new position by the end of the movement.
+      </title>
+    </svg>
+  </div>
+  <div class="mt-controls">
+    <button type="button" class="mt-play">Pause</button>
+    <div class="mt-scrub">
+      <input type="range" class="mt-range" min="0" max="1250" step="5" value="1250" aria-label="Trial time">
+      <div class="mt-ticks" aria-hidden="true"></div>
+    </div>
+    <output class="mt-time" aria-hidden="true">1.25 s</output>
+  </div>
+  <div class="mt-steps" role="group" aria-label="Jump to a step of the trial"></div>
+  <figcaption>
+    <b>Fig. 2b.</b> One trial of the task. <i>Left:</i> seen from above, the target jumps when the hand is 35% of the way
+    there, and the hand has to correct mid-reach (dashed line: the original path). <i>Right:</i> how far the target and hand
+    have shifted toward the target's new position, and what we measure from that correction. Drag the timeline or pick a
+    step to explore. Timings are illustrative.
+  </figcaption>
+</figure>
+
+<script>
+  (function () {
+    var fig = document.getElementById("mt-figure");
+    if (!fig) return;
+    var top = fig.querySelector(".mt-top");
+    var plot = fig.querySelector(".mt-plot");
+    var btn = fig.querySelector(".mt-play");
+    var range = fig.querySelector(".mt-range");
+    var timeOut = fig.querySelector(".mt-time");
+    var ticksBox = fig.querySelector(".mt-ticks");
+    var stepsBox = fig.querySelector(".mt-steps");
+    var NS = "http://www.w3.org/2000/svg";
+
+    // Task timing in real seconds (illustrative).
+    var MT = 1.25; // movement time
+    var LAT = 0.16; // correction latency
+    var SHIFT = 10; // cm
+    var SPEED = 24; // cm/s target speed
+    var SLOW = 2; // animation runs at half speed
+    var PRE = 0.9, HOLD = 4.5, RESET = 0.6; // display seconds
+    var FADE = 0.45; // labels fade in over this many display seconds
+    var CYCLE = PRE + MT * SLOW + HOLD + RESET;
+
+    function mj(t) {
+      t = Math.max(0, Math.min(1, t));
+      return t * t * t * (10 - 15 * t + 6 * t * t);
+    }
+    // Time at which forward progress reaches 35%.
+    var tJump = (function () {
+      var lo = 0, hi = 1;
+      for (var i = 0; i < 40; i++) {
+        var mid = (lo + hi) / 2;
+        if (mj(mid) < 0.35) lo = mid; else hi = mid;
+      }
+      return lo * MT;
+    })();
+    var tShiftEnd = tJump + SHIFT / SPEED;
+    var tCorr = tJump + LAT;
+
+    function targetX(t, dir) {
+      if (t <= tJump) return 0;
+      return dir * SHIFT * Math.min(1, (t - tJump) / (tShiftEnd - tJump));
+    }
+    function handX(t, dir) {
+      if (t <= tCorr) return 0;
+      return dir * SHIFT * mj((t - tCorr) / (MT - tCorr));
+    }
+    function handY(t) {
+      return mj(t / MT);
+    }
+
+    function el(svg, name, attrs, text) {
+      var e = document.createElementNS(NS, name);
+      for (var k in attrs) e.setAttribute(k, attrs[k]);
+      if (text != null) e.textContent = text;
+      svg.appendChild(e);
+      return e;
+    }
+    function clear(svg) {
+      var keep = svg.querySelector("title");
+      while (svg.lastChild && svg.lastChild !== keep) svg.removeChild(svg.lastChild);
+    }
+
+    // ---------- Left: top-down view ----------
+    var S = 5.5, CX = 210; // px per cm, centre line
+    var BOARD_Y = 52, HOME_Y = 262;
+    var tx = function (cm) { return CX + cm * S; };
+    var hy = function (p) { return HOME_Y + (BOARD_Y + 16 - HOME_Y) * p; };
+
+    function drawTop(t, dir, phase, f) {
+      clear(top);
+      // Table edge and board.
+      el(top, "rect", { x: tx(-30), y: BOARD_Y - 14, width: 60 * S, height: 22, class: "mt-board" });
+      el(top, "line", { x1: tx(-24), y1: BOARD_Y - 3, x2: tx(24), y2: BOARD_Y - 3, class: "mt-rail" });
+      el(top, "text", { x: tx(-30), y: BOARD_Y + 26, class: "mt-label" }, "target board");
+      // Trigger line at 35% of the reach.
+      var yTrig = hy(0.35);
+      el(top, "line", { x1: tx(-28), y1: yTrig, x2: tx(28), y2: yTrig, class: "mt-trigger" });
+      el(top, "text", { x: tx(-28), y: yTrig - 7, class: "mt-label mt-accent" }, "35% of reach");
+      el(top, "text", { x: tx(-28), y: yTrig + 16, class: "mt-label" }, "target moves");
+      // Home button.
+      el(top, "rect", { x: CX - 16, y: HOME_Y - 6, width: 32, height: 16, rx: 3, class: "mt-home" });
+      el(top, "text", { x: CX + 24, y: HOME_Y + 6, class: "mt-label" }, "home button");
+      // Original planned path (ghost).
+      el(top, "line", { x1: CX, y1: HOME_Y, x2: CX, y2: hy(1), class: "mt-ghost" });
+      // Ghost of the target's starting spot once it has moved.
+      if (t > tJump) el(top, "circle", { cx: CX, cy: BOARD_Y - 3, r: 13, class: "mt-target-ghost", opacity: f(tJump) });
+      // Shift arrow.
+      if (t > tJump) {
+        var x2 = tx(targetX(t, dir));
+        el(top, "line", { x1: CX, y1: BOARD_Y - 26, x2: x2, y2: BOARD_Y - 26, class: "mt-shift" });
+        if (t >= tShiftEnd) {
+          el(top, "text", { x: (CX + x2) / 2, y: BOARD_Y - 31, class: "mt-label mt-accent", "text-anchor": "middle", opacity: f(tShiftEnd) }, "10 cm");
+        }
+      }
+      // Target.
+      var hit = t >= MT;
+      el(top, "circle", { cx: tx(targetX(t, dir)), cy: BOARD_Y - 3, r: 13, class: "mt-target" + (hit ? " is-hit" : "") });
+      // Hand path so far.
+      if (t > 0) {
+        var pts = [];
+        for (var s = 0; s <= t + 1e-6; s += MT / 60) pts.push(tx(handX(s, dir)) + "," + hy(handY(s)));
+        pts.push(tx(handX(t, dir)) + "," + hy(handY(t)));
+        el(top, "polyline", { points: pts.join(" "), class: "mt-path" });
+      }
+      // Hand (fingertip).
+      el(top, "circle", { cx: tx(handX(t, dir)), cy: hy(handY(t)), r: 7, class: "mt-hand" });
+      // Phase label, matching the poster's four steps.
+      el(top, "text", { x: 12, y: 290, class: "mt-phase", opacity: phase.opacity }, phase.text);
+    }
+
+    // ---------- Right: lateral position over time ----------
+    var PL = 48, PR = 14, PT = 26, PB = 46, W = 420, H = 300, TMAX = 1.5;
+    var px = function (s) { return PL + (s / TMAX) * (W - PL - PR); };
+    var YMIN = -7, YMAX = 12;
+    var py = function (cm) { return PT + ((YMAX - cm) / (YMAX - YMIN)) * (H - PT - PB); };
+
+    function drawPlot(t, dir, f) {
+      clear(plot);
+      el(plot, "line", { x1: PL, y1: PT, x2: PL, y2: H - PB, class: "mt-axis" });
+      el(plot, "line", { x1: PL, y1: py(0), x2: W - PR, y2: py(0), class: "mt-zero" });
+      el(plot, "line", { x1: PL, y1: H - PB, x2: W - PR, y2: H - PB, class: "mt-axis" });
+      [0, 0.5, 1, 1.5].forEach(function (s) {
+        el(plot, "text", { x: px(s), y: H - PB + 16, class: "mt-tick", "text-anchor": "middle" }, s.toFixed(1));
+      });
+      [0, 5, 10].forEach(function (c) {
+        el(plot, "text", { x: PL - 8, y: py(c) + 4, class: "mt-tick", "text-anchor": "end" }, c);
+      });
+      el(plot, "text", { x: (PL + W - PR) / 2, y: H - 8, class: "mt-label", "text-anchor": "middle" }, "time from reach onset (s)");
+      el(plot, "text", { x: -(PT + (H - PT - PB) / 2), y: 14, class: "mt-label", "text-anchor": "middle", transform: "rotate(-90)" }, "shift toward target (cm)");
+
+      // Legend.
+      el(plot, "line", { x1: W - 150, y1: 12, x2: W - 134, y2: 12, class: "mt-trace-target" });
+      el(plot, "text", { x: W - 130, y: 16, class: "mt-label" }, "target");
+      el(plot, "line", { x1: W - 82, y1: 12, x2: W - 66, y2: 12, class: "mt-trace-hand" });
+      el(plot, "text", { x: W - 62, y: 16, class: "mt-label" }, "hand");
+
+      var tt = Math.min(t, TMAX);
+      function trace(fn, cls) {
+        if (tt <= 0) return;
+        var pts = [];
+        for (var s = 0; s <= tt + 1e-6; s += 0.01) pts.push(px(s) + "," + py(fn(Math.min(s, MT), 1)));
+        el(plot, "polyline", { points: pts.join(" "), class: cls });
+      }
+      trace(targetX, "mt-trace-target");
+      trace(handX, "mt-trace-hand");
+
+      // Annotations appear as the trial reaches them.
+      var yb = py(-2.2);
+      if (t >= tJump) {
+        el(plot, "line", { x1: px(tJump), y1: PT, x2: px(tJump), y2: py(0), class: "mt-event", opacity: f(tJump) });
+        el(plot, "text", { x: px(tJump) + 4, y: PT + 10, class: "mt-label mt-accent", opacity: f(tJump) }, "target moves");
+      }
+      if (t >= tCorr) {
+        var g1 = el(plot, "g", { opacity: f(tCorr) });
+        el(g1, "line", { x1: px(tJump), y1: yb, x2: px(tCorr), y2: yb, class: "mt-bracket" });
+        el(g1, "line", { x1: px(tCorr), y1: yb - 5, x2: px(tCorr), y2: yb + 5, class: "mt-bracket" });
+        el(g1, "line", { x1: px(tJump), y1: yb - 5, x2: px(tJump), y2: yb + 5, class: "mt-bracket" });
+        el(g1, "text", { x: px(tCorr) + 6, y: yb + 4, class: "mt-label" }, "correction latency");
+      }
+      if (t >= MT) {
+        var ym = py(-5.4);
+        var g2 = el(plot, "g", { opacity: f(MT) });
+        el(g2, "line", { x1: px(0), y1: ym, x2: px(MT), y2: ym, class: "mt-bracket" });
+        el(g2, "line", { x1: px(0), y1: ym - 5, x2: px(0), y2: ym + 5, class: "mt-bracket" });
+        el(g2, "line", { x1: px(MT), y1: ym - 5, x2: px(MT), y2: ym + 5, class: "mt-bracket" });
+        el(g2, "text", { x: px(0) + 6, y: ym - 6, class: "mt-label" }, "movement time");
+        el(plot, "circle", { cx: px(MT), cy: py(handX(MT, 1)), r: 4, class: "mt-hit-dot" });
+      }
+      // Time cursor, fading out once the movement is over.
+      if (t > 0) el(plot, "line", { x1: px(tt), y1: PT + 16, x2: px(tt), y2: H - PB, class: "mt-cursor", opacity: 1 - f(MT) });
+    }
+
+    function ease(x) {
+      x = Math.max(0, Math.min(1, x));
+      return x * x * (3 - 2 * x);
+    }
+
+    // Draws one moment of the looping animation. `settled` is used while scrubbing: everything up to the
+    // current moment is fully drawn, with no fades.
+    function frame(clock, settled) {
+      var c = clock % CYCLE;
+      var n = Math.floor(clock / CYCLE);
+      var dir = n % 2 === 0 ? 1 : -1;
+      var d = c - PRE; // display seconds since reach onset (negative while waiting)
+      var t = Math.max(0, Math.min(MT, d / SLOW));
+      // Opacity for something that appears at real time `evt`: eases in over FADE display seconds.
+      var f = settled
+        ? function (evt) { return t >= evt - 1e-6 ? 1 : 0; }
+        : function (evt) { return ease((d - evt * SLOW) / FADE); };
+
+      // The four steps from the poster; each label fades in when its step starts.
+      var steps = [
+        [-PRE / SLOW, "1 · ready at the home button"],
+        [0, "1 · reach onset"],
+        [tJump, "2 · target moves"],
+        [tCorr, "3 · reach adjustment"],
+        [MT, "4 · target hit"],
+      ];
+      // Give every step label at least MIN_STEP display seconds, so quick steps don't flicker past.
+      var MIN_STEP = 0.7, prev = -Infinity, step = steps[0], stepStart = -Infinity;
+      steps.forEach(function (st, i) {
+        var startAt = i === 0 ? -PRE : Math.max(st[0] * SLOW, prev + MIN_STEP);
+        prev = startAt;
+        if (d >= startAt) { step = st; stepStart = startAt; }
+      });
+      if (settled) {
+        // While scrubbing, label the step by the actual event times.
+        step = d >= 0 ? steps[1] : steps[0];
+        steps.forEach(function (st, i) { if (i > 1 && t >= st[0] - 1e-6) step = st; });
+      }
+      var phase = { text: step[1], opacity: settled || step === steps[0] ? 1 : ease((d - stepStart) / FADE) };
+
+      drawTop(t, dir, phase, f);
+      drawPlot(t, dir, f);
+
+      // Fade both panels out at the end of a trial and back in for the next one.
+      var holdEnd = PRE + MT * SLOW + HOLD;
+      var o = settled ? 1 : c >= holdEnd ? 1 - ease((c - holdEnd) / RESET) : ease(c / 0.35);
+      top.style.opacity = plot.style.opacity = o;
+      syncControls(t, step[1]);
+    }
+
+    // ---------- Timeline controls ----------
+    var STEPS = [
+      { t: 0, label: "Reach onset" },
+      { t: tJump, label: "Target moves" },
+      { t: tCorr, label: "Adjustment" },
+      { t: MT, label: "Target hit" },
+    ];
+    var stepBtns = STEPS.map(function (st, i) {
+      // Numbered tick on the timeline track, at the step's exact time.
+      var tick = document.createElement("span");
+      tick.className = "mt-tick-mark";
+      tick.style.setProperty("--p", st.t / MT);
+      tick.textContent = i + 1;
+      ticksBox.appendChild(tick);
+      // Matching button underneath.
+      var b = document.createElement("button");
+      b.type = "button";
+      b.className = "mt-step";
+      b.innerHTML = "<span>" + (i + 1) + "</span> " + st.label;
+      b.addEventListener("click", function () { seek(st.t); });
+      stepsBox.appendChild(b);
+      return b;
+    });
+
+    var scrubbing = false;
+    function syncControls(t, stepText) {
+      if (!scrubbing) range.value = Math.round(t * 1000);
+      range.style.setProperty("--fill", (t / MT) * 100 + "%");
+      timeOut.textContent = t.toFixed(2) + " s";
+      range.setAttribute("aria-valuetext", t.toFixed(2) + " seconds, " + stepText.replace(/^\d · /, ""));
+      var current = -1;
+      STEPS.forEach(function (st, i) { if (t >= st.t - 1e-6) current = i; });
+      stepBtns.forEach(function (b, i) { b.classList.toggle("is-current", i === current); });
+    }
+
+    // ---------- Playback: plays one trial, then stops with a Replay button ----------
+    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var playing = false, start = null, offset = 0, raf = null, visible = false, autoplayed = false;
+    var END = PRE + MT * SLOW + FADE + 0.1; // display time in a trial when every label has settled
+
+    var ICONS = {
+      pause: '<svg viewBox="0 0 16 16" aria-hidden="true"><rect x="3.5" y="3" width="3" height="10"/><rect x="9.5" y="3" width="3" height="10"/></svg>',
+      play: '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 2.8v10.4L13 8z"/></svg>',
+      replay:
+        '<svg viewBox="0 0 16 16" aria-hidden="true" class="mt-icon-stroke"><path d="M13.2 8.6A5.3 5.3 0 1 1 11.6 4"/><path d="M12.4 1.6v3.2H9.2"/></svg>',
+    };
+    var LABELS = { pause: "Pause", play: "Play", replay: "Replay" };
+    var action = "play";
+    function setButton(a) {
+      action = a;
+      btn.innerHTML = ICONS[a] + "<span>" + LABELS[a] + "</span>";
+      btn.setAttribute("aria-label", LABELS[a] + " animation");
+    }
+
+    function trialStart(clock) {
+      return Math.floor(clock / CYCLE) * CYCLE;
+    }
+    function loop(now) {
+      if (start === null) start = now - offset * 1000;
+      offset = (now - start) / 1000;
+      // Stop once this trial's movement is over and its labels have faded in.
+      var base = trialStart(offset);
+      if (offset - base >= END) {
+        offset = base + END;
+        frame(offset);
+        finish();
+        return;
+      }
+      frame(offset);
+      raf = playing && visible ? requestAnimationFrame(loop) : null;
+    }
+    function play() {
+      playing = true;
+      start = null;
+      setButton("pause");
+      if (!raf && visible) raf = requestAnimationFrame(loop);
+    }
+    function stop(nextAction) {
+      playing = false;
+      if (raf) cancelAnimationFrame(raf);
+      raf = null;
+      setButton(nextAction);
+    }
+    function finish() {
+      stop("replay");
+    }
+    // Replay starts a fresh trial, alternating the jump direction each time.
+    function replay() {
+      offset = trialStart(offset) + CYCLE;
+      play();
+    }
+    // Jump to real trial time t (seconds), within the current trial, and hold there.
+    function seek(t) {
+      t = Math.max(0, Math.min(MT, t));
+      offset = trialStart(offset) + PRE + t * SLOW;
+      stop(t >= MT ? "replay" : "play");
+      frame(offset, true);
+      if (t >= MT) offset = trialStart(offset) + END;
+    }
+    btn.addEventListener("click", function () {
+      if (action === "pause") stop("play");
+      else if (action === "replay") replay();
+      else play();
+    });
+    range.addEventListener("input", function () {
+      scrubbing = true;
+      seek(range.value / 1000);
+      scrubbing = false;
+    });
+
+    // Autoplay the first trial once the figure scrolls into view.
+    function startWhenVisible() {
+      visible = true;
+      if (!autoplayed && !reduce) {
+        autoplayed = true;
+        play();
+      } else if (playing && !raf) {
+        start = null;
+        raf = requestAnimationFrame(loop);
+      }
+    }
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(function (entries) {
+        if (entries[0].isIntersecting) startWhenVisible();
+        else visible = false;
+      }).observe(fig);
+    } else {
+      startWhenVisible();
+    }
+
+    if (reduce) {
+      // Reduced motion: show the finished trial; Replay still plays it on request.
+      offset = END;
+      frame(offset, true);
+      setButton("replay");
+    } else {
+      // Ready at the home button until the figure is on screen.
+      offset = 0.35;
+      frame(offset);
+      setButton("pause");
+    }
+  })();
+</script>

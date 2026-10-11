@@ -1,0 +1,291 @@
+---
+layout: default
+---
+{% comment %}
+  Lab Notebook home page. Overrides al_folio_core's about layout.
+  Content comes from the front matter of _pages/about.md.
+{% endcomment %}
+<div class="post lab-home">
+  <div class="lab-hero">
+    {% if page.profile.image %}
+      {% assign profile_image_url = page.profile.image | prepend: '/assets/img/' | relative_url %}
+    {% endif %}
+
+    <div class="lab-hero-text">
+      <div class="lab-name-row">
+        {% if profile_image_url %}
+          <img class="lab-avatar" src="{{ profile_image_url }}" alt="" width="64" height="64">
+        {% endif %}
+        <h1 class="lab-name">{{ site.first_name }} {{ site.last_name }}</h1>
+      </div>
+      {% if page.role %}<p class="lab-role">{{ page.role }}</p>{% endif %}
+      {% if page.headline %}<p class="lab-headline">{{ page.headline }}</p>{% endif %}
+      {% if page.lede %}<p class="lab-lede">{{ page.lede }}</p>{% endif %}
+    </div>
+
+    {% if page.trajectory %}
+      <figure class="lab-plot" id="trajectory" data-points="{{ page.trajectory | jsonify | escape }}">
+        <svg role="group" aria-labelledby="trajectory-caption"></svg>
+        <p class="lab-plot-readout" aria-live="polite"></p>
+        <figcaption id="trajectory-caption">
+          <b>Fig. 0.</b> Career trajectory of a single participant (n = 1). Hover or tap a point. Shaded band is a 95%
+          confidence interval, which widens after today for obvious reasons.
+        </figcaption>
+      </figure>
+    {% endif %}
+
+    <aside class="lab-side">
+      {% if profile_image_url %}
+        <figure class="lab-portrait">
+          <img src="{{ profile_image_url }}" alt="Evan Yarnall" width="240" height="240">
+          {% if page.profile.caption %}<figcaption><b>Fig. 00.</b> {{ page.profile.caption }}</figcaption>{% endif %}
+        </figure>
+      {% endif %}
+      {% if page.spec %}
+        <dl class="lab-spec">
+          {% for row in page.spec %}
+            <div>
+              <dt>{{ row.label }}</dt>
+              <dd>{{ row.value }}</dd>
+            </div>
+          {% endfor %}
+        </dl>
+      {% endif %}
+    </aside>
+  </div>
+
+  <article>
+    <section class="lab-section">
+      <h2 class="lab-section-title">About</h2>
+      <div class="lab-prose">{{ content }}</div>
+    </section>
+
+    {% if page.figures %}
+      {% assign figs = site.projects | sort: 'importance' %}
+      {% if figs.size > 0 %}
+        <section class="lab-section">
+          <h2 class="lab-section-title">
+            <a href="{{ '/research/' | relative_url }}">Current research</a>
+          </h2>
+          <div class="lab-figs">
+            {% for project in figs %}
+              {% include research_card.liquid project=project index=forloop.index %}
+            {% endfor %}
+          </div>
+        </section>
+      {% endif %}
+    {% endif %}
+
+    <section class="lab-section">{% include participate.liquid %}</section>
+
+    {% if page.announcements and page.announcements.enabled and site.news.size > 0 %}
+      <section class="lab-section">
+        <h2 class="lab-section-title">News</h2>
+        {% include news.liquid limit=true %}
+      </section>
+    {% endif %}
+
+    {% if page.selected_papers %}
+      <section class="lab-section">
+        <h2 class="lab-section-title">
+          <a href="{{ '/publications/' | relative_url }}">Selected work</a>
+        </h2>
+        {% include selected_papers.liquid %}
+      </section>
+    {% endif %}
+
+    {% if page.social %}
+      <section class="lab-section lab-contact">
+        <h2 class="lab-section-title">Contact</h2>
+        <div class="contact-icons">{% social_links %}</div>
+        <p class="contact-note">{{ site.contact_note }}</p>
+        <p class="contact-note">
+          For lab news, follow the DEMR Lab on Instagram: <a href="https://www.instagram.com/demrlab/">@demrlab</a>.
+        </p>
+      </section>
+    {% endif %}
+  </article>
+</div>
+
+<script>
+  // Let keyboard users scroll the BibTeX boxes (al-folio renders them without a tab stop).
+  document.querySelectorAll(".bibtex pre").forEach(function (pre) {
+    pre.tabIndex = 0;
+  });
+</script>
+
+<script>
+  // al-folio leaves the name out of the navbar on the home page. Add it (same markup as other pages)
+  // and reveal it once the big name has scrolled under the navbar.
+  (function () {
+    var bar = document.querySelector("#navbar .container");
+    var name = document.querySelector(".lab-name");
+    if (!bar || !name || bar.querySelector(".navbar-brand")) return;
+    var brand = document.createElement("a");
+    brand.className = "navbar-brand title font-weight-lighter lab-brand";
+    brand.href = "{{ '/' | relative_url }}";
+    brand.innerHTML = '<span class="font-weight-bold">{{ site.first_name }}</span> {{ site.last_name }}';
+    bar.insertBefore(brand, bar.firstChild);
+
+    function setShown(shown) {
+      brand.classList.toggle("is-shown", shown);
+      brand.setAttribute("aria-hidden", shown ? "false" : "true");
+      brand.tabIndex = shown ? 0 : -1;
+    }
+    setShown(false);
+    if (!("IntersectionObserver" in window)) return setShown(true);
+    var navH = document.getElementById("navbar").offsetHeight || 56;
+    new IntersectionObserver(function (entries) {
+      var e = entries[0];
+      setShown(!e.isIntersecting && e.boundingClientRect.top < navH);
+    }, { rootMargin: "-" + navH + "px 0px 0px 0px" }).observe(name);
+  })();
+</script>
+
+{% if page.trajectory %}
+  <script>
+    // Draws Fig. 0 from the `trajectory` list in _pages/about.md.
+    // The plot is drawn at its real pixel size (and redrawn on resize) so labels stay readable on phones.
+    (function () {
+      var fig = document.getElementById("trajectory");
+      if (!fig) return;
+      var svg = fig.querySelector("svg");
+      var readout = fig.querySelector(".lab-plot-readout");
+      var pts = JSON.parse(fig.getAttribute("data-points"));
+      var NS = "http://www.w3.org/2000/svg";
+      var now = new Date();
+      var nowYear = now.getFullYear() + now.getMonth() / 12;
+      var real = pts.filter(function (p) { return !p.expected; });
+      var lastReal = real[real.length - 1];
+      var active = lastReal;
+
+      // Experience only goes up: spread milestones along a gently rising curve.
+      pts.forEach(function (p, i) { p.v = 0.06 + 0.86 * Math.pow(i / (pts.length - 1), 0.8); });
+
+      function el(name, attrs, parent) {
+        var e = document.createElementNS(NS, name);
+        for (var k in attrs) e.setAttribute(k, attrs[k]);
+        (parent || svg).appendChild(e);
+        return e;
+      }
+
+      function show(p) {
+        active = p;
+        var yrLabel = Math.floor(p.year) + (p.expected ? " (expected)" : "");
+        readout.innerHTML = "<span>" + yrLabel + "</span> " + p.label.replace(/</g, "&lt;");
+        svg.querySelectorAll(".plot-pt").forEach(function (c) { c.classList.toggle("is-active", c.__p === p); });
+      }
+
+      function draw() {
+        var W = Math.max(280, Math.round(svg.getBoundingClientRect().width || 600));
+        var narrow = W < 480;
+        var H = narrow ? 190 : 240, L = narrow ? 26 : 34, R = 12, T = 16, B = 28;
+        var x0 = Math.floor(pts[0].year), x1 = Math.ceil(pts[pts.length - 1].year) + 0.5;
+        var sx = function (yr) { return L + ((yr - x0) / (x1 - x0)) * (W - L - R); };
+        var sy = function (v) { return H - B - v * (H - T - B); };
+
+        while (svg.firstChild) svg.removeChild(svg.firstChild);
+        svg.setAttribute("viewBox", "0 0 " + W + " " + H);
+        svg.setAttribute("height", H);
+
+        function path(list) {
+          var d = "M" + sx(list[0].year) + "," + sy(list[0].v);
+          for (var i = 0; i < list.length - 1; i++) {
+            var p0 = list[i - 1] || list[i], p1 = list[i], p2 = list[i + 1], p3 = list[i + 2] || p2;
+            var c1x = sx(p1.year) + (sx(p2.year) - sx(p0.year)) / 6, c1y = sy(p1.v) + (sy(p2.v) - sy(p0.v)) / 6;
+            var c2x = sx(p2.year) - (sx(p3.year) - sx(p1.year)) / 6, c2y = sy(p2.v) - (sy(p3.v) - sy(p1.v)) / 6;
+            d += " C" + c1x + "," + c1y + " " + c2x + "," + c2y + " " + sx(p2.year) + "," + sy(p2.v);
+          }
+          return d;
+        }
+
+        // Axes and year ticks (every 2 years, or every 4 on narrow screens).
+        el("line", { x1: L, y1: H - B, x2: W - R, y2: H - B, class: "plot-axis" });
+        el("line", { x1: L, y1: T, x2: L, y2: H - B, class: "plot-axis" });
+        var step = narrow ? 4 : 2;
+        for (var yr = Math.ceil(x0 / step) * step; yr <= x1; yr += step) {
+          el("line", { x1: sx(yr), y1: H - B, x2: sx(yr), y2: H - B + 4, class: "plot-axis" });
+          el("text", { x: sx(yr), y: H - B + 17, class: "plot-tick", "text-anchor": "middle" }).textContent = yr;
+        }
+        el("text", { x: -(T + (H - T - B) / 2), y: L - 12, class: "plot-tick", "text-anchor": "middle", transform: "rotate(-90)" })
+          .textContent = narrow ? "experience" : "experience (a.u.)";
+
+        // Everything plotted sits in a group clipped by a rectangle, so it can be revealed left to right.
+        var clip = el("clipPath", { id: "traj-reveal" }, el("defs", {}));
+        el("rect", { id: "traj-reveal-rect", x: 0, y: 0, width: W * reveal, height: H + 4 }, clip);
+        var plot = el("g", { "clip-path": "url(#traj-reveal)" });
+
+        // Confidence band: narrow in the past, widening after today, kept inside the plot.
+        var all = pts.concat([{ year: x1, v: Math.min(1, pts[pts.length - 1].v + 0.05) }]);
+        var up = [], down = [];
+        for (var s = all[0].year; s <= x1 + 0.001; s += 0.1) {
+          var j = 0;
+          while (j < all.length - 2 && all[j + 1].year < s) j++;
+          var a = all[j], b = all[j + 1], t = Math.max(0, Math.min(1, (s - a.year) / (b.year - a.year)));
+          var v = a.v + (b.v - a.v) * t;
+          var w = 0.025 + Math.max(0, s - nowYear) * 0.07;
+          up.push(sx(s) + "," + sy(Math.min(1, v + w)));
+          down.unshift(sx(s) + "," + sy(Math.max(0, v - w)));
+        }
+        el("polygon", { points: up.concat(down).join(" "), class: "plot-band" }, plot);
+
+        // Lines: solid up to the last real milestone, dashed for projections.
+        el("path", { d: path(real), class: "plot-line" }, plot);
+        var proj = [lastReal].concat(pts.filter(function (p) { return p.expected; }));
+        if (proj.length > 1) el("path", { d: path(proj), class: "plot-line plot-line-proj" }, plot);
+
+        // Today marker.
+        if (nowYear > x0 && nowYear < x1) {
+          el("line", { x1: sx(nowYear), y1: T, x2: sx(nowYear), y2: H - B, class: "plot-now" }, plot);
+          el("text", { x: sx(nowYear) - 4, y: T - 4, class: "plot-tick plot-now-label", "text-anchor": "end" }, plot).textContent = "today";
+        }
+
+        // Points, with a generous tap target.
+        pts.forEach(function (p) {
+          var g = el("g", { class: "plot-pt" + (p.expected ? " is-expected" : ""), tabindex: "0", role: "button",
+            "aria-label": Math.floor(p.year) + (p.expected ? " (expected)" : "") + ": " + p.label }, plot);
+          g.__p = p;
+          el("circle", { cx: sx(p.year), cy: sy(p.v), r: 16, class: "plot-hit" }, g);
+          el("circle", { cx: sx(p.year), cy: sy(p.v), r: narrow ? 4.5 : 5, class: "plot-dot" }, g);
+          el("title", {}, g).textContent = Math.floor(p.year) + ": " + p.label;
+          g.addEventListener("mouseenter", function () { show(p); });
+          g.addEventListener("focus", function () { show(p); });
+          g.addEventListener("click", function () { show(p); });
+        });
+        show(active);
+      }
+
+      // Draw the plot in, left to right, the first time it scrolls into view.
+      var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      var reveal = reduce || !("IntersectionObserver" in window) ? 1 : 0;
+      function animateReveal() {
+        var t0 = null, DUR = 1800;
+        function f(now) {
+          if (t0 === null) t0 = now;
+          var p = Math.min(1, (now - t0) / DUR);
+          reveal = p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2;
+          var r = document.getElementById("traj-reveal-rect");
+          if (r) r.setAttribute("width", svg.viewBox.baseVal.width * reveal);
+          if (p < 1) requestAnimationFrame(f);
+        }
+        requestAnimationFrame(f);
+      }
+      if (reveal < 1) {
+        var io = new IntersectionObserver(function (entries) {
+          if (entries[0].isIntersecting) { io.disconnect(); animateReveal(); }
+        }, { threshold: 0.35 });
+        io.observe(fig);
+      }
+
+      draw();
+      var lastW = 0, timer;
+      window.addEventListener("resize", function () {
+        clearTimeout(timer);
+        timer = setTimeout(function () {
+          var w = Math.round(svg.getBoundingClientRect().width);
+          if (w !== lastW) { lastW = w; draw(); }
+        }, 120);
+      });
+    })();
+  </script>
+{% endif %}
