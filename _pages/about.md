@@ -70,7 +70,8 @@ announcements:
 ---
 
 I am a PhD candidate in Rehabilitation Science at Boston University Sargent College, working in the
-Development, Experience, and Motor Recovery (DEMR) Lab with Dr. Claudio Ferre. I study sensorimotor
+[Development, Experience, and Motor Recovery (DEMR) Lab](https://sites.bu.edu/demrlab/) with
+[Dr. Claudio Ferre](https://www.bu.edu/sargent/profile/claudio-ferre/). I study sensorimotor
 integration in children with unilateral cerebral palsy, combining fNIRS and TMS to look at corticospinal
 connectivity and sensory cortical responses while children reach.
 
