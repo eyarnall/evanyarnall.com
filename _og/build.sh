@@ -38,8 +38,10 @@ cleanup() {
 trap cleanup EXIT
 sleep 1
 
+# Laid out at 1200 x 630 and captured at 2x (2400 x 1260), so it stays crisp after sites downscale it.
 # shellcheck disable=SC2086 # CHROME_FLAGS may hold several flags
-"$CHROME" --headless=new --disable-gpu --hide-scrollbars --window-size=1200,630 --virtual-time-budget=8000 \
+"$CHROME" --headless=new --disable-gpu --hide-scrollbars --window-size=1200,630 --force-device-scale-factor=2 \
+  --virtual-time-budget=8000 \
   ${CHROME_FLAGS:-} --screenshot="$NEW/card.png" "http://127.0.0.1:$PORT/og-card/" 2>/dev/null
 
 # Replace the old image only once the new one exists.
