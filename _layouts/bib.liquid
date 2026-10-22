@@ -1,6 +1,6 @@
 ---
 ---
-{% comment %} Copied from al_folio_core; adds the plain-language `summary` line and a "Lab news" button for the bib field `news`. {% endcomment %}
+{% comment %} Copied from al_folio_core; adds the plain-language `summary` line, a "Lab news" button (bib field `news`) and a "Free full text" button (`fulltext`). {% endcomment %}
 <div class="row">
   {% if site.enable_publication_thumbnails %}
     <div class="col col-sm-2 abbr">
@@ -266,6 +266,9 @@
       {% endif %}
       {% if entry.news %}
         <a href="{{ entry.news }}" class="btn btn-sm z-depth-0" role="button">Lab news</a>
+      {% endif %}
+      {% if entry.fulltext %}
+        <a href="{{ entry.fulltext }}" class="btn btn-sm z-depth-0" role="button">Free full text</a>
       {% endif %}
       {% if entry.code %}
         <a href="{{ entry.code }}" class="btn btn-sm z-depth-0" role="button">Code</a>

@@ -395,7 +395,7 @@ filtered_bibtex_keywords:
     inspirehep_id,
     news,
     pdf,
-    pmid,
+    fulltext,
     poster,
     preview,
     selected,
