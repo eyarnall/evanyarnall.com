@@ -81,7 +81,10 @@ of sensorimotor integration.
 
 Before the PhD, I coordinated clinical trials at Shriners Hospitals for Children, and at Boston University
 School of Medicine I used wearable technology and behavioral coding to measure behavior. I like working across the whole research pipeline: designing apparatus and paradigms,
-coding and analyzing behavior, and writing grants and manuscripts.
+coding and analyzing behavior, and writing grants and manuscripts. I am also one of the inaugural
+[PACES Scholars](https://www.precise-rehab.org/resources/paces) at the Precise Center, Johns Hopkins Medicine, a
+program for early-stage investigators in precision rehabilitation, and I completed USC's NIH-funded
+[ReproRehab](https://www.reprorehab.usc.edu/) program in reproducible data science in 2024–2025.
 
 Outside the lab, I have volunteered with [CP Soccer New England](https://www.cpsoccer.us/) since spring 2024. It runs
 soccer programs for kids with cerebral palsy and other neurological conditions. I also help staff the DEMR Lab's

@@ -36,6 +36,19 @@
     {% endfor %}
   </section>
 
+  {% if cv.training %}
+    <section>
+      <h2>Research training</h2>
+      {% for t in cv.training %}
+        <div class="cv-entry">
+          <div><span class="cv-what">{{ t.program }}</span> <span class="cv-where">· {{ t.organization }}</span></div>
+          <div class="cv-when">{{ t.start_date }} – {{ t.end_date }}</div>
+          {% if t.note %}<p class="cv-note">{{ t.note }}</p>{% endif %}
+        </div>
+      {% endfor %}
+    </section>
+  {% endif %}
+
   <section>
     <h2>Research experience</h2>
     {% for e in cv.experience %}

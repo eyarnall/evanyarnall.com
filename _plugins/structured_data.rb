@@ -106,6 +106,16 @@ module StructuredData
       { "@type" => "CollegeOrUniversity", "name" => e["institution"].to_s.split(",").first.strip }
     end
     awards = (cv["awards"] || []).map { |a| "#{a['title']}, #{a['awarder']} (#{a['date']})" }
+    # Training programs he belongs to (cv.yml "training"). These pages list whole cohorts, so they are
+    # program memberships rather than "sameAs" profile links.
+    programs = (cv["training"] || []).map do |t|
+      {
+        "@type" => "ProgramMembership",
+        "programName" => t["program_name"] || t["program"],
+        "hostingOrganization" => { "@type" => "Organization", "name" => t["organization"] },
+        "url" => t["url"],
+      }.compact
+    end
     same_as = (site.data["socials"] || {}).filter_map do |key, value|
       format(SOCIAL_URLS[key], value) if SOCIAL_URLS[key] && value
     end
@@ -124,7 +134,7 @@ module StructuredData
       "jobTitle" => cv["label"],
       "description" => site.config["description"],
       "affiliation" => { "@id" => id[:lab] },
-      "memberOf" => { "@id" => id[:lab] },
+      "memberOf" => [{ "@id" => id[:lab] }] + programs,
       "colleague" => { "@id" => id[:ferre] },
       "alumniOf" => alumni,
       "knowsAbout" => facts["knows_about"],
@@ -246,10 +256,19 @@ module StructuredData
       node["datePublished"] = paper["date"]
       node["isPartOf"] = { "@type" => "Periodical", "name" => paper["journal"] } if paper["journal"]
       node["pagination"] = paper["pages"]
+      ids = []
       if paper["doi"]
         node["url"] = "https://doi.org/#{paper['doi']}"
-        node["identifier"] = { "@type" => "PropertyValue", "propertyID" => "DOI", "value" => paper["doi"] }
+        ids << { "@type" => "PropertyValue", "propertyID" => "DOI", "value" => paper["doi"] }
       end
+      ids << { "@type" => "PropertyValue", "propertyID" => "PMID", "value" => paper["pmid"] } if paper["pmid"]
+      node["identifier"] = ids unless ids.empty?
+      # The same article on PubMed and on the free full-text copy (PubMed Central).
+      copies = []
+      copies << "https://pubmed.ncbi.nlm.nih.gov/#{paper['pmid']}/" if paper["pmid"]
+      copies << paper["fulltext"] if paper["fulltext"]
+      node["sameAs"] = copies unless copies.empty?
+      node["isAccessibleForFree"] = true if paper["fulltext"]
     when "unpublished"
       node["creativeWorkStatus"] = paper["status"] == "review" ? "Under review" : "In preparation"
     when "inproceedings"

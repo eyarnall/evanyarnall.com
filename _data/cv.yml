@@ -32,6 +32,23 @@ cv:
       start_date: 2015
       end_date: 2019
 
+  # Competitive training programs. Also listed in the site's structured data (_plugins/structured_data.rb).
+  training:
+    - program: PACES Scholar
+      program_name: Precision Rehabilitation Early Stage Investigators Program (PACES)
+      organization: The Precise Center, Johns Hopkins Medicine
+      url: https://www.precise-rehab.org/resources/paces
+      start_date: 2026
+      end_date: 2027
+      note: Inaugural cohort. Mentorship and monthly seminars in precision rehabilitation research.
+    - program: ReproRehab Scholar
+      program_name: Reproducible Rehabilitation (ReproRehab) Research Education Program
+      organization: University of Southern California
+      url: https://www.reprorehab.usc.edu/
+      start_date: 2024
+      end_date: 2025
+      note: NIH-funded training in data science for reproducible rehabilitation research.
+
   experience:
     - position: Graduate Researcher, DEMR Lab
       organization: Boston University, Sargent College
