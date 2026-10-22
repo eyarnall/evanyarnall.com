@@ -4,6 +4,9 @@
 # LinkedIn blocks automated checkers
 ^https://(www\.)?linkedin\.com/
 
+# SPIE (the Neurophotonics journal) stalls automated checkers until they time out
+^https://www\.spiedigitallibrary\.org/
+
 # The site's own address appears in page metadata. Links between pages are checked against the build instead
 ^https?://(www\.)?evanyarnall\.com
 
