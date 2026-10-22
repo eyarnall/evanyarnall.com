@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Rebuild the link-preview card (assets/img/og-card.png) by screenshotting the card page (/og-card/,
+# Rebuild the link-preview card (assets/img/og-card.jpg) by screenshotting the card page (/og-card/,
 # made by _pages/og-card.html) with headless Google Chrome.
 # Usage (from the site folder):  bash _og/build.sh
 #
@@ -14,7 +14,7 @@ cd "$(dirname "$0")/.."
 export LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8
 
 CHROME="${CHROME:-/Applications/Google Chrome.app/Contents/MacOS/Google Chrome}"
-OUT="${OUT:-assets/img/og-card.png}"
+OUT="${OUT:-assets/img/og-card.jpg}"
 PORT=4918
 
 if [ -n "${SITE_DIR:-}" ]; then
@@ -38,18 +38,19 @@ cleanup() {
 trap cleanup EXIT
 sleep 1
 
-# Laid out at 1200 x 630 and captured at 2x (2400 x 1260), so it stays crisp after sites downscale it.
+# Laid out at 1200 x 630 and captured at 2x (2400 x 1260), so it stays crisp after sites downscale it. JPEG keeps
+# the file small enough for apps with size limits (WhatsApp skips preview images over about 300 KB).
 # shellcheck disable=SC2086 # CHROME_FLAGS may hold several flags
 "$CHROME" --headless=new --disable-gpu --hide-scrollbars --window-size=1200,630 --force-device-scale-factor=2 \
   --virtual-time-budget=8000 \
-  ${CHROME_FLAGS:-} --screenshot="$NEW/card.png" "http://127.0.0.1:$PORT/og-card/" 2>/dev/null
+  ${CHROME_FLAGS:-} --screenshot="$NEW/card.jpg" "http://127.0.0.1:$PORT/og-card/" 2>/dev/null
 
 # Replace the old image only once the new one exists.
-if [ ! -s "$NEW/card.png" ]; then
+if [ ! -s "$NEW/card.jpg" ]; then
   echo "Chrome did not capture the card; $OUT was left as it was." >&2
   exit 1
 fi
 mkdir -p "$(dirname "$OUT")"
-mv "$NEW/card.png" "$OUT"
+mv "$NEW/card.jpg" "$OUT"
 
 echo "Wrote $OUT"

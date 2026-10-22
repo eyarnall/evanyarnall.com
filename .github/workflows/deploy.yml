@@ -112,12 +112,12 @@ jobs:
           CHROME_FLAGS: --no-sandbox
         run: bash _cv/build.sh
       - name: Capture link-preview card 🖼️
-        # Screenshots /og-card/ (title and headline from the home page, plus the headshot) into og-card.png.
+        # Screenshots /og-card/ (title and headline from the home page, plus the headshot) into og-card.jpg.
         # If it fails, the site still deploys with the image last committed to assets/img/.
         continue-on-error: true
         env:
           SITE_DIR: _site
-          OUT: _site/assets/img/og-card.png
+          OUT: _site/assets/img/og-card.jpg
           CHROME: google-chrome
           CHROME_FLAGS: --no-sandbox
         run: bash _og/build.sh

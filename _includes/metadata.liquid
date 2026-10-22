@@ -72,6 +72,13 @@
       {% assign og_image_url = og_image_source | prepend: site.baseurl | prepend: site.url %}
     {% endif %}
     <meta property="og:image" content="{{ og_image_url }}">
+    {% unless page.og_image %}
+      {% comment %} The site-wide card: give its size, type and description up front. {% endcomment %}
+      <meta property="og:image:type" content="image/jpeg">
+      <meta property="og:image:width" content="{{ site.og_image_width }}">
+      <meta property="og:image:height" content="{{ site.og_image_height }}">
+      <meta property="og:image:alt" content="{{ site.og_image_alt | escape }}">
+    {% endunless %}
   {% endif %}
   <meta property="og:locale" content="{{ site.lang }}">
 
@@ -81,6 +88,7 @@
   <meta name="twitter:description" content="{{ page_description | escape }}">
   {% if page.og_image or site.og_image %}
     <meta name="twitter:image" content="{{ og_image_url }}">
+    {% unless page.og_image %}<meta name="twitter:image:alt" content="{{ site.og_image_alt | escape }}">{% endunless %}
   {% endif %}
   {% if site.x_username %}
     <meta name="twitter:site" content="@{{ site.x_username }}">
