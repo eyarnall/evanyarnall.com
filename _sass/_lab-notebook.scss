@@ -148,6 +148,72 @@ button:focus-visible {
   }
 }
 
+// Search and theme buttons stay in the bar at every width, outside the phone menu.
+.navbar-tools {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+
+  #search-toggle,
+  #light-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    min-width: 2.75rem;
+    height: 2.75rem;
+    padding: 0 0.5rem;
+    transform: none;
+    color: var(--lab-muted);
+
+    &:hover {
+      color: var(--lab-accent);
+    }
+  }
+
+  // Keyboard shortcut hint, only where there's likely a keyboard.
+  .search-hint {
+    display: none;
+    padding: 0;
+    font-family: $lab-mono;
+    font-size: 0.75rem;
+    color: inherit;
+    background: none;
+    box-shadow: none;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .search-hint {
+      display: inline;
+    }
+  }
+}
+
+// Phones: no theme button in the bar; search offers the same light, dark and system choices.
+@media (max-width: 575.98px) {
+  .navbar-tools #light-toggle {
+    display: none;
+  }
+}
+
+// Phone menu button: a full 44px tap target.
+.navbar .navbar-toggler {
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  margin-left: 0; // sit right next to the search button
+}
+
+@media (min-width: 576px) {
+  .navbar .navbar-collapse {
+    order: 1;
+  }
+
+  .navbar-tools {
+    order: 2;
+    margin-left: 0.25rem;
+  }
+}
+
 // Home page: the navbar name fades in after the big name scrolls away.
 .navbar .lab-brand {
   opacity: 0;
