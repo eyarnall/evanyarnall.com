@@ -615,7 +615,7 @@
       el(g, "ellipse", {
         cx: thumbX, cy: 42, rx: 6.5, ry: 12, transform: "rotate(" + (side === "L" ? 28 : -28) + " " + thumbX + " 42)", class: "cy-thumb",
       });
-      el(scene, "circle", { cx: cx, cy: cy, r: 13, class: "cb-cuff cb-cuff-" + side });
+      el(scene, "circle", { cx: cx, cy: cy, r: 13, class: side === "L" ? "cb-cuff cb-cuff-L" : "cb-cuff cb-cuff-R" });
       el(scene, "text", { x: cx, y: cy + 4.5, class: "cb-cuff-label", "text-anchor": "middle" }, side);
     }
     function drawScene(t) {
@@ -642,6 +642,8 @@
     // ---------- Coding record and timeline ----------
     var BIN = 0.1, NBINS = Math.round(DUR / BIN), CODES = ["L", "R", "B"];
     var NAMES = { L: "Left", R: "Right", B: "Both" };
+    // Class names written out in full: the deploy's CSS cleanup drops styles for names it can't find whole.
+    var BAR_CLASS = { L: "cb-bar cb-bar-L", R: "cb-bar cb-bar-R", B: "cb-bar cb-bar-B" };
     var truth = [];
     for (var i = 0; i < NBINS; i++) truth.push(codeAt((i + 0.5) * BIN));
     var heldTime, binTime;
@@ -684,7 +686,7 @@
       el(tl, "text", { x: 0, y: y + 13, class: "cy-row-label" }, label);
       el(tl, "rect", { x: TL_L, y: y, width: TL_R - TL_L, height: ROW_H, class: "cy-row-bg" });
       runs(code.slice(0, upTo)).forEach(function (r) {
-        el(tl, "rect", { x: bx(r[0]), y: y, width: bx(r[1]) - bx(r[0]), height: ROW_H, class: "cb-bar cb-bar-" + r[2] });
+        el(tl, "rect", { x: bx(r[0]), y: y, width: bx(r[1]) - bx(r[0]), height: ROW_H, class: BAR_CLASS[r[2]] });
       });
     }
     function drawTimeline(t, reveal) {
@@ -692,7 +694,7 @@
       // Legend.
       var lx = TL_L;
       CODES.forEach(function (c) {
-        el(tl, "rect", { x: lx, y: 2, width: 12, height: 12, class: "cb-bar cb-bar-" + c });
+        el(tl, "rect", { x: lx, y: 2, width: 12, height: 12, class: BAR_CLASS[c] });
         el(tl, "text", { x: lx + 17, y: 12, class: "cy-tick" }, NAMES[c]);
         lx += narrow ? 62 : 74;
       });
