@@ -1,0 +1,1252 @@
+<!DOCTYPE html> <html lang="en"> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <title> Better ways to measure infant movement | Evan Yarnall </title> <meta name="author" content="Evan Yarnall"> <meta name="description" content="Comparing video coding, wearable sensors (IMUs) and markerless tracking for measuring infant movement in cerebral palsy research."> <meta name="keywords" content="Evan Yarnall, rehabilitation science, cerebral palsy, sensorimotor development, fNIRS, TMS, motor control, Boston University"> <meta property="og:site_name" content="Evan Yarnall"> <meta property="og:type" content="website"> <meta property="og:title" content="Evan Yarnall | Better ways to measure infant movement"> <meta property="og:url" content="https://evanyarnall.com/projects/3_measuring_movement/"> <meta property="og:description" content="Comparing video coding, wearable sensors (IMUs) and markerless tracking for measuring infant movement in cerebral palsy research."> <meta property="og:image" content="https://evanyarnall.com/assets/img/og-card.png"> <meta property="og:locale" content="en"> <meta name="twitter:card" content="summary"> <meta name="twitter:title" content="Better ways to measure infant movement | Evan Yarnall"> <meta name="twitter:description" content="Comparing video coding, wearable sensors (IMUs) and markerless tracking for measuring infant movement in cerebral palsy research."> <meta name="twitter:image" content="https://evanyarnall.com/assets/img/og-card.png"> <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://evanyarnall.com/#website",
+      "url": "https://evanyarnall.com/",
+      "name": "Evan Yarnall",
+      "description": "Evan Yarnall is a PhD candidate in Rehabilitation Science at Boston University studying sensorimotor development in children with and at risk for cerebral palsy, using fNIRS and TMS.",
+      "inLanguage": "en-US",
+      "publisher": {
+        "@id": "https://evanyarnall.com/#person"
+      },
+      "about": {
+        "@id": "https://evanyarnall.com/#person"
+      }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://evanyarnall.com/#person",
+      "name": "Evan Yarnall",
+      "givenName": "Evan",
+      "familyName": "Yarnall",
+      "url": "https://evanyarnall.com/",
+      "image": {
+        "@type": "ImageObject",
+        "url": "https://evanyarnall.com/assets/img/prof_pic.jpg",
+        "caption": "Evan Yarnall"
+      },
+      "jobTitle": "PhD Candidate, Rehabilitation Science",
+      "description": "Evan Yarnall is a PhD candidate in Rehabilitation Science at Boston University studying sensorimotor development in children with and at risk for cerebral palsy, using fNIRS and TMS.",
+      "affiliation": {
+        "@id": "https://evanyarnall.com/#demr-lab"
+      },
+      "memberOf": {
+        "@id": "https://evanyarnall.com/#demr-lab"
+      },
+      "colleague": {
+        "@id": "https://evanyarnall.com/#claudio-ferre"
+      },
+      "alumniOf": [
+        {
+          "@type": "CollegeOrUniversity",
+          "name": "Temple University"
+        }
+      ],
+      "knowsAbout": [
+        "Rehabilitation science",
+        "Cerebral palsy",
+        "Unilateral cerebral palsy",
+        "Sensorimotor development",
+        "Infant motor development",
+        "Bimanual coordination",
+        "Online motor control",
+        "Functional near-infrared spectroscopy (fNIRS)",
+        "Transcranial magnetic stimulation (TMS)",
+        "Behavioral video coding",
+        "Wearable motion sensors (IMUs)"
+      ],
+      "award": [
+        "Student Scholarship, American Academy for Cerebral Palsy and Developmental Medicine (2025)"
+      ],
+      "hasOccupation": {
+        "@type": "Occupation",
+        "name": "Graduate Researcher"
+      },
+      "hasCredential": [
+        {
+          "@type": "EducationalOccupationalCredential",
+          "credentialCategory": "degree",
+          "name": "BS, Kinesiology (Pre-Physical Therapy)",
+          "recognizedBy": {
+            "@type": "CollegeOrUniversity",
+            "name": "Temple University"
+          }
+        },
+        {
+          "@type": "EducationalOccupationalCredential",
+          "credentialCategory": "certificate",
+          "name": "RCR Foundations (Responsible Conduct of Research)",
+          "recognizedBy": {
+            "@type": "Organization",
+            "name": "CITI Program"
+          },
+          "dateCreated": "2024"
+        },
+        {
+          "@type": "EducationalOccupationalCredential",
+          "credentialCategory": "certificate",
+          "name": "Biomedical Research",
+          "recognizedBy": {
+            "@type": "Organization",
+            "name": "CITI Program"
+          },
+          "dateCreated": "2022"
+        },
+        {
+          "@type": "EducationalOccupationalCredential",
+          "credentialCategory": "certificate",
+          "name": "Good Clinical Practice (GCP)",
+          "recognizedBy": {
+            "@type": "Organization",
+            "name": "CITI Program"
+          },
+          "dateCreated": "2021"
+        }
+      ],
+      "sameAs": [
+        "https://www.linkedin.com/in/evanyarnall",
+        "https://github.com/eyarnall",
+        "https://orcid.org/0000-0001-9155-3070"
+      ]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://evanyarnall.com/#claudio-ferre",
+      "name": "Claudio L. Ferre",
+      "givenName": "Claudio",
+      "familyName": "Ferre",
+      "honorificSuffix": "PhD",
+      "jobTitle": "Assistant Professor of Occupational Therapy",
+      "description": "Director of the Development, Experience, & Motor Recovery (DEMR) Lab at Boston University, and Evan Yarnall's PhD advisor.",
+      "url": "https://www.bu.edu/sargent/profile/claudio-ferre/",
+      "sameAs": [
+        "https://orcid.org/0000-0002-4370-6965",
+        "https://www.bu.edu/neurophotonics/profile/claudio-ferre/",
+        "https://sites.bu.edu/demrlab/people/"
+      ],
+      "worksFor": {
+        "@id": "https://evanyarnall.com/#boston-university"
+      },
+      "affiliation": [
+        {
+          "@id": "https://evanyarnall.com/#bu-sargent"
+        },
+        {
+          "@id": "https://evanyarnall.com/#bu-neurophotonics"
+        }
+      ],
+      "memberOf": {
+        "@id": "https://evanyarnall.com/#demr-lab"
+      }
+    },
+    {
+      "@type": "ResearchOrganization",
+      "@id": "https://evanyarnall.com/#demr-lab",
+      "name": "Development, Experience, & Motor Recovery Lab",
+      "alternateName": "DEMR Lab",
+      "url": "https://sites.bu.edu/demrlab/",
+      "description": "Boston University research lab that studies motor skills in infants and children to develop new therapies for children with cerebral palsy.",
+      "email": "demrlab@bu.edu",
+      "telephone": "+1-617-353-7492",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "635 Commonwealth Ave",
+        "addressLocality": "Boston",
+        "addressRegion": "MA",
+        "postalCode": "02215",
+        "addressCountry": "US"
+      },
+      "sameAs": [
+        "https://www.instagram.com/demrlab/"
+      ],
+      "parentOrganization": {
+        "@id": "https://evanyarnall.com/#bu-sargent"
+      },
+      "member": [
+        {
+          "@id": "https://evanyarnall.com/#claudio-ferre"
+        },
+        {
+          "@id": "https://evanyarnall.com/#person"
+        }
+      ]
+    },
+    {
+      "@type": "CollegeOrUniversity",
+      "@id": "https://evanyarnall.com/#bu-sargent",
+      "name": "Boston University Sargent College of Health & Rehabilitation Sciences",
+      "url": "https://www.bu.edu/sargent/",
+      "parentOrganization": {
+        "@id": "https://evanyarnall.com/#boston-university"
+      }
+    },
+    {
+      "@type": "ResearchOrganization",
+      "@id": "https://evanyarnall.com/#bu-neurophotonics",
+      "name": "Boston University Neurophotonics Center",
+      "url": "https://www.bu.edu/neurophotonics/",
+      "parentOrganization": {
+        "@id": "https://evanyarnall.com/#boston-university"
+      }
+    },
+    {
+      "@type": "CollegeOrUniversity",
+      "@id": "https://evanyarnall.com/#boston-university",
+      "name": "Boston University",
+      "url": "https://www.bu.edu/",
+      "sameAs": [
+        "https://en.wikipedia.org/wiki/Boston_University"
+      ]
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://evanyarnall.com/projects/3_measuring_movement/#webpage",
+      "url": "https://evanyarnall.com/projects/3_measuring_movement/",
+      "name": "Better ways to measure infant movement | Evan Yarnall",
+      "description": "Comparing video coding, wearable sensors (IMUs) and markerless tracking for measuring infant movement in cerebral palsy research.",
+      "inLanguage": "en-US",
+      "isPartOf": {
+        "@id": "https://evanyarnall.com/#website"
+      },
+      "about": {
+        "@type": "ResearchProject",
+        "name": "Better ways to measure infant movement",
+        "description": "Comparing video coding, wearable sensors and markerless tracking, plus the coding pipelines behind them.",
+        "parentOrganization": {
+          "@id": "https://evanyarnall.com/#demr-lab"
+        },
+        "member": [
+          {
+            "@id": "https://evanyarnall.com/#person"
+          },
+          {
+            "@id": "https://evanyarnall.com/#claudio-ferre"
+          }
+        ]
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://evanyarnall.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Research",
+            "item": "https://evanyarnall.com/research/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Better ways to measure infant movement",
+            "item": "https://evanyarnall.com/projects/3_measuring_movement/"
+          }
+        ]
+      }
+    }
+  ]
+}
+</script> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; font-src 'self' data: https:; media-src 'self' https:; frame-src 'self' https:; connect-src 'self' https:;"> <style>
+  :root {
+    --max-content-width: 930px;
+  }
+</style> <link rel="stylesheet" href="/assets/css/tailwind.css?v=50c64c15cbb9fd1ce6056fdb8bcb4b62"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css" integrity="sha256-MVopmdyC2tYTiJ8wlktf0uh0v4NgT+vNdyVFepi7Q0c=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.5/css/academicons.min.css" integrity="sha256-SzrCOBJbGVFMahewkgjwnApaV2+av1DwMAA+/QGLyZw=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/scholar-icons@1.0.3/css/scholar-icons.css" integrity="sha256-VY3hHVj/hNX3fYG6wtbA6TcKJQl7+FthzGSyIB64klY=" crossorigin="anonymous"> <link defer rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&amp;display=swap"> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-github.css?v=591dab5a4e56573bf4ef7fd332894c99" media="" id="highlight_theme_light"> <link rel="shortcut icon" href="/assets/img/favicon.svg?v=5832fb3cbf72736918a3dec3b5adc7f9"> <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png?v=046ac299995eae6216dee398c4146213"> <link rel="stylesheet" href="/assets/css/main.css?v=3116ba77db9ee1581d05bb3e86fbf7f1"> <link rel="canonical" href="https://evanyarnall.com/projects/3_measuring_movement/"> <script src="/assets/js/theme.js?v=5286c3e4c334d0ecb8fc0c40ff4fa7ec"></script> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-native.css?v=5847e5ed4a4568527aa6cfab446049ca" media="none" id="highlight_theme_dark"> <script>
+    initTheme();
+  </script> <link rel="stylesheet" href="/assets/al_email_protect/css/email-protect.css"> </head> <body class="fixed-top-nav sticky-bottom-footer"> <header> <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top" role="navigation"> <div class="container"> <a class="navbar-brand title font-weight-lighter" href="/"> <span class="font-weight-bold">Evan</span> Yarnall </a> <button class="navbar-toggler collapsed navbar-toggler-main" type="button" data-nav-toggle="navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar top-bar"></span> <span class="icon-bar middle-bar"></span> <span class="icon-bar bottom-bar"></span> </button> <div class="collapse navbar-collapse navbar-collapse-main" id="navbarNav"> <ul class="navbar-nav navbar-menu-list flex-nowrap"> <li class="nav-item "> <a class="nav-link" href="/">about </a> </li> <li class="nav-item "> <a class="nav-link" href="/research/">Research </a> </li> <li class="nav-item "> <a class="nav-link" href="/publications/">Publications </a> </li> <li class="nav-item "> <a class="nav-link" href="/cv/">CV </a> </li> <li class="nav-item"> <button id="search-toggle" type="button" title="Search" aria-label="Open search"> <span class="nav-link">ctrl k <i class="fa-solid fa-magnifying-glass"></i></span> </button> </li> <li class="toggle-container"> <button id="light-toggle" type="button" title="Change theme" aria-label="Change color theme"> <i class="fa-half-sun-moon" id="light-toggle-system"></i> <i class="fa-solid fa-moon" id="light-toggle-dark"></i> <i class="fa-solid fa-sun" id="light-toggle-light"></i> </button> </li> </ul> </div> </div> </nav> </header> <div class="container mt-5" role="main"> <div class="post"> <header class="post-header"> <h1 class="post-title">Better ways to measure infant movement</h1> <p class="post-description">Comparing video coding, wearable sensors and markerless tracking, plus the coding pipelines behind them.</p> </header> <article> <p>Early signs of cerebral palsy often show up in how infants move, but measuring that movement reliably is hard. Our lab compares several ways of capturing it:</p> <ul> <li> <strong>Video observation</strong>, scored through behavioral coding</li> <li> <strong>Wearable sensors</strong> (inertial measurement units, or IMUs)</li> <li> <strong>Markerless motion tracking</strong> with DeepLabCut during infant reaching</li> </ul> <p>I build and maintain the lab’s behavioral coding pipelines in Datavyu, using Ruby and Python, including the inter-rater reliability workflows that make the coded data trustworthy.</p> <h2 id="what-behavioral-coding-looks-like">What behavioral coding looks like</h2> <p>Coding means watching video and marking exactly when a behavior happens, such as each moment an infant’s hand touches a toy. Two trained coders score the same sessions, and their agreement (inter-rater reliability) tells us whether the codes can be trusted. Try it:</p> <figure class="lab-figure lab-figure-live cy-figure" id="cy-figure"> <div class="cy-head"> <p class="cy-status" aria-live="polite">Ready</p> <p class="cy-clock" aria-hidden="true">0.0 s</p> </div> <svg class="cy-scene" viewbox="0 82 600 104" role="img" aria-label="A drawn infant hand reaching toward a toy block on a table."></svg> <div class="cy-controls"> <button type="button" class="cy-start"></button> <button type="button" class="cy-hold" disabled aria-pressed="false">Touching</button> <span class="cy-hint">or hold the space bar</span> </div> <svg class="cy-timeline" viewbox="0 0 600 86" role="img" aria-label="Timeline of your coding compared with the trained coder's coding."></svg> <p class="cy-result" aria-live="polite"></p> <figcaption> <b>Fig. 3a.</b> Try behavioral coding. Press <i>Start</i>, then hold <i>Touching</i> (or the space bar) whenever the hand is in contact with the block. Afterwards, compare your record with a trained coder's. The clip is simulated. </figcaption> </figure> <script>
+  (function () {
+    var fig = document.getElementById("cy-figure");
+    if (!fig) return;
+    var scene = fig.querySelector(".cy-scene");
+    var tl = fig.querySelector(".cy-timeline");
+    var statusEl = fig.querySelector(".cy-status");
+    var clockEl = fig.querySelector(".cy-clock");
+    var startBtn = fig.querySelector(".cy-start");
+    var holdBtn = fig.querySelector(".cy-hold");
+    var resultEl = fig.querySelector(".cy-result");
+    var NS = "http://www.w3.org/2000/svg";
+
+    // ---------- The clip: fingertip x position over time ----------
+    var DUR = 12; // seconds
+    var TOY_X = 400; // left face of the block; contact when the fingertip reaches it
+    var REST_X = 130;
+    // [time, fingertip x]. Includes a near miss at ~4.6 s and a brief tap at ~9.4 s.
+    var KEYS = [
+      [0, REST_X], [1.2, 250], [2.0, TOY_X], [3.2, TOY_X], [3.8, 330], [4.6, TOY_X - 9], [5.2, 335],
+      [6.0, TOY_X], [8.0, TOY_X], [8.6, 300], [9.3, TOY_X], [9.6, TOY_X], [10.3, 210], [11.4, REST_X], [DUR, REST_X],
+    ];
+    function smooth(x) { return x * x * (3 - 2 * x); }
+    function handX(t) {
+      for (var i = 0; i < KEYS.length - 1; i++) {
+        var a = KEYS[i], b = KEYS[i + 1];
+        if (t <= b[0]) return a[1] + (b[1] - a[1]) * smooth((t - a[0]) / (b[0] - a[0]));
+      }
+      return REST_X;
+    }
+    function touching(t) { return handX(t) >= TOY_X - 0.5; }
+
+    // ---------- Drawing ----------
+    function el(parent, name, attrs, text) {
+      var e = document.createElementNS(NS, name);
+      for (var k in attrs) e.setAttribute(k, attrs[k]);
+      if (text != null) e.textContent = text;
+      parent.appendChild(e);
+      return e;
+    }
+    function clear(svg) { while (svg.firstChild) svg.removeChild(svg.firstChild); }
+
+    var TABLE_Y = 172, TOY_W = 70;
+    function drawScene(t) {
+      clear(scene);
+      el(scene, "line", { x1: 0, y1: TABLE_Y, x2: 600, y2: TABLE_Y, class: "cy-table" });
+      var x = handX(t), contact = touching(t);
+      var y = TABLE_Y - 36 + (contact ? 0 : Math.sin(t * 4.2) * 3);
+
+      // Toy block, wobbling a little while it is touched.
+      var wob = contact ? Math.sin(t * 22) * 2.5 : 0;
+      var g = el(scene, "g", { transform: "rotate(" + wob + " " + (TOY_X + TOY_W / 2) + " " + TABLE_Y + ")" });
+      el(g, "rect", { x: TOY_X, y: TABLE_Y - TOY_W, width: TOY_W, height: TOY_W, rx: 7, class: "cy-toy" });
+      el(g, "text", { x: TOY_X + TOY_W / 2, y: TABLE_Y - 23, class: "cy-toy-letter", "text-anchor": "middle" }, "A");
+
+      // Arm and hand as a line drawing; the middle fingertips end exactly at x.
+      var arm = "M -30 " + (y + 16) + " L " + (x - 58) + " " + (y + 4);
+      el(scene, "path", { d: arm, class: "cy-arm-outline" });
+      el(scene, "path", { d: arm, class: "cy-arm" });
+      [[-14, 23], [-5.5, 30], [3, 29], [11.5, 22]].forEach(function (f) {
+        el(scene, "rect", { x: x - 30, y: y + f[0], width: f[1], height: 7.5, rx: 3.75, class: "cy-finger" });
+      });
+      el(scene, "rect", { x: x - 64, y: y - 17, width: 42, height: 36, rx: 13, class: "cy-palm" });
+      el(scene, "ellipse", {
+        cx: x - 36, cy: y + 21, rx: 12, ry: 6.5, transform: "rotate(-24 " + (x - 36) + " " + (y + 21) + ")", class: "cy-thumb",
+      });
+    }
+
+    // ---------- Coding record and timeline ----------
+    var BIN = 0.1, NBINS = Math.round(DUR / BIN);
+    var truth = [];
+    for (var i = 0; i < NBINS; i++) truth.push(touching((i + 0.5) * BIN));
+    var pressedTime, binTime;
+    function resetRecord() {
+      pressedTime = new Array(NBINS).fill(0);
+      binTime = new Array(NBINS).fill(0);
+    }
+    function userCode() {
+      return binTime.map(function (bt, i) { return bt > 0 && pressedTime[i] / bt > 0.5; });
+    }
+
+    // The timeline is drawn at its real pixel width so text stays readable on phones.
+    var TL_W = 600, TL_L = 110, TL_R = 570, ROW_H = 18, narrow = false;
+    function measureTimeline() {
+      TL_W = Math.max(260, Math.round(tl.getBoundingClientRect().width || 600));
+      narrow = TL_W < 480;
+      TL_L = narrow ? 50 : 110;
+      TL_R = TL_W - (narrow ? 14 : 30);
+      tl.setAttribute("viewBox", "0 0 " + TL_W + " 86");
+      // Crop the scene to the action on narrow screens.
+      scene.setAttribute("viewBox", narrow ? "50 82 440 104" : "0 82 600 104");
+    }
+    var bx = function (i) { return TL_L + (i / NBINS) * (TL_R - TL_L); };
+    function runs(code) {
+      var out = [], s = -1;
+      for (var i = 0; i <= code.length; i++) {
+        if (code[i] && s < 0) s = i;
+        if (!code[i] && s >= 0) { out.push([s, i]); s = -1; }
+      }
+      return out;
+    }
+    function drawRow(y, label, code, upTo, cls) {
+      el(tl, "text", { x: 0, y: y + 13, class: "cy-row-label" }, label);
+      el(tl, "rect", { x: TL_L, y: y, width: TL_R - TL_L, height: ROW_H, class: "cy-row-bg" });
+      runs(code.slice(0, upTo)).forEach(function (r) {
+        el(tl, "rect", { x: bx(r[0]), y: y, width: bx(r[1]) - bx(r[0]), height: ROW_H, class: cls });
+      });
+    }
+    function drawTimeline(t, reveal) {
+      clear(tl);
+      var upTo = Math.min(NBINS, Math.ceil(t / BIN));
+      drawRow(6, "You", userCode(), upTo, "cy-bar-you");
+      drawRow(32, narrow ? "Coder" : "Trained coder", truth, reveal ? NBINS : 0, "cy-bar-truth");
+      if (!reveal) el(tl, "text", { x: TL_L + 8, y: 45, class: "cy-row-note" }, narrow ? "shown at the end" : "revealed when the clip ends");
+      else if (!narrow) {
+        // Point out the two moments that trip people up.
+        el(tl, "text", { x: bx(4.85 / BIN), y: 45, class: "cy-row-note", "text-anchor": "middle" }, "near miss");
+        el(tl, "text", { x: bx(9.75 / BIN) + 4, y: 45, class: "cy-row-note" }, "← brief tap");
+      }
+      for (var s = 0; s <= DUR; s += narrow ? 4 : 2) {
+        el(tl, "line", { x1: bx(s / BIN), y1: 58, x2: bx(s / BIN), y2: 63, class: "cy-axis" });
+        el(tl, "text", { x: bx(s / BIN), y: 78, class: "cy-tick", "text-anchor": "middle" }, s + " s");
+      }
+      el(tl, "line", { x1: TL_L, y1: 58, x2: TL_R, y2: 58, class: "cy-axis" });
+      if (t > 0 && t < DUR) el(tl, "line", { x1: bx(t / BIN), y1: 2, x2: bx(t / BIN), y2: 58, class: "cy-cursor" });
+    }
+
+    // ---------- Scoring: percent agreement and Cohen's kappa ----------
+    function score(code) {
+      var n = NBINS, agree = 0, yu = 0, yt = 0;
+      for (var i = 0; i < n; i++) {
+        if (code[i] === truth[i]) agree++;
+        if (code[i]) yu++;
+        if (truth[i]) yt++;
+      }
+      var po = agree / n;
+      var pe = (yu / n) * (yt / n) + (1 - yu / n) * (1 - yt / n);
+      var kappa = pe >= 1 ? 1 : (po - pe) / (1 - pe);
+      return { po: po, kappa: kappa, boutsYou: runs(code).length, boutsTruth: runs(truth).length };
+    }
+    // Feedback on the two hard moments: the near miss (~4.6 s) and the brief tap (~9.3-9.6 s).
+    function anyIn(code, from, to) {
+      for (var i = Math.floor(from / BIN); i < Math.ceil(to / BIN); i++) if (code[i]) return true;
+      return false;
+    }
+    function tricky(code) {
+      var fooled = anyIn(code, 4.3, 5.0), caughtTap = anyIn(code, 9.2, 9.9);
+      var a = fooled
+        ? "The near miss at 4.6 s fooled you: the hand stops just short of the block."
+        : "You didn’t fall for the near miss at 4.6 s, where the hand stops just short of the block.";
+      var b = caughtTap ? " And you caught the brief tap at 9.4 s." : " You missed the brief tap at 9.4 s, which lasts about a third of a second.";
+      return a + b;
+    }
+    function kappaWord(k) {
+      if (k < 0.2) return "slight";
+      if (k < 0.4) return "fair";
+      if (k < 0.6) return "moderate";
+      if (k < 0.8) return "substantial";
+      return "almost perfect";
+    }
+
+    // ---------- Flow: ready, countdown, coding, results ----------
+    var state = "ready", raf = null, t0 = 0, last = 0, pressed = false;
+    var RETRY_ICON =
+      '<svg viewBox="0 0 16 16" aria-hidden="true" class="mt-icon-stroke"><path d="M13.2 8.6A5.3 5.3 0 1 1 11.6 4"/><path d="M12.4 1.6v3.2H9.2"/></svg>';
+    var PLAY_ICON = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 2.8v10.4L13 8z"/></svg>';
+
+    function setPressed(p) {
+      if (state !== "coding") p = false;
+      pressed = p;
+      holdBtn.classList.toggle("is-down", p);
+      holdBtn.setAttribute("aria-pressed", p ? "true" : "false");
+    }
+
+    function tick(now) {
+      if (state === "countdown") {
+        var left = 3 - Math.floor((now - t0) / 600);
+        if (left <= 0) {
+          state = "coding";
+          t0 = last = now;
+          statusEl.textContent = "Coding: hold while it touches";
+        } else {
+          statusEl.textContent = "Starting in " + left + "…";
+        }
+        raf = requestAnimationFrame(tick);
+        return;
+      }
+      var t = Math.min(DUR, (now - t0) / 1000);
+      var dt = (now - last) / 1000;
+      last = now;
+      var b = Math.min(NBINS - 1, Math.floor(t / BIN));
+      binTime[b] += dt;
+      if (pressed) pressedTime[b] += dt;
+      drawScene(t);
+      drawTimeline(t, false);
+      clockEl.textContent = t.toFixed(1) + " s";
+      if (t >= DUR) return finish();
+      raf = requestAnimationFrame(tick);
+    }
+
+    function start() {
+      resetRecord();
+      resultEl.textContent = "";
+      fig.classList.remove("is-done");
+      state = "countdown";
+      t0 = performance.now();
+      holdBtn.disabled = false;
+      startBtn.disabled = true;
+      drawScene(0);
+      drawTimeline(0, false);
+      holdBtn.focus();
+      raf = requestAnimationFrame(tick);
+    }
+
+    function finish() {
+      state = "done";
+      setPressed(false);
+      holdBtn.disabled = true;
+      startBtn.disabled = false;
+      startBtn.innerHTML = RETRY_ICON + "<span>Try again</span>";
+      statusEl.textContent = "Done";
+      fig.classList.add("is-done");
+      drawTimeline(DUR, true);
+      var s = score(userCode());
+      resultEl.innerHTML =
+        "<b>" + Math.round(s.po * 100) + "% agreement</b> with the trained coder, " +
+        "<b>Cohen’s κ = " + s.kappa.toFixed(2) + "</b> (" + kappaWord(s.kappa) + "). " +
+        "You coded " + s.boutsYou + " touch" + (s.boutsYou === 1 ? "" : "es") + "; the coder found " + s.boutsTruth + ". " +
+        "Percent agreement can look high by chance alone, so labs report κ, which corrects for it. " +
+        tricky(userCode());
+      startBtn.focus();
+    }
+
+    // Button: hold with mouse, finger or keyboard (Enter/Space on the focused button also works).
+    holdBtn.addEventListener("pointerdown", function (e) { e.preventDefault(); setPressed(true); });
+    ["pointerup", "pointerleave", "pointercancel"].forEach(function (ev) {
+      holdBtn.addEventListener(ev, function () { setPressed(false); });
+    });
+    holdBtn.addEventListener("contextmenu", function (e) { e.preventDefault(); });
+    // Space bar anywhere while coding.
+    document.addEventListener("keydown", function (e) {
+      if (state !== "coding" && state !== "countdown") return;
+      if (e.code === "Space" || e.key === " " || e.key === "Enter") {
+        e.preventDefault();
+        if (!e.repeat) setPressed(true);
+      }
+    });
+    document.addEventListener("keyup", function (e) {
+      if (e.code === "Space" || e.key === " " || e.key === "Enter") setPressed(false);
+    });
+    window.addEventListener("blur", function () { setPressed(false); });
+
+    window.addEventListener("resize", function () {
+      measureTimeline();
+      if (state === "done") drawTimeline(DUR, true);
+      else if (state !== "coding") drawTimeline(0, false);
+    });
+    measureTimeline();
+    startBtn.addEventListener("click", start);
+    startBtn.innerHTML = PLAY_ICON + "<span>Start</span>";
+    resetRecord();
+    drawScene(0);
+    drawTimeline(0, false);
+  })();
+</script> <h2 id="coding-which-hand">Coding which hand</h2> <p>Real coding schemes go further than “touching or not.” To study how infants learn to use their two hands together, we also code <em>which</em> hand is on the toy: the left, the right, or both. Telling these apart reliably is the first step toward spotting more advanced skills, like pulling apart the pieces of a toy, opening containers, or putting things into them.</p> <figure class="lab-figure lab-figure-live cy-figure cb-figure" id="cb-figure"> <div class="cy-head"> <p class="cy-status" aria-live="polite">Ready</p> <p class="cy-clock" aria-hidden="true">0.0 s</p> </div> <svg class="cy-scene cb-scene" viewbox="0 0 600 250" role="img" aria-label="Two drawn infant hands, seen from above, reaching for a rattle."></svg> <div class="cy-controls cb-controls"> <button type="button" class="cy-start"></button> <div class="cb-keys" role="group" aria-label="Hold to code which hand is touching the rattle"> <button type="button" class="cy-hold cb-hold cb-left" data-code="L" disabled aria-pressed="false">Left</button> <button type="button" class="cy-hold cb-hold cb-both" data-code="B" disabled aria-pressed="false">Both</button> <button type="button" class="cy-hold cb-hold cb-right" data-code="R" disabled aria-pressed="false">Right</button> </div> <span class="cy-hint">or hold ← ↓ →</span> </div> <svg class="cy-timeline cb-timeline" viewbox="0 0 600 104" role="img" aria-label="Timeline of your coding compared with the trained coder's coding, colored by hand."></svg> <p class="cy-result" aria-live="polite"></p> <figcaption> <b>Fig. 3b.</b> Code which hand is touching the rattle. Hold <i>Left</i>, <i>Right</i> or <i>Both</i> while it happens (holding Left and Right together also counts as Both). The view is from above and behind the infant, so the infant's left hand is on the left. The clip is simulated. </figcaption> </figure> <script>
+  (function () {
+    var fig = document.getElementById("cb-figure");
+    if (!fig) return;
+    var scene = fig.querySelector(".cb-scene");
+    var tl = fig.querySelector(".cb-timeline");
+    var statusEl = fig.querySelector(".cy-status");
+    var clockEl = fig.querySelector(".cy-clock");
+    var startBtn = fig.querySelector(".cy-start");
+    var holdBtns = Array.prototype.slice.call(fig.querySelectorAll(".cb-hold"));
+    var resultEl = fig.querySelector(".cy-result");
+    var NS = "http://www.w3.org/2000/svg";
+
+    // ---------- The clip: each hand's progress toward the rattle (0 = resting, 1 = touching) ----------
+    var DUR = 15;
+    var RIGHT = [
+      [0, 0], [1.0, 0], [1.8, 1], [3.4, 1], [4.0, 0], [6.3, 0], [7.0, 1], [9.0, 1], [9.6, 0],
+      [10.0, 0], [10.4, 1], [10.7, 1], [11.0, 0], [12.6, 0], [13.1, 1], [14.0, 1], [14.6, 0], [DUR, 0],
+    ];
+    var LEFT = [
+      [0, 0], [2.0, 0], [2.5, 0.86], [2.9, 0.86], [3.3, 0], [3.8, 0], [4.5, 1], [5.8, 1], [6.3, 0.45], [6.8, 1],
+      [9.0, 1], [9.6, 0], [11.2, 0], [11.8, 1], [14.0, 1], [14.6, 0], [DUR, 0],
+    ];
+    function smooth(x) { return x * x * (3 - 2 * x); }
+    function track(keys, t) {
+      for (var i = 0; i < keys.length - 1; i++) {
+        var a = keys[i], b = keys[i + 1];
+        if (t <= b[0]) return a[1] + (b[1] - a[1]) * smooth((t - a[0]) / (b[0] - a[0] || 1));
+      }
+      return 0;
+    }
+    function codeAt(t) {
+      var l = track(LEFT, t) >= 0.999, r = track(RIGHT, t) >= 0.999;
+      return l && r ? "B" : l ? "L" : r ? "R" : "";
+    }
+
+    // ---------- Drawing ----------
+    function el(parent, name, attrs, text) {
+      var e = document.createElementNS(NS, name);
+      for (var k in attrs) e.setAttribute(k, attrs[k]);
+      if (text != null) e.textContent = text;
+      parent.appendChild(e);
+      return e;
+    }
+    function clear(svg) { while (svg.firstChild) svg.removeChild(svg.firstChild); }
+
+    var TOY = { x: 300, y: 62, r: 34 };
+    // Resting and touching positions of each fingertip (top of the hand).
+    var POS = {
+      L: { rest: [185, 142], touch: [TOY.x - TOY.r - 2, TOY.y + 14], shoulder: [150, 300] },
+      R: { rest: [415, 142], touch: [TOY.x + TOY.r + 2, TOY.y + 14], shoulder: [450, 300] },
+    };
+    function handAt(side, p) {
+      var a = POS[side].rest, b = POS[side].touch;
+      return [a[0] + (b[0] - a[0]) * p, a[1] + (b[1] - a[1]) * p];
+    }
+    function drawHand(side, p, t) {
+      var tip = handAt(side, p), sh = POS[side].shoulder;
+      var bob = p > 0.999 ? 0 : Math.sin(t * 3.7 + (side === "L" ? 0 : 1.7)) * 2;
+      var x = tip[0], y = tip[1] + bob;
+      // Direction from shoulder to fingertip, for orienting the hand.
+      var dx = x - sh[0], dy = y - sh[1], len = Math.sqrt(dx * dx + dy * dy);
+      var ux = dx / len, uy = dy / len;
+      var ang = (Math.atan2(uy, ux) * 180) / Math.PI + 90;
+      var wx = x - ux * 60, wy = y - uy * 60; // wrist
+      var arm = "M " + sh[0] + " " + sh[1] + " L " + wx + " " + wy;
+      el(scene, "path", { d: arm, class: "cy-arm-outline" });
+      el(scene, "path", { d: arm, class: "cy-arm" });
+      // Sleeve cuff with the side label.
+      var cx = wx + (sh[0] - wx) * 0.32, cy = wy + (sh[1] - wy) * 0.32;
+      var g = el(scene, "g", { transform: "translate(" + x + " " + y + ") rotate(" + ang + ")" });
+      // Hand drawn pointing up (negative y) in local coordinates, with the longest fingertip at 0.
+      [[-13, 22], [-5, 28], [3, 27], [11, 21]].forEach(function (f) {
+        el(g, "rect", { x: f[0] - 3.5, y: 28 - f[1], width: 7.5, height: f[1], rx: 3.75, class: "cy-finger" });
+      });
+      el(g, "rect", { x: -19, y: 22, width: 38, height: 40, rx: 13, class: "cy-palm" });
+      var thumbX = side === "L" ? 19 : -19;
+      el(g, "ellipse", {
+        cx: thumbX, cy: 42, rx: 6.5, ry: 12, transform: "rotate(" + (side === "L" ? 28 : -28) + " " + thumbX + " 42)", class: "cy-thumb",
+      });
+      el(scene, "circle", { cx: cx, cy: cy, r: 13, class: "cb-cuff cb-cuff-" + side });
+      el(scene, "text", { x: cx, y: cy + 4.5, class: "cb-cuff-label", "text-anchor": "middle" }, side);
+    }
+    function drawScene(t) {
+      clear(scene);
+      el(scene, "rect", { x: 0, y: 0, width: 600, height: 250, class: "cb-surface" });
+      var held = codeAt(t);
+      var wob = held ? Math.sin(t * 18) * (held === "B" ? 2 : 4) : 0;
+      var g = el(scene, "g", { transform: "rotate(" + wob + " " + TOY.x + " " + TOY.y + ")" });
+      el(g, "circle", { cx: TOY.x, cy: TOY.y, r: TOY.r, class: "cy-toy" });
+      el(g, "circle", { cx: TOY.x, cy: TOY.y, r: TOY.r - 13, class: "cb-toy-ring" });
+      [0, 60, 120].forEach(function (a) {
+        el(g, "line", {
+          x1: TOY.x, y1: TOY.y - TOY.r + 4, x2: TOY.x, y2: TOY.y + TOY.r - 4, class: "cb-toy-bead",
+          transform: "rotate(" + a + " " + TOY.x + " " + TOY.y + ")",
+        });
+      });
+      drawHand("L", track(LEFT, t), t);
+      drawHand("R", track(RIGHT, t), t);
+      var ly = narrow ? 38 : 20;
+      el(scene, "text", { x: narrow ? 108 : 12, y: ly, class: "cb-side" }, "infant's left");
+      el(scene, "text", { x: narrow ? 492 : 588, y: ly, class: "cb-side", "text-anchor": "end" }, "infant's right");
+    }
+
+    // ---------- Coding record and timeline ----------
+    var BIN = 0.1, NBINS = Math.round(DUR / BIN), CODES = ["L", "R", "B"];
+    var NAMES = { L: "Left", R: "Right", B: "Both" };
+    var truth = [];
+    for (var i = 0; i < NBINS; i++) truth.push(codeAt((i + 0.5) * BIN));
+    var heldTime, binTime;
+    function resetRecord() {
+      heldTime = [];
+      binTime = new Array(NBINS).fill(0);
+      for (var i = 0; i < NBINS; i++) heldTime.push({ L: 0, R: 0, B: 0 });
+    }
+    // A bin gets whichever code was held for most of it, if any code was held for over half of it.
+    function userCode() {
+      return binTime.map(function (bt, i) {
+        if (!bt) return "";
+        var best = "", most = 0;
+        CODES.forEach(function (c) { if (heldTime[i][c] > most) { most = heldTime[i][c]; best = c; } });
+        return most / bt > 0.5 ? best : "";
+      });
+    }
+
+    var TL_W = 600, TL_L = 110, TL_R = 570, ROW_H = 18, narrow = false;
+    function measure() {
+      TL_W = Math.max(260, Math.round(tl.getBoundingClientRect().width || 600));
+      narrow = TL_W < 480;
+      TL_L = narrow ? 50 : 110;
+      TL_R = TL_W - (narrow ? 14 : 30);
+      tl.setAttribute("viewBox", "0 0 " + TL_W + " 104");
+      scene.setAttribute("viewBox", narrow ? "100 20 400 230" : "0 0 600 250");
+    }
+    var bx = function (i) { return TL_L + (i / NBINS) * (TL_R - TL_L); };
+    function runs(code) {
+      var out = [], s = 0;
+      for (var i = 1; i <= code.length; i++) {
+        if (i === code.length || code[i] !== code[s]) {
+          if (code[s]) out.push([s, i, code[s]]);
+          s = i;
+        }
+      }
+      return out;
+    }
+    function drawRow(y, label, code, upTo) {
+      el(tl, "text", { x: 0, y: y + 13, class: "cy-row-label" }, label);
+      el(tl, "rect", { x: TL_L, y: y, width: TL_R - TL_L, height: ROW_H, class: "cy-row-bg" });
+      runs(code.slice(0, upTo)).forEach(function (r) {
+        el(tl, "rect", { x: bx(r[0]), y: y, width: bx(r[1]) - bx(r[0]), height: ROW_H, class: "cb-bar cb-bar-" + r[2] });
+      });
+    }
+    function drawTimeline(t, reveal) {
+      clear(tl);
+      // Legend.
+      var lx = TL_L;
+      CODES.forEach(function (c) {
+        el(tl, "rect", { x: lx, y: 2, width: 12, height: 12, class: "cb-bar cb-bar-" + c });
+        el(tl, "text", { x: lx + 17, y: 12, class: "cy-tick" }, NAMES[c]);
+        lx += narrow ? 62 : 74;
+      });
+      var upTo = Math.min(NBINS, Math.ceil(t / BIN));
+      drawRow(24, "You", userCode(), upTo);
+      drawRow(50, narrow ? "Coder" : "Trained coder", truth, reveal ? NBINS : 0);
+      if (!reveal) el(tl, "text", { x: TL_L + 8, y: 63, class: "cy-row-note" }, narrow ? "shown at the end" : "revealed when the clip ends");
+      var step = narrow ? 5 : 3;
+      for (var s = 0; s <= DUR; s += step) {
+        el(tl, "line", { x1: bx(s / BIN), y1: 76, x2: bx(s / BIN), y2: 81, class: "cy-axis" });
+        el(tl, "text", { x: bx(s / BIN), y: 96, class: "cy-tick", "text-anchor": "middle" }, s + " s");
+      }
+      el(tl, "line", { x1: TL_L, y1: 76, x2: TL_R, y2: 76, class: "cy-axis" });
+      if (t > 0 && t < DUR) el(tl, "line", { x1: bx(t / BIN), y1: 20, x2: bx(t / BIN), y2: 76, class: "cy-cursor" });
+    }
+
+    // ---------- Scoring: agreement, Cohen's kappa across categories, per-category agreement ----------
+    function score(code) {
+      var n = NBINS, agree = 0, pe = 0, cats = ["", "L", "R", "B"];
+      for (var i = 0; i < n; i++) if (code[i] === truth[i]) agree++;
+      cats.forEach(function (c) {
+        var a = 0, b = 0;
+        for (var i = 0; i < n; i++) { if (code[i] === c) a++; if (truth[i] === c) b++; }
+        pe += (a / n) * (b / n);
+      });
+      var po = agree / n;
+      var per = {};
+      CODES.forEach(function (c) {
+        var tot = 0, hit = 0;
+        for (var i = 0; i < n; i++) if (truth[i] === c) { tot++; if (code[i] === c) hit++; }
+        per[c] = tot ? hit / tot : 1;
+      });
+      return { po: po, kappa: pe >= 1 ? 1 : (po - pe) / (1 - pe), per: per };
+    }
+    function kappaWord(k) {
+      if (k < 0.2) return "slight";
+      if (k < 0.4) return "fair";
+      if (k < 0.6) return "moderate";
+      if (k < 0.8) return "substantial";
+      return "almost perfect";
+    }
+    function share(code, from, to, fn) {
+      var n = 0, hit = 0;
+      for (var i = Math.floor(from / BIN); i < Math.ceil(to / BIN); i++) { n++; if (fn(code[i])) hit++; }
+      return n ? hit / n : 0;
+    }
+    function tricky(code) {
+      var notes = [];
+      // Near miss: left hand hovers by the rattle (2.5-2.9 s) while only the right hand holds it.
+      notes.push(share(code, 2.5, 2.9, function (c) { return c === "L" || c === "B"; }) > 0.5
+        ? "At 2.5 s the left hand only hovered next to the rattle, so that moment is still Right."
+        : "You weren't fooled by the left hand hovering next to the rattle at 2.5 s.");
+      // Brief right tap at 10.4-10.7 s.
+      notes.push(share(code, 10.4, 10.7, function (c) { return c === "R"; }) >= 0.5
+        ? "You caught the quick right-hand tap at 10.5 s."
+        : "You missed the quick right-hand tap at 10.5 s.");
+      // Switch from Left to Both when the right hand joins at 13.1 s.
+      notes.push(share(code, 13.2, 14.0, function (c) { return c === "B"; }) >= 0.6
+        ? "You switched to Both when the right hand joined at 13.1 s."
+        : "At 13.1 s the right hand joins, so Left becomes Both.");
+      return notes.join(" ");
+    }
+
+    // ---------- Input: which buttons or keys are held ----------
+    var held = { L: false, R: false, B: false };
+    var KEYS = { ArrowLeft: "L", a: "L", A: "L", ArrowRight: "R", d: "R", D: "R", ArrowDown: "B", s: "B", S: "B", " ": "B" };
+    function currentCode() {
+      if (state !== "coding") return "";
+      if (held.B || (held.L && held.R)) return "B";
+      return held.L ? "L" : held.R ? "R" : "";
+    }
+    function refreshButtons() {
+      var c = currentCode();
+      holdBtns.forEach(function (b) {
+        var on = b.dataset.code === c || (c === "B" && held[b.dataset.code]);
+        b.classList.toggle("is-down", on);
+        b.setAttribute("aria-pressed", on ? "true" : "false");
+      });
+    }
+    function setHeld(code, on) {
+      held[code] = on;
+      refreshButtons();
+    }
+    function releaseAll() {
+      held.L = held.R = held.B = false;
+      refreshButtons();
+    }
+
+    // ---------- Flow ----------
+    var state = "ready", raf = null, t0 = 0, last = 0;
+    var RETRY_ICON =
+      '<svg viewBox="0 0 16 16" aria-hidden="true" class="mt-icon-stroke"><path d="M13.2 8.6A5.3 5.3 0 1 1 11.6 4"/><path d="M12.4 1.6v3.2H9.2"/></svg>';
+    var PLAY_ICON = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 2.8v10.4L13 8z"/></svg>';
+
+    function tick(now) {
+      if (state === "countdown") {
+        var left = 3 - Math.floor((now - t0) / 600);
+        if (left <= 0) {
+          state = "coding";
+          t0 = last = now;
+          statusEl.textContent = "Coding: which hand?";
+          refreshButtons();
+        } else {
+          statusEl.textContent = "Starting in " + left + "…";
+        }
+        raf = requestAnimationFrame(tick);
+        return;
+      }
+      var t = Math.min(DUR, (now - t0) / 1000);
+      var dt = (now - last) / 1000;
+      last = now;
+      var b = Math.min(NBINS - 1, Math.floor(t / BIN));
+      binTime[b] += dt;
+      var c = currentCode();
+      if (c) heldTime[b][c] += dt;
+      drawScene(t);
+      drawTimeline(t, false);
+      clockEl.textContent = t.toFixed(1) + " s";
+      if (t >= DUR) return finish();
+      raf = requestAnimationFrame(tick);
+    }
+
+    function start() {
+      resetRecord();
+      releaseAll();
+      resultEl.textContent = "";
+      state = "countdown";
+      t0 = performance.now();
+      holdBtns.forEach(function (b) { b.disabled = false; });
+      startBtn.disabled = true;
+      drawScene(0);
+      drawTimeline(0, false);
+      raf = requestAnimationFrame(tick);
+    }
+
+    function finish() {
+      state = "done";
+      releaseAll();
+      holdBtns.forEach(function (b) { b.disabled = true; });
+      startBtn.disabled = false;
+      startBtn.innerHTML = RETRY_ICON + "<span>Try again</span>";
+      statusEl.textContent = "Done";
+      drawTimeline(DUR, true);
+      var code = userCode(), s = score(code);
+      resultEl.innerHTML =
+        "<b>" + Math.round(s.po * 100) + "% agreement</b>, <b>Cohen’s κ = " + s.kappa.toFixed(2) + "</b> (" + kappaWord(s.kappa) + "). " +
+        "By category: Left " + Math.round(s.per.L * 100) + "%, Right " + Math.round(s.per.R * 100) + "%, Both " +
+        Math.round(s.per.B * 100) + "% of the coder's time matched. " + tricky(code);
+      startBtn.focus();
+    }
+
+    holdBtns.forEach(function (b) {
+      var code = b.dataset.code;
+      b.addEventListener("pointerdown", function (e) { e.preventDefault(); setHeld(code, true); });
+      ["pointerup", "pointerleave", "pointercancel"].forEach(function (ev) {
+        b.addEventListener(ev, function () { setHeld(code, false); });
+      });
+      b.addEventListener("contextmenu", function (e) { e.preventDefault(); });
+    });
+    document.addEventListener("keydown", function (e) {
+      if ((state !== "coding" && state !== "countdown") || !(e.key in KEYS)) return;
+      e.preventDefault();
+      if (!e.repeat) setHeld(KEYS[e.key], true);
+    });
+    document.addEventListener("keyup", function (e) {
+      if (e.key in KEYS) setHeld(KEYS[e.key], false);
+    });
+    window.addEventListener("blur", releaseAll);
+    window.addEventListener("resize", function () {
+      measure();
+      if (state === "done") drawTimeline(DUR, true);
+      else if (state !== "coding") drawTimeline(0, false);
+    });
+
+    measure();
+    startBtn.addEventListener("click", start);
+    startBtn.innerHTML = PLAY_ICON + "<span>Start</span>";
+    resetRecord();
+    drawScene(0);
+    drawTimeline(0, false);
+  })();
+</script> <h2 id="video-or-wearable-sensors">Video or wearable sensors?</h2> <p>Video coding is detailed but slow: someone has to watch every second. Wearable sensors (IMUs), worn on the wrists and ankles like bracelets, record movement automatically, but their continuous signal has to be turned into “moving” and “not moving” with a threshold. Part of our work compares the two. Try picking a threshold:</p> <figure class="lab-figure lab-figure-live cy-figure iv-figure" id="iv-figure"> <div class="iv-panels"> <svg class="iv-scene" viewbox="0 0 200 200" role="img" aria-label="A drawn infant lying on their back, seen from above, moving one arm while wearing a sensor bracelet on the wrist."></svg> <svg class="iv-chart" viewbox="0 0 600 236" role="img" aria-label="Timelines of the video coder's movement bouts, the wrist sensor's acceleration with a threshold line, and the movement bouts the sensor detects above that threshold."></svg> </div> <div class="iv-controls"> <button type="button" class="mt-play iv-play"></button> <label class="iv-thr" for="iv-threshold"> <span class="fn-label">sensor threshold</span> <input type="range" id="iv-threshold" min="0.02" max="0.4" step="0.005" value="0.15"> <output class="iv-thr-val" for="iv-threshold">0.150 g</output> </label> </div> <p class="iv-result" aria-live="polite"></p> <figcaption> <b>Fig. 3c.</b> One movement, two ways of measuring it. The video coder marks when the infant's arm is moving; the wrist sensor (IMU) records acceleration continuously, but needs a threshold to decide what counts as movement. Drag the threshold to see how well the sensor agrees with video coding. Simulated data. </figcaption> </figure> <script>
+  (function () {
+    var fig = document.getElementById("iv-figure");
+    if (!fig) return;
+    var scene = fig.querySelector(".iv-scene");
+    var chart = fig.querySelector(".iv-chart");
+    var btn = fig.querySelector(".iv-play");
+    var thrInput = fig.querySelector("#iv-threshold");
+    var thrOut = fig.querySelector(".iv-thr-val");
+    var result = fig.querySelector(".iv-result");
+    var NS = "http://www.w3.org/2000/svg";
+    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    // ---------- Simulated recording ----------
+    var DUR = 12, FS = 50, N = DUR * FS;
+    var BOUTS = [
+      { s: 1.0, e: 2.6, amp: 1.0, f: 2.2 },
+      { s: 3.9, e: 4.8, amp: 0.2, f: 1.8 }, // small, subtle movement
+      { s: 6.0, e: 8.2, amp: 0.85, f: 1.8 },
+      { s: 9.4, e: 10.2, amp: 0.55, f: 2.6 },
+    ];
+    var BUMP = 11.2; // the sensor gets bumped; the arm doesn't move
+    function smooth(x) { x = Math.max(0, Math.min(1, x)); return x * x * (3 - 2 * x); }
+    function angle(t) {
+      var a = 0.45;
+      BOUTS.forEach(function (b) {
+        if (t < b.s || t > b.e) return;
+        var env = smooth(Math.min((t - b.s) / 0.25, (b.e - t) / 0.25));
+        a += 0.9 * b.amp * env * Math.sin(2 * Math.PI * b.f * (t - b.s));
+      });
+      return a;
+    }
+    var SH = [128, 92], ARM = 58;
+    function wrist(t) { var a = angle(t); return [SH[0] + ARM * Math.cos(a), SH[1] + ARM * Math.sin(a)]; }
+    var seed = 11;
+    function rand() { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; }
+    function gauss() { return Math.sqrt(-2 * Math.log(rand() + 1e-9)) * Math.cos(2 * Math.PI * rand()); }
+
+    var acc = [], dt = 1 / FS, maxA = 0;
+    for (var i = 0; i < N; i++) {
+      var t = i * dt, p0 = wrist(t - dt), p1 = wrist(t), p2 = wrist(t + dt);
+      var ax = (p2[0] - 2 * p1[0] + p0[0]) / (dt * dt), ay = (p2[1] - 2 * p1[1] + p0[1]) / (dt * dt);
+      acc.push(Math.sqrt(ax * ax + ay * ay));
+      maxA = Math.max(maxA, acc[i]);
+    }
+    acc = acc.map(function (v, i) {
+      var t = i * dt, bump = t > BUMP ? 0.9 * Math.exp(-(t - BUMP) / 0.05) : 0;
+      return Math.max(0, (v / maxA) * 1.0 + 0.035 * Math.abs(gauss()) + bump);
+    });
+    // Smoothed signal (0.2 s moving average) is what the threshold is applied to.
+    var sm = acc.map(function (_, i) {
+      var s = 0, n = 0;
+      for (var k = -5; k <= 5; k++) { var j = i + k; if (j >= 0 && j < N) { s += acc[j]; n++; } }
+      return s / n;
+    });
+
+    var BIN = 0.1, NB = Math.round(DUR / BIN);
+    var truth = [];
+    for (var b = 0; b < NB; b++) {
+      var c = (b + 0.5) * BIN;
+      truth.push(BOUTS.some(function (x) { return c >= x.s && c <= x.e; }));
+    }
+    function detect(thr) {
+      var out = [];
+      for (var b = 0; b < NB; b++) {
+        var on = 0;
+        for (var k = 0; k < BIN * FS; k++) if (sm[Math.round(b * BIN * FS) + k] > thr) on++;
+        out.push(on / (BIN * FS) > 0.5);
+      }
+      // Bridge gaps shorter than 0.3 s between detected bouts.
+      for (var i = 1; i < NB - 1; i++) {
+        if (!out[i]) {
+          for (var g = 1; g <= 3 && i + g < NB; g++) {
+            if (out[i - 1] && out[i + g]) { for (var q = i; q < i + g; q++) out[q] = true; break; }
+          }
+        }
+      }
+      // Ignore "bouts" shorter than 0.4 s (brief spikes such as a bump to the sensor).
+      for (var i = 0; i < NB; ) {
+        if (!out[i]) { i++; continue; }
+        var j = i;
+        while (j < NB && out[j]) j++;
+        if ((j - i) * BIN < 0.4) for (var q = i; q < j; q++) out[q] = false;
+        i = j;
+      }
+      return out;
+    }
+    function score(code) {
+      var agree = 0, yu = 0, yt = 0;
+      for (var i = 0; i < NB; i++) { if (code[i] === truth[i]) agree++; if (code[i]) yu++; if (truth[i]) yt++; }
+      var po = agree / NB, pe = (yu / NB) * (yt / NB) + (1 - yu / NB) * (1 - yt / NB);
+      return { po: po, kappa: pe >= 1 ? 1 : (po - pe) / (1 - pe) };
+    }
+    function anyIn(code, a, b) { for (var i = Math.floor(a / BIN); i < Math.ceil(b / BIN); i++) if (code[i]) return true; return false; }
+
+    // ---------- Drawing ----------
+    function el(parent, name, attrs, text) {
+      var e = document.createElementNS(NS, name);
+      for (var k in attrs) e.setAttribute(k, attrs[k]);
+      if (text != null) e.textContent = text;
+      parent.appendChild(e);
+      return e;
+    }
+    function clear(svg) { while (svg.firstChild) svg.removeChild(svg.firstChild); }
+
+    function drawScene(t) {
+      clear(scene);
+      el(scene, "rect", { x: 0, y: 0, width: 200, height: 200, class: "iv-mat" });
+      // Legs, body, head (infant lying on their back, head at the top).
+      el(scene, "path", { d: "M 88 150 Q 70 170 66 192 M 112 150 Q 130 170 134 192", class: "iv-limb-outline" });
+      el(scene, "path", { d: "M 88 150 Q 70 170 66 192 M 112 150 Q 130 170 134 192", class: "iv-limb" });
+      el(scene, "path", { d: "M 72 92 L 40 128", class: "iv-limb-outline" });
+      el(scene, "path", { d: "M 72 92 L 40 128", class: "iv-limb" });
+      el(scene, "circle", { cx: 38, cy: 131, r: 7, class: "iv-skin" });
+      var w = wrist(t);
+      el(scene, "path", { d: "M " + SH[0] + " " + SH[1] + " L " + w[0] + " " + w[1], class: "iv-limb-outline" });
+      el(scene, "path", { d: "M " + SH[0] + " " + SH[1] + " L " + w[0] + " " + w[1], class: "iv-limb" });
+      el(scene, "rect", { x: 70, y: 80, width: 60, height: 80, rx: 26, class: "iv-skin" });
+      el(scene, "circle", { cx: 100, cy: 52, r: 27, class: "iv-skin" });
+      // Wrist sensor bracelet and hand.
+      var a = angle(t), bx = SH[0] + (ARM - 8) * Math.cos(a), by = SH[1] + (ARM - 8) * Math.sin(a);
+      el(scene, "rect", { x: bx - 7, y: by - 5, width: 14, height: 10, rx: 3, class: "iv-sensor", transform: "rotate(" + (a * 180) / Math.PI + " " + bx + " " + by + ")" });
+      el(scene, "circle", { cx: w[0], cy: w[1], r: 7, class: "iv-skin" });
+      el(scene, "text", { x: 6, y: 16, class: "iv-tiny" }, "IMU on wrist");
+    }
+
+    var L = 104, R = 588, X = function (s) { return L + (s / DUR) * (R - L); };
+    var ROW = { video: 14, trace: [44, 150], imu: 160, axis: 192 };
+    var TY = function (v) { return ROW.trace[1] - (Math.min(v, 1.25) / 1.25) * (ROW.trace[1] - ROW.trace[0]); };
+    var thr = parseFloat(thrInput.value), detected = detect(thr);
+
+    function bars(code, y, cls) {
+      var s = -1;
+      for (var i = 0; i <= NB; i++) {
+        if (i < NB && code[i] && s < 0) s = i;
+        if ((i === NB || !code[i]) && s >= 0) {
+          el(chart, "rect", { x: X(s * BIN), y: y, width: X(i * BIN) - X(s * BIN), height: 16, class: cls });
+          s = -1;
+        }
+      }
+    }
+    function drawChart(t) {
+      clear(chart);
+      // Row labels
+      el(chart, "text", { x: 0, y: ROW.video + 12, class: "iv-label" }, "Video coding");
+      el(chart, "text", { x: 0, y: ROW.trace[0] + 12, class: "iv-label" }, "Wrist sensor");
+      el(chart, "text", { x: 0, y: ROW.trace[0] + 27, class: "iv-tiny" }, "acceleration (g)");
+      el(chart, "text", { x: 0, y: ROW.imu + 12, class: "iv-label" }, "Sensor says");
+      // Row backgrounds
+      [ROW.video, ROW.imu].forEach(function (y) { el(chart, "rect", { x: L, y: y, width: R - L, height: 16, class: "iv-row" }); });
+      bars(truth, ROW.video, "iv-bar-video");
+      bars(detected, ROW.imu, "iv-bar-imu");
+      // Trace
+      var pts = [];
+      for (var i = 0; i < N; i += 2) pts.push(X(i * dt).toFixed(1) + "," + TY(acc[i]).toFixed(1));
+      el(chart, "line", { x1: L, y1: ROW.trace[1], x2: R, y2: ROW.trace[1], class: "iv-axis" });
+      el(chart, "polyline", { points: pts.join(" "), class: "iv-trace" });
+      el(chart, "line", { x1: L, y1: TY(thr), x2: R, y2: TY(thr), class: "iv-threshold" });
+      el(chart, "text", { x: L - 4, y: TY(thr) + 3, class: "iv-tiny iv-thr-text", "text-anchor": "end" }, "threshold");
+      // Annotations for the two tricky moments
+      el(chart, "text", { x: X(4.35), y: ROW.trace[0] + 2, class: "iv-tiny", "text-anchor": "middle" }, "small movement");
+      el(chart, "text", { x: X(BUMP + 0.05), y: ROW.trace[0] + 2, class: "iv-tiny", "text-anchor": "middle" }, "sensor bump");
+      // Time axis
+      el(chart, "line", { x1: L, y1: ROW.axis, x2: R, y2: ROW.axis, class: "iv-axis" });
+      for (var s = 0; s <= DUR; s += 2) {
+        el(chart, "line", { x1: X(s), y1: ROW.axis, x2: X(s), y2: ROW.axis + 4, class: "iv-axis" });
+        el(chart, "text", { x: X(s), y: ROW.axis + 18, class: "iv-tiny", "text-anchor": "middle" }, s + " s");
+      }
+      if (t > 0 && t < DUR) el(chart, "line", { x1: X(t), y1: 8, x2: X(t), y2: ROW.axis, class: "iv-cursor" });
+    }
+    function updateResult() {
+      var sc = score(detected);
+      var missed = !anyIn(detected, 3.9, 4.8), bumped = anyIn(detected, BUMP - 0.05, BUMP + 0.45);
+      var note;
+      if (missed && bumped) note = "At this threshold the sensor misses the small movement at 4.3 s and also counts the bump at 11.2 s.";
+      else if (missed) note = "At this threshold the sensor misses the small movement at 4.3 s that the video coder saw.";
+      else if (bumped) note = "At this threshold the sensor also counts the bump at 11.2 s, which wasn't a movement.";
+      else note = "Good balance: the sensor catches the small movement at 4.3 s and ignores the bump at 11.2 s.";
+      result.innerHTML = "<b>" + Math.round(sc.po * 100) + "% agreement</b> with video coding, <b>κ = " + sc.kappa.toFixed(2) + "</b>. " + note;
+    }
+
+    // ---------- Playback: plays once, then Replay ----------
+    var ICONS = {
+      pause: '<svg viewBox="0 0 16 16" aria-hidden="true"><rect x="3.5" y="3" width="3" height="10"/><rect x="9.5" y="3" width="3" height="10"/></svg>',
+      play: '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 2.8v10.4L13 8z"/></svg>',
+      replay: '<svg viewBox="0 0 16 16" aria-hidden="true" class="mt-icon-stroke"><path d="M13.2 8.6A5.3 5.3 0 1 1 11.6 4"/><path d="M12.4 1.6v3.2H9.2"/></svg>',
+    };
+    var LABELS = { pause: "Pause", play: "Play", replay: "Replay" };
+    var action = "play", t = DUR, playing = false, raf = null, last = 0, started = false;
+    function setButton(a) {
+      action = a;
+      btn.innerHTML = ICONS[a] + "<span>" + LABELS[a] + "</span>";
+      btn.setAttribute("aria-label", LABELS[a] + " animation");
+    }
+    function render() { drawScene(t); drawChart(t); }
+    function loop(now) {
+      if (!last) last = now;
+      t = Math.min(DUR, t + (now - last) / 1000);
+      last = now;
+      render();
+      if (t >= DUR) { playing = false; raf = null; last = 0; setButton("replay"); return; }
+      raf = requestAnimationFrame(loop);
+    }
+    function play() {
+      if (t >= DUR) t = 0;
+      playing = true;
+      last = 0;
+      setButton("pause");
+      if (!raf) raf = requestAnimationFrame(loop);
+    }
+    function pause() {
+      playing = false;
+      if (raf) cancelAnimationFrame(raf);
+      raf = null;
+      last = 0;
+      setButton("play");
+    }
+    btn.addEventListener("click", function () { if (action === "pause") pause(); else play(); });
+    thrInput.addEventListener("input", function () {
+      thr = parseFloat(thrInput.value);
+      thrOut.textContent = thr.toFixed(3) + " g";
+      detected = detect(thr);
+      updateResult();
+      if (!playing) render();
+    });
+
+    // Initial state: the full recording drawn; play once when the figure scrolls into view.
+    updateResult();
+    render();
+    setButton("replay");
+    if (!reduce && "IntersectionObserver" in window) {
+      var io = new IntersectionObserver(function (entries) {
+        if (entries[0].isIntersecting && !started) { started = true; io.disconnect(); t = 0; play(); }
+      }, { threshold: 0.4 });
+      io.observe(fig);
+    }
+  })();
+</script> <h2 id="related-work">Related work</h2> <div class="publications"> <ol class="bibliography"> <li> <div class="row"> <div class="col col-sm-2 abbr"> <abbr class="badge rounded w-100" style="background-color:#0c0a3e"> <a href="https://www.aacpdm.org/" rel="external nofollow noopener" target="_blank">AACPDM</a> </abbr> </div> <div id="su2026deeplabcut" class="col-sm-8"> <div class="title">Feasibility of Using DeepLabCut for Markerless Motion Tracking During Infant Reaching</div> <div class="author"> <a href="https://sites.bu.edu/demrlab/people/" rel="external nofollow noopener" target="_blank">X. Su</a>, <a href="https://sites.bu.edu/demrlab/people/" rel="external nofollow noopener" target="_blank">M. Kelly</a>, <a href="https://sites.bu.edu/demrlab/people/" rel="external nofollow noopener" target="_blank">H. Kim</a>, <em>Evan Yarnall</em>, and <a href="https://sites.bu.edu/demrlab/people/" rel="external nofollow noopener" target="_blank">C. L. Ferre</a> </div> <div class="periodical"> <em>In American Academy for Cerebral Palsy and Developmental Medicine (AACPDM) 80th Annual Meeting</em>, Sep 2026 </div> <div class="periodical"> Scientific poster SP167 </div> <p class="plain-summary"> <span class="plain-summary-label">In plain words:</span> Can free video-tracking software (DeepLabCut) follow babies’ arms as they reach for toys, with no markers or sensors on the body? This poster tested whether the approach is practical for infant studies. </p> <div class="links"> <a class="bibtex btn btn-sm z-depth-0" role="button">Bib</a> </div> <div class="bibtex hidden"> <figure class="highlight"><pre><code class="language-bibtex" data-lang="bibtex"><span class="nc">@inproceedings</span><span class="p">{</span><span class="nl">su2026deeplabcut</span><span class="p">,</span>
+  <span class="na">title</span> <span class="p">=</span> <span class="s">{Feasibility of Using DeepLabCut for Markerless Motion Tracking During Infant Reaching}</span><span class="p">,</span>
+  <span class="na">author</span> <span class="p">=</span> <span class="s">{Su, X. and Kelly, M. and Kim, H. and Yarnall, Evan and Ferre, C. L.}</span><span class="p">,</span>
+  <span class="na">booktitle</span> <span class="p">=</span> <span class="s">{American Academy for Cerebral Palsy and Developmental Medicine (AACPDM) 80th Annual Meeting}</span><span class="p">,</span>
+  <span class="na">address</span> <span class="p">=</span> <span class="s">{Philadelphia, PA}</span><span class="p">,</span>
+  <span class="na">year</span> <span class="p">=</span> <span class="s">{2026}</span><span class="p">,</span>
+  <span class="na">month</span> <span class="p">=</span> <span class="nv">sep</span><span class="p">,</span>
+  <span class="na">note</span> <span class="p">=</span> <span class="s">{Scientific poster SP167}</span>
+<span class="p">}</span></code></pre></figure> </div> </div> </div> </li> <li> <div class="row"> <div class="col col-sm-2 abbr"> <abbr class="badge rounded w-100" style="background-color:#0c0a3e"> <a href="https://www.aacpdm.org/" rel="external nofollow noopener" target="_blank">AACPDM</a> </abbr> </div> <div id="su2025imu" class="col-sm-8"> <div class="title">Comparison of Spontaneous Movement Measurements Using Video Observation and Inertial Measurement Units (IMUs) in Typically Developing Infants and Infants at Risk for Cerebral Palsy</div> <div class="author"> <a href="https://sites.bu.edu/demrlab/people/" rel="external nofollow noopener" target="_blank">X. Su</a>, <em>Evan Yarnall</em>, <a href="https://sites.bu.edu/demrlab/people/" rel="external nofollow noopener" target="_blank">M. Kelly</a>, <a href="https://sites.bu.edu/demrlab/people/" rel="external nofollow noopener" target="_blank">H. Kim</a>, and <a href="https://sites.bu.edu/demrlab/people/" rel="external nofollow noopener" target="_blank">C. L. Ferre</a> </div> <div class="periodical"> <em>In American Academy for Cerebral Palsy and Developmental Medicine (AACPDM) 79th Annual Meeting</em>, Oct 2025 </div> <div class="periodical"> Free paper Q2 </div> <p class="plain-summary"> <span class="plain-summary-label">In plain words:</span> Two ways to measure babies’ spontaneous movements, compared side by side: trained observers coding video, and small wearable motion sensors. The study included babies developing typically and babies at risk for cerebral palsy. The wearable sensors captured spontaneous movement acceptably well compared with video coding. </p> <div class="links"> <a class="bibtex btn btn-sm z-depth-0" role="button">Bib</a> </div> <div class="bibtex hidden"> <figure class="highlight"><pre><code class="language-bibtex" data-lang="bibtex"><span class="nc">@inproceedings</span><span class="p">{</span><span class="nl">su2025imu</span><span class="p">,</span>
+  <span class="na">title</span> <span class="p">=</span> <span class="s">{Comparison of Spontaneous Movement Measurements Using Video Observation and Inertial Measurement Units (IMUs) in Typically Developing Infants and Infants at Risk for Cerebral Palsy}</span><span class="p">,</span>
+  <span class="na">author</span> <span class="p">=</span> <span class="s">{Su, X. and Yarnall, Evan and Kelly, M. and Kim, H. and Ferre, C. L.}</span><span class="p">,</span>
+  <span class="na">booktitle</span> <span class="p">=</span> <span class="s">{American Academy for Cerebral Palsy and Developmental Medicine (AACPDM) 79th Annual Meeting}</span><span class="p">,</span>
+  <span class="na">address</span> <span class="p">=</span> <span class="s">{New Orleans, LA}</span><span class="p">,</span>
+  <span class="na">year</span> <span class="p">=</span> <span class="s">{2025}</span><span class="p">,</span>
+  <span class="na">month</span> <span class="p">=</span> <span class="nv">oct</span><span class="p">,</span>
+  <span class="na">note</span> <span class="p">=</span> <span class="s">{Free paper Q2}</span>
+<span class="p">}</span></code></pre></figure> </div> </div> </div> </li> <li> <div class="row"> <div class="col col-sm-2 abbr"> <abbr class="badge rounded w-100" style="background-color:#0c0a3e"> <a href="https://www.aacpdm.org/" rel="external nofollow noopener" target="_blank">AACPDM</a> </abbr> </div> <div id="su2024dynamics" class="col-sm-8"> <div class="title">Exploring the Dynamics of Spontaneous Infant Movement: A Longitudinal Study of Movement Patterns and Cortical Activity</div> <div class="author"> <a href="https://sites.bu.edu/demrlab/people/" rel="external nofollow noopener" target="_blank">X. Su</a>, <a href="https://sites.bu.edu/demrlab/people/" rel="external nofollow noopener" target="_blank">M. Kelly</a>, <a href="https://sites.bu.edu/demrlab/people/" rel="external nofollow noopener" target="_blank">H. Kim</a>, <em>Evan Yarnall</em>, and <a href="https://sites.bu.edu/demrlab/people/" rel="external nofollow noopener" target="_blank">C. L. Ferre</a> </div> <div class="periodical"> <em>In American Academy for Cerebral Palsy and Developmental Medicine (AACPDM) 78th Annual Meeting</em>, Oct 2024 </div> <div class="periodical"> Scientific poster SP169 </div> <p class="plain-summary"> <span class="plain-summary-label">In plain words:</span> In their first months, babies wave their arms and kick on their own. This study followed babies over time to see how those movement patterns change and how they relate to brain activity. </p> <div class="links"> <a class="bibtex btn btn-sm z-depth-0" role="button">Bib</a> </div> <div class="bibtex hidden"> <figure class="highlight"><pre><code class="language-bibtex" data-lang="bibtex"><span class="nc">@inproceedings</span><span class="p">{</span><span class="nl">su2024dynamics</span><span class="p">,</span>
+  <span class="na">title</span> <span class="p">=</span> <span class="s">{Exploring the Dynamics of Spontaneous Infant Movement: A Longitudinal Study of Movement Patterns and Cortical Activity}</span><span class="p">,</span>
+  <span class="na">author</span> <span class="p">=</span> <span class="s">{Su, X. and Kelly, M. and Kim, H. and Yarnall, Evan and Ferre, C. L.}</span><span class="p">,</span>
+  <span class="na">booktitle</span> <span class="p">=</span> <span class="s">{American Academy for Cerebral Palsy and Developmental Medicine (AACPDM) 78th Annual Meeting}</span><span class="p">,</span>
+  <span class="na">address</span> <span class="p">=</span> <span class="s">{Quebec City, Canada}</span><span class="p">,</span>
+  <span class="na">year</span> <span class="p">=</span> <span class="s">{2024}</span><span class="p">,</span>
+  <span class="na">month</span> <span class="p">=</span> <span class="nv">oct</span><span class="p">,</span>
+  <span class="na">note</span> <span class="p">=</span> <span class="s">{Scientific poster SP169}</span>
+<span class="p">}</span></code></pre></figure> </div> </div> </div> </li> </ol> </div> </article> </div> </div> <footer class="sticky-bottom mt-5" role="contentinfo"> <div class="container"> © Copyright 2026 Evan Yarnall. Built with <a href="https://github.com/alshedivat/al-folio" rel="external nofollow noopener" target="_blank">al-folio</a>. </div> </footer> <script>
+  window.alFolio = {
+    compatBootstrap: false
+  };
+</script> <script src="/assets/js/nav-toggle.js?v=141bd79a73ebc0f0b6ea58e440ae79fc"></script> <script defer src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script> <script defer src="/assets/js/masonry.js?v=e49affc7bd2646f6acdad1dbe02c2359" type="text/javascript"></script> <script src="/assets/js/tooltips-setup.js?v=fe487e99db6c43751e6e7bdb2d6a0611"></script> <script src="/assets/js/no_defer.js?v=53b1b1a645525975c963ce8bf8bfefcf"></script> <script defer src="/assets/js/common.js?v=87baac90f765f2f3362dcf6aaf312a8a"></script> <script defer src="/assets/js/copy_code.js?v=c8a01c11a92744d44b093fc3bda915df" type="text/javascript"></script> <script defer src="/assets/js/jupyter_new_tab.js?v=896d254890d9b47f0281f63bfccf0dee"></script> <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script> <script defer src="/assets/al_img_tools/js/zoom.js"></script> <script src="https://cdn.jsdelivr.net/npm/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js" integrity="sha256-uMJJ3EoTyfRBoTbR+lrfu1uRQ87RZG8AR3cVNuQVeFg=" crossorigin="anonymous"></script> <script>
+    addBackToTop();
+  </script> <script type="module" src="/assets/al_search/js/search/ninja-keys.min.js"></script> <ninja-keys hidebreadcrumbs noautoloadmdicons placeholder="Type to start searching"></ninja-keys> <script src="/assets/al_search/js/search-setup.js"></script> <script>
+// get the ninja-keys element
+const ninja = document.querySelector('ninja-keys');
+
+// add the home and posts menu items
+ninja.data = [{
+    id: "nav-about",
+    title: "about",
+    section: "Navigation",
+    handler: () => {
+      window.location.href = "/";
+    },
+  },{id: "nav-research",
+          title: "Research",
+          description: "What I&#39;m working on now, in the DEMR Lab at Boston University.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/research/";
+          },
+        },{id: "nav-publications",
+          title: "Publications",
+          description: "Journal articles and conference presentations.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/publications/";
+          },
+        },{id: "nav-cv",
+          title: "CV",
+          description: "Curriculum vitae.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/cv/";
+          },
+        },{id: "news-gave-my-first-talk-bimanual-skills-during-infancy-at-aacpdm-2024-in-québec-city-presenting-on-dr-ferre-s-behalf-in-a-symposium-on-bimanual-skills-in-unilateral-cerebral-palsy-lab-news",
+          title: 'Gave my first talk, Bimanual Skills during Infancy, at AACPDM 2024 in Québec...',
+          description: "",
+          section: "News",},{id: "news-my-first-author-abstract-motor-experience-drives-brain-development-was-presented-as-a-talk-by-dr-ferre-at-aacpdm-2025-in-new-orleans-and-i-received-an-aacpdm-student-scholarship",
+          title: 'My first-author abstract, Motor Experience Drives Brain Development, was presented as a talk...',
+          description: "",
+          section: "News",},{id: "news-presented-two-first-author-posters-at-aacpdm-2026-in-philadelphia-one-on-how-bilateral-hand-use-develops-and-a-demonstration-of-our-moving-target-reaching-board-more-on-linkedin",
+          title: 'Presented two first-author posters at AACPDM 2026 in Philadelphia: one on how bilateral...',
+          description: "",
+          section: "News",},{id: "projects-sensorimotor-development-in-infants-at-risk-for-cp",
+          title: 'Sensorimotor development in infants at risk for CP',
+          description: "A longitudinal study following infants from 6 to 24 months. The focus of my dissertation.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/1_infant_sensorimotor/";
+            },},{id: "projects-reaching-in-unilateral-cp",
+          title: 'Reaching in unilateral CP',
+          description: "Brain, body and a new apparatus. Combining fNIRS with a custom moving-target reaching board.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/2_fnirs_tms_cp/";
+            },},{id: "projects-better-ways-to-measure-infant-movement",
+          title: 'Better ways to measure infant movement',
+          description: "Comparing video coding, wearable sensors and markerless tracking, plus the coding pipelines behind them.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/3_measuring_movement/";
+            },},{
+        id: 'social-email',
+        title: 'email',
+        section: 'Socials',
+        handler: () => {
+          window.open("mailto:%65%79%61%72%6E%61%6C%6C@%62%75.%65%64%75", "_blank");
+        },
+      },{
+        id: 'social-linkedin',
+        title: 'LinkedIn',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://www.linkedin.com/in/evanyarnall", "_blank");
+        },
+      },{
+        id: 'social-github',
+        title: 'GitHub',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://github.com/eyarnall", "_blank");
+        },
+      },{
+        id: 'social-orcid',
+        title: 'ORCID',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://orcid.org/0000-0001-9155-3070", "_blank");
+        },
+      },{
+        id: 'social-cv',
+        title: 'CV',
+        section: 'Socials',
+        handler: () => {
+          window.open("/assets/pdf/Yarnall_CV.pdf", "_blank");
+        },
+      },{
+      id: 'light-theme',
+      title: 'Change theme to light',
+      description: 'Change the theme of the site to Light',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("light");
+      },
+    },
+    {
+      id: 'dark-theme',
+      title: 'Change theme to dark',
+      description: 'Change the theme of the site to Dark',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("dark");
+      },
+    },
+    {
+      id: 'system-theme',
+      title: 'Use system default theme',
+      description: 'Change the theme of the site to System Default',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("system");
+      },
+    },];
+
+</script> <script src="/assets/al_search/js/shortcut-key.js"></script> <script defer src="/assets/al_email_protect/js/email-protect.js"></script> </body> </html>

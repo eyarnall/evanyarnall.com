@@ -1,0 +1,932 @@
+<!DOCTYPE html> <html lang="en"> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <title> Reaching in unilateral CP | Evan Yarnall </title> <meta name="author" content="Evan Yarnall"> <meta name="description" content="How children with unilateral cerebral palsy adjust a reach mid-movement, studied with fNIRS and a custom moving-target reaching board."> <meta name="keywords" content="Evan Yarnall, rehabilitation science, cerebral palsy, sensorimotor development, fNIRS, TMS, motor control, Boston University"> <meta property="og:site_name" content="Evan Yarnall"> <meta property="og:type" content="website"> <meta property="og:title" content="Evan Yarnall | Reaching in unilateral CP"> <meta property="og:url" content="https://evanyarnall.com/projects/2_fnirs_tms_cp/"> <meta property="og:description" content="How children with unilateral cerebral palsy adjust a reach mid-movement, studied with fNIRS and a custom moving-target reaching board."> <meta property="og:image" content="https://evanyarnall.com/assets/img/og-card.png"> <meta property="og:locale" content="en"> <meta name="twitter:card" content="summary"> <meta name="twitter:title" content="Reaching in unilateral CP | Evan Yarnall"> <meta name="twitter:description" content="How children with unilateral cerebral palsy adjust a reach mid-movement, studied with fNIRS and a custom moving-target reaching board."> <meta name="twitter:image" content="https://evanyarnall.com/assets/img/og-card.png"> <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://evanyarnall.com/#website",
+      "url": "https://evanyarnall.com/",
+      "name": "Evan Yarnall",
+      "description": "Evan Yarnall is a PhD candidate in Rehabilitation Science at Boston University studying sensorimotor development in children with and at risk for cerebral palsy, using fNIRS and TMS.",
+      "inLanguage": "en-US",
+      "publisher": {
+        "@id": "https://evanyarnall.com/#person"
+      },
+      "about": {
+        "@id": "https://evanyarnall.com/#person"
+      }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://evanyarnall.com/#person",
+      "name": "Evan Yarnall",
+      "givenName": "Evan",
+      "familyName": "Yarnall",
+      "url": "https://evanyarnall.com/",
+      "image": {
+        "@type": "ImageObject",
+        "url": "https://evanyarnall.com/assets/img/prof_pic.jpg",
+        "caption": "Evan Yarnall"
+      },
+      "jobTitle": "PhD Candidate, Rehabilitation Science",
+      "description": "Evan Yarnall is a PhD candidate in Rehabilitation Science at Boston University studying sensorimotor development in children with and at risk for cerebral palsy, using fNIRS and TMS.",
+      "affiliation": {
+        "@id": "https://evanyarnall.com/#demr-lab"
+      },
+      "memberOf": {
+        "@id": "https://evanyarnall.com/#demr-lab"
+      },
+      "colleague": {
+        "@id": "https://evanyarnall.com/#claudio-ferre"
+      },
+      "alumniOf": [
+        {
+          "@type": "CollegeOrUniversity",
+          "name": "Temple University"
+        }
+      ],
+      "knowsAbout": [
+        "Rehabilitation science",
+        "Cerebral palsy",
+        "Unilateral cerebral palsy",
+        "Sensorimotor development",
+        "Infant motor development",
+        "Bimanual coordination",
+        "Online motor control",
+        "Functional near-infrared spectroscopy (fNIRS)",
+        "Transcranial magnetic stimulation (TMS)",
+        "Behavioral video coding",
+        "Wearable motion sensors (IMUs)"
+      ],
+      "award": [
+        "Student Scholarship, American Academy for Cerebral Palsy and Developmental Medicine (2025)"
+      ],
+      "hasOccupation": {
+        "@type": "Occupation",
+        "name": "Graduate Researcher"
+      },
+      "hasCredential": [
+        {
+          "@type": "EducationalOccupationalCredential",
+          "credentialCategory": "degree",
+          "name": "BS, Kinesiology (Pre-Physical Therapy)",
+          "recognizedBy": {
+            "@type": "CollegeOrUniversity",
+            "name": "Temple University"
+          }
+        },
+        {
+          "@type": "EducationalOccupationalCredential",
+          "credentialCategory": "certificate",
+          "name": "RCR Foundations (Responsible Conduct of Research)",
+          "recognizedBy": {
+            "@type": "Organization",
+            "name": "CITI Program"
+          },
+          "dateCreated": "2024"
+        },
+        {
+          "@type": "EducationalOccupationalCredential",
+          "credentialCategory": "certificate",
+          "name": "Biomedical Research",
+          "recognizedBy": {
+            "@type": "Organization",
+            "name": "CITI Program"
+          },
+          "dateCreated": "2022"
+        },
+        {
+          "@type": "EducationalOccupationalCredential",
+          "credentialCategory": "certificate",
+          "name": "Good Clinical Practice (GCP)",
+          "recognizedBy": {
+            "@type": "Organization",
+            "name": "CITI Program"
+          },
+          "dateCreated": "2021"
+        }
+      ],
+      "sameAs": [
+        "https://www.linkedin.com/in/evanyarnall",
+        "https://github.com/eyarnall",
+        "https://orcid.org/0000-0001-9155-3070"
+      ]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://evanyarnall.com/#claudio-ferre",
+      "name": "Claudio L. Ferre",
+      "givenName": "Claudio",
+      "familyName": "Ferre",
+      "honorificSuffix": "PhD",
+      "jobTitle": "Assistant Professor of Occupational Therapy",
+      "description": "Director of the Development, Experience, & Motor Recovery (DEMR) Lab at Boston University, and Evan Yarnall's PhD advisor.",
+      "url": "https://www.bu.edu/sargent/profile/claudio-ferre/",
+      "sameAs": [
+        "https://orcid.org/0000-0002-4370-6965",
+        "https://www.bu.edu/neurophotonics/profile/claudio-ferre/",
+        "https://sites.bu.edu/demrlab/people/"
+      ],
+      "worksFor": {
+        "@id": "https://evanyarnall.com/#boston-university"
+      },
+      "affiliation": [
+        {
+          "@id": "https://evanyarnall.com/#bu-sargent"
+        },
+        {
+          "@id": "https://evanyarnall.com/#bu-neurophotonics"
+        }
+      ],
+      "memberOf": {
+        "@id": "https://evanyarnall.com/#demr-lab"
+      }
+    },
+    {
+      "@type": "ResearchOrganization",
+      "@id": "https://evanyarnall.com/#demr-lab",
+      "name": "Development, Experience, & Motor Recovery Lab",
+      "alternateName": "DEMR Lab",
+      "url": "https://sites.bu.edu/demrlab/",
+      "description": "Boston University research lab that studies motor skills in infants and children to develop new therapies for children with cerebral palsy.",
+      "email": "demrlab@bu.edu",
+      "telephone": "+1-617-353-7492",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "635 Commonwealth Ave",
+        "addressLocality": "Boston",
+        "addressRegion": "MA",
+        "postalCode": "02215",
+        "addressCountry": "US"
+      },
+      "sameAs": [
+        "https://www.instagram.com/demrlab/"
+      ],
+      "parentOrganization": {
+        "@id": "https://evanyarnall.com/#bu-sargent"
+      },
+      "member": [
+        {
+          "@id": "https://evanyarnall.com/#claudio-ferre"
+        },
+        {
+          "@id": "https://evanyarnall.com/#person"
+        }
+      ]
+    },
+    {
+      "@type": "CollegeOrUniversity",
+      "@id": "https://evanyarnall.com/#bu-sargent",
+      "name": "Boston University Sargent College of Health & Rehabilitation Sciences",
+      "url": "https://www.bu.edu/sargent/",
+      "parentOrganization": {
+        "@id": "https://evanyarnall.com/#boston-university"
+      }
+    },
+    {
+      "@type": "ResearchOrganization",
+      "@id": "https://evanyarnall.com/#bu-neurophotonics",
+      "name": "Boston University Neurophotonics Center",
+      "url": "https://www.bu.edu/neurophotonics/",
+      "parentOrganization": {
+        "@id": "https://evanyarnall.com/#boston-university"
+      }
+    },
+    {
+      "@type": "CollegeOrUniversity",
+      "@id": "https://evanyarnall.com/#boston-university",
+      "name": "Boston University",
+      "url": "https://www.bu.edu/",
+      "sameAs": [
+        "https://en.wikipedia.org/wiki/Boston_University"
+      ]
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://evanyarnall.com/projects/2_fnirs_tms_cp/#webpage",
+      "url": "https://evanyarnall.com/projects/2_fnirs_tms_cp/",
+      "name": "Reaching in unilateral CP | Evan Yarnall",
+      "description": "How children with unilateral cerebral palsy adjust a reach mid-movement, studied with fNIRS and a custom moving-target reaching board.",
+      "inLanguage": "en-US",
+      "isPartOf": {
+        "@id": "https://evanyarnall.com/#website"
+      },
+      "about": {
+        "@type": "ResearchProject",
+        "name": "Reaching in unilateral CP",
+        "description": "Brain, body and a new apparatus. Combining fNIRS with a custom moving-target reaching board.",
+        "parentOrganization": {
+          "@id": "https://evanyarnall.com/#demr-lab"
+        },
+        "member": [
+          {
+            "@id": "https://evanyarnall.com/#person"
+          },
+          {
+            "@id": "https://evanyarnall.com/#claudio-ferre"
+          }
+        ]
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://evanyarnall.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Research",
+            "item": "https://evanyarnall.com/research/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Reaching in unilateral CP",
+            "item": "https://evanyarnall.com/projects/2_fnirs_tms_cp/"
+          }
+        ]
+      }
+    }
+  ]
+}
+</script> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; font-src 'self' data: https:; media-src 'self' https:; frame-src 'self' https:; connect-src 'self' https:;"> <style>
+  :root {
+    --max-content-width: 930px;
+  }
+</style> <link rel="stylesheet" href="/assets/css/tailwind.css?v=50c64c15cbb9fd1ce6056fdb8bcb4b62"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css" integrity="sha256-MVopmdyC2tYTiJ8wlktf0uh0v4NgT+vNdyVFepi7Q0c=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.5/css/academicons.min.css" integrity="sha256-SzrCOBJbGVFMahewkgjwnApaV2+av1DwMAA+/QGLyZw=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/scholar-icons@1.0.3/css/scholar-icons.css" integrity="sha256-VY3hHVj/hNX3fYG6wtbA6TcKJQl7+FthzGSyIB64klY=" crossorigin="anonymous"> <link defer rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&amp;display=swap"> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-github.css?v=591dab5a4e56573bf4ef7fd332894c99" media="" id="highlight_theme_light"> <link rel="shortcut icon" href="/assets/img/favicon.svg?v=5832fb3cbf72736918a3dec3b5adc7f9"> <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png?v=046ac299995eae6216dee398c4146213"> <link rel="stylesheet" href="/assets/css/main.css?v=3116ba77db9ee1581d05bb3e86fbf7f1"> <link rel="canonical" href="https://evanyarnall.com/projects/2_fnirs_tms_cp/"> <script src="/assets/js/theme.js?v=5286c3e4c334d0ecb8fc0c40ff4fa7ec"></script> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-native.css?v=5847e5ed4a4568527aa6cfab446049ca" media="none" id="highlight_theme_dark"> <script>
+    initTheme();
+  </script> <link rel="stylesheet" href="/assets/al_email_protect/css/email-protect.css"> </head> <body class="fixed-top-nav sticky-bottom-footer"> <header> <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top" role="navigation"> <div class="container"> <a class="navbar-brand title font-weight-lighter" href="/"> <span class="font-weight-bold">Evan</span> Yarnall </a> <button class="navbar-toggler collapsed navbar-toggler-main" type="button" data-nav-toggle="navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar top-bar"></span> <span class="icon-bar middle-bar"></span> <span class="icon-bar bottom-bar"></span> </button> <div class="collapse navbar-collapse navbar-collapse-main" id="navbarNav"> <ul class="navbar-nav navbar-menu-list flex-nowrap"> <li class="nav-item "> <a class="nav-link" href="/">about </a> </li> <li class="nav-item "> <a class="nav-link" href="/research/">Research </a> </li> <li class="nav-item "> <a class="nav-link" href="/publications/">Publications </a> </li> <li class="nav-item "> <a class="nav-link" href="/cv/">CV </a> </li> <li class="nav-item"> <button id="search-toggle" type="button" title="Search" aria-label="Open search"> <span class="nav-link">ctrl k <i class="fa-solid fa-magnifying-glass"></i></span> </button> </li> <li class="toggle-container"> <button id="light-toggle" type="button" title="Change theme" aria-label="Change color theme"> <i class="fa-half-sun-moon" id="light-toggle-system"></i> <i class="fa-solid fa-moon" id="light-toggle-dark"></i> <i class="fa-solid fa-sun" id="light-toggle-light"></i> </button> </li> </ul> </div> </div> </nav> </header> <div class="container mt-5" role="main"> <div class="post"> <header class="post-header"> <h1 class="post-title">Reaching in unilateral CP</h1> <p class="post-description">Brain, body and a new apparatus. Combining fNIRS with a custom moving-target reaching board.</p> </header> <article> <p>Children with unilateral cerebral palsy often have difficulty integrating sensory feedback with movement in their affected arm. To understand why, I combine two non-invasive techniques during reaching tasks:</p> <ul> <li> <strong>TMS</strong> (transcranial magnetic stimulation) to assess corticospinal tract connectivity</li> <li> <strong>fNIRS</strong> (functional near-infrared spectroscopy) to measure sensory cortical responses</li> </ul> <h2 id="why-the-pathways-matter">Why the pathways matter</h2> <p>Each hemisphere of the brain starts out connected to both hands. As the brain matures, only the connections to the opposite hand remain. An early injury to one hemisphere, as in unilateral cerebral palsy, can change how these pathways develop, and TMS lets us see which ones are there. Switch between the stages below, then try a TMS pulse:</p> <figure class="lab-figure lab-figure-live cy-figure pw-figure" id="pw-figure"> <div class="pw-tabs" role="tablist" aria-label="Stage of development"> <button type="button" role="tab" data-stage="A">A. Immature</button> <button type="button" role="tab" data-stage="B">B. Typical development</button> <button type="button" role="tab" data-stage="C">C. Prenatal injury</button> </div> <svg class="pw-svg" viewbox="0 0 800 830" role="img" aria-labelledby="pw-title"> <title id="pw-title"> Diagram of corticospinal (motor) tracts from the two brain hemispheres, crossing below the brain, through the spinal cord, and out along nerves to the hands, in immature, typically developed and prenatally injured brains. </title> <image href="/assets/img/research/cst-development.png" x="0" y="0" width="2400" height="972"></image> </svg> <p class="pw-desc" aria-live="polite"></p> <div class="pw-tms"> <span class="fn-label">TMS</span> <button type="button" class="cy-hold pw-fire" data-side="L" aria-label="Stimulate left hemisphere">Left hemisphere</button> <button type="button" class="cy-hold pw-fire" data-side="R" aria-label="Stimulate right hemisphere">Right hemisphere</button> </div> <p class="pw-result" aria-live="polite"></p> <div class="pw-legend" aria-hidden="true"> <span><i class="pw-key pw-key-immature"></i>Immature motor tracts</span> <span><i class="pw-key pw-key-mature"></i>Mature motor tracts</span> <span><i class="pw-key pw-key-atypical"></i>Atypical ipsilateral motor tracts</span> </div> <figcaption> <b>Fig. 2a.</b> How the brain's motor pathways to the hands develop, and what a TMS pulse reveals about them. Diagram: DEMR Lab, Boston University. </figcaption> </figure> <script>
+  (function () {
+    var fig = document.getElementById("pw-figure");
+    if (!fig) return;
+    var svg = fig.querySelector(".pw-svg");
+    var desc = fig.querySelector(".pw-desc");
+    var result = fig.querySelector(".pw-result");
+    var tabs = Array.prototype.slice.call(fig.querySelectorAll("[data-stage]"));
+    var fires = Array.prototype.slice.call(fig.querySelectorAll(".pw-fire"));
+    var NS = "http://www.w3.org/2000/svg";
+    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    function el(parent, name, attrs, text) {
+      var e = document.createElementNS(NS, name);
+      for (var k in attrs) e.setAttribute(k, attrs[k]);
+      if (text != null) e.textContent = text;
+      parent.appendChild(e);
+      return e;
+    }
+    function pathD(pts) {
+      return pts.map(function (p, i) { return (i ? "L" : "M") + p[0] + " " + p[1]; }).join(" ");
+    }
+
+    // Traced from the diagram (image pixels). Tracts run from the motor cortex to a motor neuron in the spinal cord;
+    // nerves run from that motor neuron to the hand. Keys: L/R = hemisphere or side, c = crossed, i = uncrossed.
+    var PATHS = {
+      A: {
+        tracts: { Li: [[298,310],[297.5,322.5],[297.1,333.6],[297.6,348.2],[298.5,360.7],[298.4,374],[297,383.1],[294.7,397.8],[293.7,408],[292.5,418.7],[291.6,433.2],[290.8,443],[289.8,456.6],[289,469.3],[288,484],[286.7,494],[285,505.1],[283.6,518.9],[283,528.7],[281.3,542.3],[280,554.6],[278.7,570.3],[277,581],[275.7,591.7],[274,606.7],[272.3,617.4],[271,631],[268.3,643.8],[267.3,658.1],[268,669],[268,681.7],[269,694],[270.7,706],[270.2,716.2],[274.3,729.7],[286.8,736.6],[295.3,740.3],[306.8,746.5],[318,752]], Lc: [[312,315],[310.8,327.5],[308,342.2],[306.2,352.3],[305,362.8],[304.4,377.7],[305.3,390],[306.2,403.4],[307.2,413.4],[308.2,427],[309.3,438.8],[311.8,454.4],[312.8,464.2],[315.8,475.1],[319.6,489.6],[323.9,501.5],[328.6,514.9],[332.8,523.9],[340.9,535.5],[346.7,545],[354.2,552],[367.8,563],[376.3,569.6],[388.6,577.2],[399.3,582.9],[412.2,589.5],[421,594.5],[432.9,602.4],[442.8,610.5],[451.7,623],[458,633.3],[465.4,646.2],[466.2,657.8],[465.5,670.7],[466.3,682],[466.3,694.7],[465.3,708],[465.8,720.2],[462,734],[448,739.9],[438.2,742.3],[423.8,746],[418,748]], Rc: [[415,315],[417.8,327.5],[421.9,342.6],[424,352.1],[426.5,362.5],[429.5,377.7],[432.2,389.1],[433.4,402.9],[435.6,414.3],[437.4,427.9],[436.4,439.9],[434.3,450.4],[430.8,465.2],[428.2,476.6],[423.6,491.6],[418.2,501],[410.7,515.5],[405.1,524.7],[395.5,538.6],[387.6,545.8],[379.9,552.4],[367.8,562.7],[358.1,568.6],[345.6,575.7],[335.5,581.5],[326.8,588],[313.9,595.2],[304.6,600.6],[293.4,608.3],[285.4,615.9],[275.7,628],[271.7,638.8],[267.3,651.7],[268.3,663.9],[268.7,676],[268.2,688.2],[269.2,701.3],[269.6,714.8],[271.3,728.5],[279.1,735.7],[291.3,739.7],[300.5,743],[312.5,750],[318,752]], Ri: [[425,310],[426.9,322.5],[425.6,334],[428.3,349.1],[430,360.7],[432.7,374.5],[434.2,384.1],[436.7,397.5],[439.3,410],[441.8,423],[442.8,435.9],[442.3,446.4],[446.1,461],[447.7,471.7],[449.8,486.7],[451.1,498],[453,512.1],[454,521.7],[455.5,535.3],[456.8,547.3],[458,561.6],[459.2,572],[460.2,582],[461.2,597.4],[462.7,608.8],[463.7,622.9],[464.3,632.6],[466.2,646],[467.3,657.5],[466.5,669.5],[466.8,682],[466.3,694.7],[465.3,708],[465.8,720.2],[462,734],[448,739.9],[438.2,742.3],[423.8,746],[418,748]] },
+        nerves: { L: [[318,752],[307,759.8],[296.2,767.5],[284.2,774],[271.2,779],[258.2,783.3],[245.2,787.2],[231.7,786],[220,781],[209.8,772.6],[200.4,763.5],[190.7,755.3],[181.8,748.2],[173.2,740.8],[163.1,731.8],[153.4,723.2],[144.2,713.5],[135.9,703.4],[128.5,692.2],[123.8,680.6],[121,671.4],[117.3,658.9],[114,646.5],[112,633.5],[112,620.9],[112,610],[112,599.1],[112.9,586.5],[113.8,580]], R: [[418,748],[429,757.7],[439.3,765.8],[449.1,772.7],[461.4,777.6],[474.3,781.3],[487.5,784.8],[500.6,786.1],[510.9,779.4],[519.5,773.8],[528,765],[538,756.4],[547.1,748.3],[554.4,742],[563.5,733.2],[572.2,723.6],[580.4,714.1],[586.6,705.8],[593.4,696.4],[600.2,686.3],[606.5,674.1],[611,662.5],[614.8,649.1],[616.9,636.6],[617.9,623.7],[618,610.8],[617.2,597.8],[615.5,585.1],[614.7,580]] },
+      },
+      B: {
+        tracts: { Lc: [[1132,305],[1132.7,317.2],[1133.4,329.5],[1134,342],[1134.7,354],[1136,366],[1138,378],[1140,390],[1142,402],[1144,414],[1146.1,426],[1148.9,439.4],[1151.2,451.2],[1154,464.1],[1156.6,475.2],[1160.5,487.9],[1165.3,502.2],[1170.5,515.4],[1176.4,527.5],[1182.9,538.2],[1191,549.2],[1199.6,557.7],[1210.3,563.4],[1219.1,573.2],[1229.7,579.3],[1240.9,584.9],[1251.8,590.3],[1261.7,596.2],[1271.3,603.1],[1281,611.2],[1289,620.7],[1293.7,633.3],[1299,645.8],[1302.2,659.1],[1301.2,672.2],[1301.7,684],[1302.3,696.7],[1303.3,710],[1304.3,723.3],[1299,732.2],[1287,736.9],[1274.7,740.9],[1262,744.2],[1250,748]], Rc: [[1290,310],[1289.2,322.3],[1288.4,334.7],[1287.7,347],[1287,359],[1286.2,371.7],[1285,384],[1283.8,396],[1282,408],[1280,420],[1278,432],[1276,443.8],[1273.3,455.8],[1270.4,467.8],[1267.2,479.8],[1262.8,491.2],[1256.7,502.2],[1250,513.3],[1243.3,524.3],[1235.2,533.5],[1226.8,541.8],[1217.9,550.2],[1207,557],[1194.9,559.6],[1185.7,568.4],[1174.5,575.4],[1163.5,580.2],[1153.2,585],[1141.9,591.7],[1132.7,598.2],[1123.3,606.7],[1114.3,615.7],[1108,626.7],[1104,639.8],[1100,653],[1099,666],[1100.3,678],[1101.5,690.2],[1100.7,703.3],[1099.9,716.7],[1101.5,726.5],[1109.9,733.5],[1121,738],[1132.2,741.1],[1144.2,745.5],[1155,750]] },
+        nerves: { L: [[1155,750],[1143.8,755.5],[1132.5,761.7],[1121.9,767],[1110.2,772.6],[1099.1,777],[1086.8,780.8],[1073.4,783.3],[1059.1,781.4],[1046.4,773.9],[1036.9,764.4],[1027,756.1],[1017.8,747.8],[1008.8,738.8],[1000.3,729.8],[992.4,720.1],[984.1,710.5],[976,700.2],[969.8,690.8],[962.8,678.6],[957.7,666.4],[954.1,653.5],[951.8,640.9],[950,625.5],[950.2,611.4],[950.9,599.8],[950.7,586.7],[950,580]], R: [[1250,748],[1261.2,754],[1272.2,760],[1283.3,766],[1294.3,772],[1306,776],[1318.3,778.9],[1331,781.5],[1343.8,781.5],[1354,776.8],[1362.4,766.9],[1371.3,758.1],[1381,749.3],[1390,740],[1398.2,730.2],[1407.6,721.1],[1416.7,711.6],[1425.2,701.8],[1432.6,691.6],[1438.5,681.4],[1444,669.9],[1448.2,658.1],[1451.3,646.2],[1453.4,633.1],[1454.7,620],[1454.5,607.2],[1452.9,594.3],[1452,581.3],[1452,575]] },
+      },
+      C: {
+        tracts: { Rc: [[2090,312],[2089.3,324.4],[2088.7,336.9],[2087.8,349],[2087,361.3],[2086.3,374],[2085,386],[2083.7,398],[2082,410],[2080.3,422],[2079,433.8],[2076.1,445.3],[2073.1,458.5],[2070.1,470.8],[2066.1,483.1],[2061.8,494.3],[2055.3,505],[2048.3,515],[2040.2,524.2],[2031.8,533.6],[2022.7,542.5],[2011.6,551.1],[2001.2,557.8],[1990.2,563.7],[1978.3,569.5],[1966.6,574.5],[1955.5,579.9],[1944.2,586.2],[1933,593.7],[1923.6,602.2],[1915.3,613],[1908.7,625.3],[1904.4,639],[1901.7,653],[1902.8,667],[1904,681],[1905,694.3],[1905,707.2],[1906.5,719.2],[1917,726],[1928.7,732.3],[1940,738.1],[1952,745],[1958,748]], Ri: [[2045,290],[2047.5,302.5],[2050,315],[2052.5,327.5],[2056.3,339.9],[2059.3,352],[2062,366.1],[2063.6,375],[2066.1,388.7],[2067.7,401.6],[2070.5,415.9],[2071.6,427.3],[2075.2,442.6],[2075.8,453.5],[2076.4,462.4],[2078.8,478.7],[2080.3,489.6],[2082,503.9],[2083.4,515.5],[2085.6,530],[2086.4,538.9],[2088.1,552.7],[2089.7,564.3],[2091.2,573.2],[2093,588.8],[2094.5,599.7],[2096.9,614.7],[2098.9,626.7],[2100.9,640.6],[2102.5,650],[2105.2,663.7],[2106.2,674.9],[2105,694.2],[2105,709.4],[2103.3,721],[2096.4,728.4],[2083.5,733.6],[2072,738.4],[2055.1,746.3],[2053.8,746.6]] },
+        nerves: { L: [[1958,748],[1947.2,754.8],[1936,761.7],[1924.6,767.8],[1914,772.1],[1902,775],[1890,777],[1878,779],[1866,780.8],[1855.7,778.1],[1847.9,769.5],[1838.7,759.6],[1828.8,751.2],[1818.9,743.1],[1809,734.3],[1800.3,725],[1793,714.5],[1784.9,704.6],[1777.1,694.5],[1769.7,683.3],[1763.6,672.1],[1758.7,660.7],[1755.6,649.3],[1752.9,635.9],[1751.7,623.2],[1751.5,610.5],[1752,597.8],[1751.2,586],[1751.5,573.8],[1751.6,571.3]], R: [[2053.8,746.6],[2061.5,753.2],[2072.5,761.4],[2080.7,765.8],[2092.3,771.1],[2104.8,775.6],[2118.5,778.5],[2131.2,778.8],[2143.5,775.3],[2154.3,765.9],[2163.7,758.8],[2174.3,751.2],[2184.4,743.2],[2190.7,735.5],[2199.8,726.1],[2208.7,717],[2217.8,707.7],[2226.6,697.7],[2232.7,684.9],[2233.5,669.8],[2238.3,664.5],[2250.8,652.1],[2252.4,638.6],[2248.6,626.8],[2254.1,613.6],[2256.5,601.5],[2257.7,596.8]] },
+      },
+    };
+    var PANEL_X = { A: 0, B: 800, C: 1600 };
+    var TRACT_SIDE = { Lc: ["L", "R"], Li: ["L", "L"], Rc: ["R", "L"], Ri: ["R", "R"] }; // [from hemisphere, to hand]
+    var TYPE = { A: "immature", B: "mature", C: "mature" };
+    // Positions per panel, in image pixels.
+    var COIL = { A: { L: [300, 118], R: [420, 118] }, B: { L: [1140, 112], R: [1262, 112] }, C: { L: [1940, 110], R: [2062, 110] } };
+    var ORIGIN = { A: { L: [305, 312], R: [420, 312] }, B: { L: [1132, 305], R: [1290, 310] }, C: { L: [1930, 292], R: [2088, 315] } };
+    var HANDC = { A: { L: [100, 645], R: [632, 655] }, B: { L: [935, 645], R: [1468, 655] }, C: { L: [1735, 645], R: [2268, 655] } };
+    var MEPPOS = { A: { L: [28, 792], R: [640, 796] }, B: { L: [862, 792], R: [1478, 796] }, C: { L: [1660, 792], R: [2290, 796] } };
+
+    var TEXT = {
+      A: "Immature: early in development, each hemisphere sends motor tracts to both sides of the spinal cord, so each hand is connected to both hemispheres.",
+      B: "Typical development: the ipsilateral tracts are pruned away and the contralateral ones mature, so each hemisphere controls the opposite hand.",
+      C: "Prenatal injury (unilateral CP): the lesioned hemisphere loses its tract, and the non-lesioned hemisphere keeps an atypical ipsilateral tract to the affected hand, alongside its normal contralateral one.",
+    };
+    var TMS_TEXT = {
+      A: { L: "TMS over the left hemisphere: both hands respond, through contralateral and ipsilateral tracts.",
+           R: "TMS over the right hemisphere: both hands respond, through contralateral and ipsilateral tracts." },
+      B: { L: "TMS over the left hemisphere: only the right hand responds (contralateral).",
+           R: "TMS over the right hemisphere: only the left hand responds (contralateral)." },
+      C: { L: "TMS over the lesioned left hemisphere: no response in this example, because its motor tract was lost.",
+           R: "TMS over the non-lesioned right hemisphere: both hands respond. The response in the affected right hand travels through an ipsilateral tract, and detecting it is one thing TMS is used for." },
+    };
+
+    // Invisible guide paths for every tract and nerve, plus a layer for effects.
+    var guides = {};
+    Object.keys(PATHS).forEach(function (st) {
+      guides[st] = { tracts: {}, nerves: {} };
+      Object.keys(PATHS[st].tracts).forEach(function (k) {
+        guides[st].tracts[k] = el(svg, "path", { d: pathD(PATHS[st].tracts[k]), class: "pw-guide" });
+      });
+      Object.keys(PATHS[st].nerves).forEach(function (k) {
+        guides[st].nerves[k] = el(svg, "path", { d: pathD(PATHS[st].nerves[k]), class: "pw-guide" });
+      });
+    });
+    var fx = el(svg, "g", { class: "pw-fx" });
+
+    // ---------- Panning between panels ----------
+    var stage = "A", viewX = 0, panRaf = null;
+    function setView(x) {
+      viewX = x;
+      svg.setAttribute("viewBox", x + " 0 800 830");
+    }
+    function panTo(x) {
+      if (panRaf) cancelAnimationFrame(panRaf);
+      if (reduce) return setView(x);
+      var from = viewX, t0 = null;
+      function f(now) {
+        if (t0 === null) t0 = now;
+        var p = Math.min(1, (now - t0) / 650), e = p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2;
+        setView(from + (x - from) * e);
+        panRaf = p < 1 ? requestAnimationFrame(f) : null;
+      }
+      panRaf = requestAnimationFrame(f);
+    }
+    function clearFx() { while (fx.firstChild) fx.removeChild(fx.firstChild); }
+    function setStage(s) {
+      stage = s;
+      clearFx();
+      panTo(PANEL_X[s]);
+      tabs.forEach(function (t) {
+        var on = t.dataset.stage === s;
+        t.classList.toggle("is-current", on);
+        t.setAttribute("aria-selected", on ? "true" : "false");
+      });
+      desc.textContent = TEXT[s];
+      result.textContent = "Press a TMS button to see which hands respond.";
+    }
+
+    // ---------- TMS pulse ----------
+    var busy = false;
+    function travel(path, dur, cls, done) {
+      if (reduce) return done();
+      var len = path.getTotalLength(), dot = el(fx, "circle", { r: 10, class: "pw-pulse " + cls }), t0 = null;
+      function f(now) {
+        if (t0 === null) t0 = now;
+        var p = Math.min(1, (now - t0) / dur), pt = path.getPointAtLength(p * len);
+        dot.setAttribute("cx", pt.x);
+        dot.setAttribute("cy", pt.y);
+        if (p < 1) requestAnimationFrame(f);
+        else { if (dot.parentNode) fx.removeChild(dot); done(); }
+      }
+      requestAnimationFrame(f);
+    }
+    function respond(side) {
+      var c = HANDC[stage][side], m = MEPPOS[stage][side];
+      el(fx, "circle", { cx: c[0], cy: c[1], r: 100, class: "pw-hand-ring" + (reduce ? "" : " is-pulsing") });
+      var g = el(fx, "g", { class: "pw-mep" });
+      el(g, "polyline", {
+        points: [[0, 0], [20, 0], [27, 18], [36, -20], [44, 0], [84, 0]] // biphasic MEP: negative deflection first
+          .map(function (p) { return m[0] + p[0] + "," + (m[1] + p[1]); }).join(" "),
+        class: "pw-mep-line",
+      });
+      el(g, "text", { x: m[0] + 42, y: m[1] - 26, class: "pw-mep-text", "text-anchor": "middle" }, "MEP");
+    }
+    function fire(side) {
+      if (busy) return;
+      busy = true;
+      clearFx();
+      result.textContent = "";
+      var co = COIL[stage][side], o = ORIGIN[stage][side];
+      var coil = el(fx, "g", { class: "pw-coil" });
+      el(coil, "circle", { cx: co[0] - 22, cy: co[1], r: 22 });
+      el(coil, "circle", { cx: co[0] + 22, cy: co[1], r: 22 });
+      el(fx, "circle", { cx: o[0], cy: o[1], r: 12, class: "pw-flash" });
+      var live = Object.keys(PATHS[stage].tracts).filter(function (k) { return TRACT_SIDE[k][0] === side; });
+      var pending = live.length;
+      function finish() {
+        setTimeout(function () {
+          if (coil.parentNode) fx.removeChild(coil);
+          result.textContent = TMS_TEXT[stage][side];
+          busy = false;
+        }, reduce ? 0 : 250);
+      }
+      if (!pending) return finish();
+      live.forEach(function (k) {
+        var to = TRACT_SIDE[k][1];
+        var atypical = stage === "C" && k === "Ri";
+        var speed = TYPE[stage] === "immature" ? 1.5 : 1;
+        travel(guides[stage].tracts[k], 950 * speed, atypical ? "is-atypical" : "", function () {
+          travel(guides[stage].nerves[to], 650 * speed, atypical ? "is-atypical" : "", function () {
+            respond(to);
+            if (--pending === 0) finish();
+          });
+        });
+      });
+    }
+
+    tabs.forEach(function (t) { t.addEventListener("click", function () { if (!busy) setStage(t.dataset.stage); }); });
+    fires.forEach(function (b) { b.addEventListener("click", function () { fire(b.dataset.side); }); });
+    setView(0);
+    setStage("A");
+  })();
+</script> <h2 id="a-moving-target-you-can-actually-touch">A moving target you can actually touch</h2> <p>Reaching for a moving target requires constant correction based on what you see and feel. Most studies of this “online” motor control use targets on a screen, which lack the touch and depth cues of reaching for a real object. So I designed a physical moving-target board, built with Julia Zayas (Boston University College of Engineering, Class of 2027), the project’s lead engineer.</p> <figure class="lab-figure lab-figure-live" id="mt-figure"> <div class="mt-panels"> <svg class="mt-top" viewbox="0 0 420 300" role="img" aria-labelledby="mt-top-title"> <title id="mt-top-title"> Top-down view of one trial: the hand leaves the home button, the target jumps 10 centimeters sideways when the hand is 35 percent of the way there, and the hand path bends to reach the target's new position. </title> </svg> <svg class="mt-plot" viewbox="0 0 420 300" role="img" aria-labelledby="mt-plot-title"> <title id="mt-plot-title"> Lateral position over time. The target trace steps sideways, and after a short correction latency the hand trace follows it to the target's new position by the end of the movement. </title> </svg> </div> <div class="mt-controls"> <button type="button" class="mt-play">Pause</button> <div class="mt-scrub"> <input type="range" class="mt-range" min="0" max="1250" step="5" value="1250" aria-label="Trial time"> <div class="mt-ticks" aria-hidden="true"></div> </div> <output class="mt-time" aria-hidden="true">1.25 s</output> </div> <div class="mt-steps" role="group" aria-label="Jump to a step of the trial"></div> <figcaption> <b>Fig. 2b.</b> One trial of the task. <i>Left:</i> seen from above, the target jumps when the hand is 35% of the way there, and the hand has to correct mid-reach (dashed line: the original path). <i>Right:</i> how far the target and hand have shifted toward the target's new position, and what we measure from that correction. Drag the timeline or pick a step to explore. Timings are illustrative. </figcaption> </figure> <script>
+  (function () {
+    var fig = document.getElementById("mt-figure");
+    if (!fig) return;
+    var top = fig.querySelector(".mt-top");
+    var plot = fig.querySelector(".mt-plot");
+    var btn = fig.querySelector(".mt-play");
+    var range = fig.querySelector(".mt-range");
+    var timeOut = fig.querySelector(".mt-time");
+    var ticksBox = fig.querySelector(".mt-ticks");
+    var stepsBox = fig.querySelector(".mt-steps");
+    var NS = "http://www.w3.org/2000/svg";
+
+    // Task timing in real seconds (illustrative).
+    var MT = 1.25; // movement time
+    var LAT = 0.16; // correction latency
+    var SHIFT = 10; // cm
+    var SPEED = 24; // cm/s target speed
+    var SLOW = 2; // animation runs at half speed
+    var PRE = 0.9, HOLD = 4.5, RESET = 0.6; // display seconds
+    var FADE = 0.45; // labels fade in over this many display seconds
+    var CYCLE = PRE + MT * SLOW + HOLD + RESET;
+
+    function mj(t) {
+      t = Math.max(0, Math.min(1, t));
+      return t * t * t * (10 - 15 * t + 6 * t * t);
+    }
+    // Time at which forward progress reaches 35%.
+    var tJump = (function () {
+      var lo = 0, hi = 1;
+      for (var i = 0; i < 40; i++) {
+        var mid = (lo + hi) / 2;
+        if (mj(mid) < 0.35) lo = mid; else hi = mid;
+      }
+      return lo * MT;
+    })();
+    var tShiftEnd = tJump + SHIFT / SPEED;
+    var tCorr = tJump + LAT;
+
+    function targetX(t, dir) {
+      if (t <= tJump) return 0;
+      return dir * SHIFT * Math.min(1, (t - tJump) / (tShiftEnd - tJump));
+    }
+    function handX(t, dir) {
+      if (t <= tCorr) return 0;
+      return dir * SHIFT * mj((t - tCorr) / (MT - tCorr));
+    }
+    function handY(t) {
+      return mj(t / MT);
+    }
+
+    function el(svg, name, attrs, text) {
+      var e = document.createElementNS(NS, name);
+      for (var k in attrs) e.setAttribute(k, attrs[k]);
+      if (text != null) e.textContent = text;
+      svg.appendChild(e);
+      return e;
+    }
+    function clear(svg) {
+      var keep = svg.querySelector("title");
+      while (svg.lastChild && svg.lastChild !== keep) svg.removeChild(svg.lastChild);
+    }
+
+    // ---------- Left: top-down view ----------
+    var S = 5.5, CX = 210; // px per cm, centre line
+    var BOARD_Y = 52, HOME_Y = 262;
+    var tx = function (cm) { return CX + cm * S; };
+    var hy = function (p) { return HOME_Y + (BOARD_Y + 16 - HOME_Y) * p; };
+
+    function drawTop(t, dir, phase, f) {
+      clear(top);
+      // Table edge and board.
+      el(top, "rect", { x: tx(-30), y: BOARD_Y - 14, width: 60 * S, height: 22, class: "mt-board" });
+      el(top, "line", { x1: tx(-24), y1: BOARD_Y - 3, x2: tx(24), y2: BOARD_Y - 3, class: "mt-rail" });
+      el(top, "text", { x: tx(-30), y: BOARD_Y + 26, class: "mt-label" }, "target board");
+      // Trigger line at 35% of the reach.
+      var yTrig = hy(0.35);
+      el(top, "line", { x1: tx(-28), y1: yTrig, x2: tx(28), y2: yTrig, class: "mt-trigger" });
+      el(top, "text", { x: tx(-28), y: yTrig - 7, class: "mt-label mt-accent" }, "35% of reach");
+      el(top, "text", { x: tx(-28), y: yTrig + 16, class: "mt-label" }, "target moves");
+      // Home button.
+      el(top, "rect", { x: CX - 16, y: HOME_Y - 6, width: 32, height: 16, rx: 3, class: "mt-home" });
+      el(top, "text", { x: CX + 24, y: HOME_Y + 6, class: "mt-label" }, "home button");
+      // Original planned path (ghost).
+      el(top, "line", { x1: CX, y1: HOME_Y, x2: CX, y2: hy(1), class: "mt-ghost" });
+      // Ghost of the target's starting spot once it has moved.
+      if (t > tJump) el(top, "circle", { cx: CX, cy: BOARD_Y - 3, r: 13, class: "mt-target-ghost", opacity: f(tJump) });
+      // Shift arrow.
+      if (t > tJump) {
+        var x2 = tx(targetX(t, dir));
+        el(top, "line", { x1: CX, y1: BOARD_Y - 26, x2: x2, y2: BOARD_Y - 26, class: "mt-shift" });
+        if (t >= tShiftEnd) {
+          el(top, "text", { x: (CX + x2) / 2, y: BOARD_Y - 31, class: "mt-label mt-accent", "text-anchor": "middle", opacity: f(tShiftEnd) }, "10 cm");
+        }
+      }
+      // Target.
+      var hit = t >= MT;
+      el(top, "circle", { cx: tx(targetX(t, dir)), cy: BOARD_Y - 3, r: 13, class: "mt-target" + (hit ? " is-hit" : "") });
+      // Hand path so far.
+      if (t > 0) {
+        var pts = [];
+        for (var s = 0; s <= t + 1e-6; s += MT / 60) pts.push(tx(handX(s, dir)) + "," + hy(handY(s)));
+        pts.push(tx(handX(t, dir)) + "," + hy(handY(t)));
+        el(top, "polyline", { points: pts.join(" "), class: "mt-path" });
+      }
+      // Hand (fingertip).
+      el(top, "circle", { cx: tx(handX(t, dir)), cy: hy(handY(t)), r: 7, class: "mt-hand" });
+      // Phase label, matching the poster's four steps.
+      el(top, "text", { x: 12, y: 290, class: "mt-phase", opacity: phase.opacity }, phase.text);
+    }
+
+    // ---------- Right: lateral position over time ----------
+    var PL = 48, PR = 14, PT = 26, PB = 46, W = 420, H = 300, TMAX = 1.5;
+    var px = function (s) { return PL + (s / TMAX) * (W - PL - PR); };
+    var YMIN = -7, YMAX = 12;
+    var py = function (cm) { return PT + ((YMAX - cm) / (YMAX - YMIN)) * (H - PT - PB); };
+
+    function drawPlot(t, dir, f) {
+      clear(plot);
+      el(plot, "line", { x1: PL, y1: PT, x2: PL, y2: H - PB, class: "mt-axis" });
+      el(plot, "line", { x1: PL, y1: py(0), x2: W - PR, y2: py(0), class: "mt-zero" });
+      el(plot, "line", { x1: PL, y1: H - PB, x2: W - PR, y2: H - PB, class: "mt-axis" });
+      [0, 0.5, 1, 1.5].forEach(function (s) {
+        el(plot, "text", { x: px(s), y: H - PB + 16, class: "mt-tick", "text-anchor": "middle" }, s.toFixed(1));
+      });
+      [0, 5, 10].forEach(function (c) {
+        el(plot, "text", { x: PL - 8, y: py(c) + 4, class: "mt-tick", "text-anchor": "end" }, c);
+      });
+      el(plot, "text", { x: (PL + W - PR) / 2, y: H - 8, class: "mt-label", "text-anchor": "middle" }, "time from reach onset (s)");
+      el(plot, "text", { x: -(PT + (H - PT - PB) / 2), y: 14, class: "mt-label", "text-anchor": "middle", transform: "rotate(-90)" }, "shift toward target (cm)");
+
+      // Legend.
+      el(plot, "line", { x1: W - 150, y1: 12, x2: W - 134, y2: 12, class: "mt-trace-target" });
+      el(plot, "text", { x: W - 130, y: 16, class: "mt-label" }, "target");
+      el(plot, "line", { x1: W - 82, y1: 12, x2: W - 66, y2: 12, class: "mt-trace-hand" });
+      el(plot, "text", { x: W - 62, y: 16, class: "mt-label" }, "hand");
+
+      var tt = Math.min(t, TMAX);
+      function trace(fn, cls) {
+        if (tt <= 0) return;
+        var pts = [];
+        for (var s = 0; s <= tt + 1e-6; s += 0.01) pts.push(px(s) + "," + py(fn(Math.min(s, MT), 1)));
+        el(plot, "polyline", { points: pts.join(" "), class: cls });
+      }
+      trace(targetX, "mt-trace-target");
+      trace(handX, "mt-trace-hand");
+
+      // Annotations appear as the trial reaches them.
+      var yb = py(-2.2);
+      if (t >= tJump) {
+        el(plot, "line", { x1: px(tJump), y1: PT, x2: px(tJump), y2: py(0), class: "mt-event", opacity: f(tJump) });
+        el(plot, "text", { x: px(tJump) + 4, y: PT + 10, class: "mt-label mt-accent", opacity: f(tJump) }, "target moves");
+      }
+      if (t >= tCorr) {
+        var g1 = el(plot, "g", { opacity: f(tCorr) });
+        el(g1, "line", { x1: px(tJump), y1: yb, x2: px(tCorr), y2: yb, class: "mt-bracket" });
+        el(g1, "line", { x1: px(tCorr), y1: yb - 5, x2: px(tCorr), y2: yb + 5, class: "mt-bracket" });
+        el(g1, "line", { x1: px(tJump), y1: yb - 5, x2: px(tJump), y2: yb + 5, class: "mt-bracket" });
+        el(g1, "text", { x: px(tCorr) + 6, y: yb + 4, class: "mt-label" }, "correction latency");
+      }
+      if (t >= MT) {
+        var ym = py(-5.4);
+        var g2 = el(plot, "g", { opacity: f(MT) });
+        el(g2, "line", { x1: px(0), y1: ym, x2: px(MT), y2: ym, class: "mt-bracket" });
+        el(g2, "line", { x1: px(0), y1: ym - 5, x2: px(0), y2: ym + 5, class: "mt-bracket" });
+        el(g2, "line", { x1: px(MT), y1: ym - 5, x2: px(MT), y2: ym + 5, class: "mt-bracket" });
+        el(g2, "text", { x: px(0) + 6, y: ym - 6, class: "mt-label" }, "movement time");
+        el(plot, "circle", { cx: px(MT), cy: py(handX(MT, 1)), r: 4, class: "mt-hit-dot" });
+      }
+      // Time cursor, fading out once the movement is over.
+      if (t > 0) el(plot, "line", { x1: px(tt), y1: PT + 16, x2: px(tt), y2: H - PB, class: "mt-cursor", opacity: 1 - f(MT) });
+    }
+
+    function ease(x) {
+      x = Math.max(0, Math.min(1, x));
+      return x * x * (3 - 2 * x);
+    }
+
+    // Draws one moment of the looping animation. `settled` is used while scrubbing: everything up to the
+    // current moment is fully drawn, with no fades.
+    function frame(clock, settled) {
+      var c = clock % CYCLE;
+      var n = Math.floor(clock / CYCLE);
+      var dir = n % 2 === 0 ? 1 : -1;
+      var d = c - PRE; // display seconds since reach onset (negative while waiting)
+      var t = Math.max(0, Math.min(MT, d / SLOW));
+      // Opacity for something that appears at real time `evt`: eases in over FADE display seconds.
+      var f = settled
+        ? function (evt) { return t >= evt - 1e-6 ? 1 : 0; }
+        : function (evt) { return ease((d - evt * SLOW) / FADE); };
+
+      // The four steps from the poster; each label fades in when its step starts.
+      var steps = [
+        [-PRE / SLOW, "1 · ready at the home button"],
+        [0, "1 · reach onset"],
+        [tJump, "2 · target moves"],
+        [tCorr, "3 · reach adjustment"],
+        [MT, "4 · target hit"],
+      ];
+      // Give every step label at least MIN_STEP display seconds, so quick steps don't flicker past.
+      var MIN_STEP = 0.7, prev = -Infinity, step = steps[0], stepStart = -Infinity;
+      steps.forEach(function (st, i) {
+        var startAt = i === 0 ? -PRE : Math.max(st[0] * SLOW, prev + MIN_STEP);
+        prev = startAt;
+        if (d >= startAt) { step = st; stepStart = startAt; }
+      });
+      if (settled) {
+        // While scrubbing, label the step by the actual event times.
+        step = d >= 0 ? steps[1] : steps[0];
+        steps.forEach(function (st, i) { if (i > 1 && t >= st[0] - 1e-6) step = st; });
+      }
+      var phase = { text: step[1], opacity: settled || step === steps[0] ? 1 : ease((d - stepStart) / FADE) };
+
+      drawTop(t, dir, phase, f);
+      drawPlot(t, dir, f);
+
+      // Fade both panels out at the end of a trial and back in for the next one.
+      var holdEnd = PRE + MT * SLOW + HOLD;
+      var o = settled ? 1 : c >= holdEnd ? 1 - ease((c - holdEnd) / RESET) : ease(c / 0.35);
+      top.style.opacity = plot.style.opacity = o;
+      syncControls(t, step[1]);
+    }
+
+    // ---------- Timeline controls ----------
+    var STEPS = [
+      { t: 0, label: "Reach onset" },
+      { t: tJump, label: "Target moves" },
+      { t: tCorr, label: "Adjustment" },
+      { t: MT, label: "Target hit" },
+    ];
+    var stepBtns = STEPS.map(function (st, i) {
+      // Numbered tick on the timeline track, at the step's exact time.
+      var tick = document.createElement("span");
+      tick.className = "mt-tick-mark";
+      tick.style.setProperty("--p", st.t / MT);
+      tick.textContent = i + 1;
+      ticksBox.appendChild(tick);
+      // Matching button underneath.
+      var b = document.createElement("button");
+      b.type = "button";
+      b.className = "mt-step";
+      b.innerHTML = "<span>" + (i + 1) + "</span> " + st.label;
+      b.addEventListener("click", function () { seek(st.t); });
+      stepsBox.appendChild(b);
+      return b;
+    });
+
+    var scrubbing = false;
+    function syncControls(t, stepText) {
+      if (!scrubbing) range.value = Math.round(t * 1000);
+      range.style.setProperty("--fill", (t / MT) * 100 + "%");
+      timeOut.textContent = t.toFixed(2) + " s";
+      range.setAttribute("aria-valuetext", t.toFixed(2) + " seconds, " + stepText.replace(/^\d · /, ""));
+      var current = -1;
+      STEPS.forEach(function (st, i) { if (t >= st.t - 1e-6) current = i; });
+      stepBtns.forEach(function (b, i) { b.classList.toggle("is-current", i === current); });
+    }
+
+    // ---------- Playback: plays one trial, then stops with a Replay button ----------
+    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var playing = false, start = null, offset = 0, raf = null, visible = false, autoplayed = false;
+    var END = PRE + MT * SLOW + FADE + 0.1; // display time in a trial when every label has settled
+
+    var ICONS = {
+      pause: '<svg viewBox="0 0 16 16" aria-hidden="true"><rect x="3.5" y="3" width="3" height="10"/><rect x="9.5" y="3" width="3" height="10"/></svg>',
+      play: '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 2.8v10.4L13 8z"/></svg>',
+      replay:
+        '<svg viewBox="0 0 16 16" aria-hidden="true" class="mt-icon-stroke"><path d="M13.2 8.6A5.3 5.3 0 1 1 11.6 4"/><path d="M12.4 1.6v3.2H9.2"/></svg>',
+    };
+    var LABELS = { pause: "Pause", play: "Play", replay: "Replay" };
+    var action = "play";
+    function setButton(a) {
+      action = a;
+      btn.innerHTML = ICONS[a] + "<span>" + LABELS[a] + "</span>";
+      btn.setAttribute("aria-label", LABELS[a] + " animation");
+    }
+
+    function trialStart(clock) {
+      return Math.floor(clock / CYCLE) * CYCLE;
+    }
+    function loop(now) {
+      if (start === null) start = now - offset * 1000;
+      offset = (now - start) / 1000;
+      // Stop once this trial's movement is over and its labels have faded in.
+      var base = trialStart(offset);
+      if (offset - base >= END) {
+        offset = base + END;
+        frame(offset);
+        finish();
+        return;
+      }
+      frame(offset);
+      raf = playing && visible ? requestAnimationFrame(loop) : null;
+    }
+    function play() {
+      playing = true;
+      start = null;
+      setButton("pause");
+      if (!raf && visible) raf = requestAnimationFrame(loop);
+    }
+    function stop(nextAction) {
+      playing = false;
+      if (raf) cancelAnimationFrame(raf);
+      raf = null;
+      setButton(nextAction);
+    }
+    function finish() {
+      stop("replay");
+    }
+    // Replay starts a fresh trial, alternating the jump direction each time.
+    function replay() {
+      offset = trialStart(offset) + CYCLE;
+      play();
+    }
+    // Jump to real trial time t (seconds), within the current trial, and hold there.
+    function seek(t) {
+      t = Math.max(0, Math.min(MT, t));
+      offset = trialStart(offset) + PRE + t * SLOW;
+      stop(t >= MT ? "replay" : "play");
+      frame(offset, true);
+      if (t >= MT) offset = trialStart(offset) + END;
+    }
+    btn.addEventListener("click", function () {
+      if (action === "pause") stop("play");
+      else if (action === "replay") replay();
+      else play();
+    });
+    range.addEventListener("input", function () {
+      scrubbing = true;
+      seek(range.value / 1000);
+      scrubbing = false;
+    });
+
+    // Autoplay the first trial once the figure scrolls into view.
+    function startWhenVisible() {
+      visible = true;
+      if (!autoplayed && !reduce) {
+        autoplayed = true;
+        play();
+      } else if (playing && !raf) {
+        start = null;
+        raf = requestAnimationFrame(loop);
+      }
+    }
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(function (entries) {
+        if (entries[0].isIntersecting) startWhenVisible();
+        else visible = false;
+      }).observe(fig);
+    } else {
+      startWhenVisible();
+    }
+
+    if (reduce) {
+      // Reduced motion: show the finished trial; Replay still plays it on request.
+      offset = END;
+      frame(offset, true);
+      setButton("replay");
+    } else {
+      // Ready at the home button until the figure is on screen.
+      offset = 0.35;
+      frame(offset);
+      setButton("pause");
+    }
+  })();
+</script> <p>A child reaches from a home button toward a joystick target on a motorized track. When the hand is 35% of the way there, an ultrasonic sensor tracking the hand triggers the target to shift about 10 cm left or right. We measure correction latency, movement time and success rate, while fNIRS records cortical activity. Children reach with both their affected and unaffected arm.</p> <figure class="lab-figure"> <img src="/assets/img/research/moving-target-board.jpg" alt="The moving-target board: a clear acrylic case holding a motorized track, with a joystick target and two ultrasonic sensors on a 3D-printed carriage, wiring, a small display and a keypad." width="720" height="540" loading="lazy"> <figcaption><b>Fig. 2c.</b> The board: the joystick target and its ultrasonic sensor ride on an enclosed motorized track. Still from the <a href="https://youtube.com/shorts/V6jFa3vHAho" rel="external nofollow noopener" target="_blank">video demo</a>.</figcaption> </figure> <p>To our knowledge, it is the first physical moving-target apparatus for assessing online motor control in children with CP alongside neuroimaging. Next steps are establishing its reliability and testing whether it can be used for training.</p> <p class="lab-funding">Supported by NICHD R03HD114194.</p> <aside class="lab-callout" aria-label="Take part in research"> <p class="lab-callout-text"> <strong>For families.</strong> The DEMR Lab is enrolling children and teens 6–17 years old, both typically developing and with cerebral palsy, for studies of how the brain pathways that control the hands are organized. Families are compensated for their time and travel. </p> <a class="lab-callout-link" href="https://sites.bu.edu/demrlab/we-are-recruiting-2/" rel="external nofollow noopener" target="_blank">See the lab's current studies</a> </aside> <h2 id="related-work">Related work</h2> <div class="publications"> <ol class="bibliography"><li> <div class="row"> <div class="col col-sm-2 abbr"> <abbr class="badge rounded w-100" style="background-color:#0c0a3e"> <a href="https://www.aacpdm.org/" rel="external nofollow noopener" target="_blank">AACPDM</a> </abbr> <figure> <picture> <img src="/assets/img/publication_preview/yarnall2026board.jpg" class="preview z-depth-1 rounded" width="100%" height="auto" alt="yarnall2026board.jpg" data-zoomable="" loading="eager" onerror="this.onerror=null; document.querySelectorAll('.responsive-img-srcset').forEach(function (n) { n.remove(); });"> </picture> </figure> </div> <div id="yarnall2026board" class="col-sm-8"> <div class="title">Moving Target Board for Testing Online Motor Control</div> <div class="author"> <em>Evan Yarnall</em>, J. Zayas, and <a href="https://sites.bu.edu/demrlab/people/" rel="external nofollow noopener" target="_blank">C. L. Ferre</a> </div> <div class="periodical"> <em>In American Academy for Cerebral Palsy and Developmental Medicine (AACPDM) 80th Annual Meeting</em>, Sep 2026 </div> <div class="periodical"> Demonstration poster DP26 </div> <p class="plain-summary"> <span class="plain-summary-label">In plain words:</span> A new device for testing how children correct a reach mid-movement: a real target on a motorized track jumps sideways as the child reaches for it, while a soft cap measures brain activity with light (fNIRS). It was built to understand how children control their reaches, including kids with cerebral palsy that affects one side of their body. </p> <div class="links"> <a class="abstract btn btn-sm z-depth-0" role="button">Abs</a> <a class="bibtex btn btn-sm z-depth-0" role="button">Bib</a> <a href="https://youtube.com/shorts/V6jFa3vHAho" class="btn btn-sm z-depth-0" role="button" rel="external nofollow noopener" target="_blank">Video</a> <a href="/assets/pdf/Yarnall_AACPDM2026_DP26_poster.pdf" class="btn btn-sm z-depth-0" role="button">Poster</a> </div> <div class="abstract hidden"> <p>Children with unilateral cerebral palsy (UCP) demonstrate impairments in online motor control, particularly difficulty adjusting reach trajectories in response to target perturbations. Current assessments predominantly use screen-based virtual targets, which may not fully replicate the sensorimotor demands of physical reaching, limiting ecological validity and generalizability to functional activities. Our objective is to demonstrate a novel physical moving target apparatus designed to assess online motor control in children with UCP, integrating real-time target perturbation with concurrent functional near-infrared spectroscopy (fNIRS) to examine cortical activity. The apparatus consists of a horizontal target board (approximately 60 cm wide) with a linear track and enclosed motorized target system. Children and adolescents (ages 6-17 years) are seated with target distance individually normalized to 70-80% of comfortable reach based on arm length. Participants initiate a reach from a home button toward an illuminated target. When the hand reaches 35% of the distance to target (approximately peak reach velocity), a camera-based position-tracking system triggers the target to shift laterally by ±10 cm at 24 cm/s, requiring rapid online trajectory adjustment. This paradigm challenges core components of online sensorimotor integration: visual monitoring, proprioceptive updating, and motor planning. Participants complete reaches with both affected and unaffected limbs under static and dynamic target conditions. Concurrent fNIRS captures cortical activation patterns to examine neural correlates of online motor control. The system features child-safe design with enclosed moving components and age-appropriate reach distances. Physical reaching tasks engage haptic and proprioceptive cues not captured by screen-based paradigms, enhancing ecological validity. Findings may better predict functional outcomes in daily activities such as grasping toys or catching objects which are skills essential for children with CP in activities of daily living and play. This strengthens lab-to-clinic translation. Integrating physical reaching with neuroimaging enables examination of cortical activation during realistic sensorimotor challenges. This may reveal neural signatures distinguishing successful from unsuccessful trajectory adjustments and identify mechanisms underlying motor control deficits in CP. Clinically, the apparatus may inform intervention planning by identifying which components of online motor control—visual feedback processing, trajectory planning, or motor execution—are most impaired. To our knowledge, this is the first physical moving target apparatus developed to assess online motor control in children with CP using concurrent neuroimaging. Future research will establish test-retest reliability, examine predictive validity for functional outcomes, and explore whether training yields intervention benefits.</p> </div> <div class="bibtex hidden"> <figure class="highlight"><pre><code class="language-bibtex" data-lang="bibtex"><span class="nc">@inproceedings</span><span class="p">{</span><span class="nl">yarnall2026board</span><span class="p">,</span>
+  <span class="na">title</span> <span class="p">=</span> <span class="s">{Moving Target Board for Testing Online Motor Control}</span><span class="p">,</span>
+  <span class="na">author</span> <span class="p">=</span> <span class="s">{Yarnall, Evan and Zayas, J. and Ferre, C. L.}</span><span class="p">,</span>
+  <span class="na">booktitle</span> <span class="p">=</span> <span class="s">{American Academy for Cerebral Palsy and Developmental Medicine (AACPDM) 80th Annual Meeting}</span><span class="p">,</span>
+  <span class="na">address</span> <span class="p">=</span> <span class="s">{Philadelphia, PA}</span><span class="p">,</span>
+  <span class="na">year</span> <span class="p">=</span> <span class="s">{2026}</span><span class="p">,</span>
+  <span class="na">month</span> <span class="p">=</span> <span class="nv">sep</span><span class="p">,</span>
+  <span class="na">note</span> <span class="p">=</span> <span class="s">{Demonstration poster DP26}</span><span class="p">,</span>
+<span class="p">}</span></code></pre></figure> </div> </div> </div> </li></ol> </div> </article> </div> </div> <footer class="sticky-bottom mt-5" role="contentinfo"> <div class="container"> © Copyright 2026 Evan Yarnall. Built with <a href="https://github.com/alshedivat/al-folio" rel="external nofollow noopener" target="_blank">al-folio</a>. </div> </footer> <script>
+  window.alFolio = {
+    compatBootstrap: false
+  };
+</script> <script src="/assets/js/nav-toggle.js?v=141bd79a73ebc0f0b6ea58e440ae79fc"></script> <script defer src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script> <script defer src="/assets/js/masonry.js?v=e49affc7bd2646f6acdad1dbe02c2359" type="text/javascript"></script> <script src="/assets/js/tooltips-setup.js?v=fe487e99db6c43751e6e7bdb2d6a0611"></script> <script src="/assets/js/no_defer.js?v=53b1b1a645525975c963ce8bf8bfefcf"></script> <script defer src="/assets/js/common.js?v=87baac90f765f2f3362dcf6aaf312a8a"></script> <script defer src="/assets/js/copy_code.js?v=c8a01c11a92744d44b093fc3bda915df" type="text/javascript"></script> <script defer src="/assets/js/jupyter_new_tab.js?v=896d254890d9b47f0281f63bfccf0dee"></script> <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script> <script defer src="/assets/al_img_tools/js/zoom.js"></script> <script src="https://cdn.jsdelivr.net/npm/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js" integrity="sha256-uMJJ3EoTyfRBoTbR+lrfu1uRQ87RZG8AR3cVNuQVeFg=" crossorigin="anonymous"></script> <script>
+    addBackToTop();
+  </script> <script type="module" src="/assets/al_search/js/search/ninja-keys.min.js"></script> <ninja-keys hidebreadcrumbs noautoloadmdicons placeholder="Type to start searching"></ninja-keys> <script src="/assets/al_search/js/search-setup.js"></script> <script>
+// get the ninja-keys element
+const ninja = document.querySelector('ninja-keys');
+
+// add the home and posts menu items
+ninja.data = [{
+    id: "nav-about",
+    title: "about",
+    section: "Navigation",
+    handler: () => {
+      window.location.href = "/";
+    },
+  },{id: "nav-research",
+          title: "Research",
+          description: "What I&#39;m working on now, in the DEMR Lab at Boston University.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/research/";
+          },
+        },{id: "nav-publications",
+          title: "Publications",
+          description: "Journal articles and conference presentations.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/publications/";
+          },
+        },{id: "nav-cv",
+          title: "CV",
+          description: "Curriculum vitae.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/cv/";
+          },
+        },{id: "news-gave-my-first-talk-bimanual-skills-during-infancy-at-aacpdm-2024-in-québec-city-presenting-on-dr-ferre-s-behalf-in-a-symposium-on-bimanual-skills-in-unilateral-cerebral-palsy-lab-news",
+          title: 'Gave my first talk, Bimanual Skills during Infancy, at AACPDM 2024 in Québec...',
+          description: "",
+          section: "News",},{id: "news-my-first-author-abstract-motor-experience-drives-brain-development-was-presented-as-a-talk-by-dr-ferre-at-aacpdm-2025-in-new-orleans-and-i-received-an-aacpdm-student-scholarship",
+          title: 'My first-author abstract, Motor Experience Drives Brain Development, was presented as a talk...',
+          description: "",
+          section: "News",},{id: "news-presented-two-first-author-posters-at-aacpdm-2026-in-philadelphia-one-on-how-bilateral-hand-use-develops-and-a-demonstration-of-our-moving-target-reaching-board-more-on-linkedin",
+          title: 'Presented two first-author posters at AACPDM 2026 in Philadelphia: one on how bilateral...',
+          description: "",
+          section: "News",},{id: "projects-sensorimotor-development-in-infants-at-risk-for-cp",
+          title: 'Sensorimotor development in infants at risk for CP',
+          description: "A longitudinal study following infants from 6 to 24 months. The focus of my dissertation.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/1_infant_sensorimotor/";
+            },},{id: "projects-reaching-in-unilateral-cp",
+          title: 'Reaching in unilateral CP',
+          description: "Brain, body and a new apparatus. Combining fNIRS with a custom moving-target reaching board.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/2_fnirs_tms_cp/";
+            },},{id: "projects-better-ways-to-measure-infant-movement",
+          title: 'Better ways to measure infant movement',
+          description: "Comparing video coding, wearable sensors and markerless tracking, plus the coding pipelines behind them.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/3_measuring_movement/";
+            },},{
+        id: 'social-email',
+        title: 'email',
+        section: 'Socials',
+        handler: () => {
+          window.open("mailto:%65%79%61%72%6E%61%6C%6C@%62%75.%65%64%75", "_blank");
+        },
+      },{
+        id: 'social-linkedin',
+        title: 'LinkedIn',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://www.linkedin.com/in/evanyarnall", "_blank");
+        },
+      },{
+        id: 'social-github',
+        title: 'GitHub',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://github.com/eyarnall", "_blank");
+        },
+      },{
+        id: 'social-orcid',
+        title: 'ORCID',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://orcid.org/0000-0001-9155-3070", "_blank");
+        },
+      },{
+        id: 'social-cv',
+        title: 'CV',
+        section: 'Socials',
+        handler: () => {
+          window.open("/assets/pdf/Yarnall_CV.pdf", "_blank");
+        },
+      },{
+      id: 'light-theme',
+      title: 'Change theme to light',
+      description: 'Change the theme of the site to Light',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("light");
+      },
+    },
+    {
+      id: 'dark-theme',
+      title: 'Change theme to dark',
+      description: 'Change the theme of the site to Dark',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("dark");
+      },
+    },
+    {
+      id: 'system-theme',
+      title: 'Use system default theme',
+      description: 'Change the theme of the site to System Default',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("system");
+      },
+    },];
+
+</script> <script src="/assets/al_search/js/shortcut-key.js"></script> <script defer src="/assets/al_email_protect/js/email-protect.js"></script> </body> </html>

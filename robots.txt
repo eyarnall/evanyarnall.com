@@ -1,0 +1,6 @@
+# All crawlers are welcome, including search engines and AI tools.
+# A plain-text summary of the site for AI tools: /llms.txt
+User-agent: *
+Disallow:
+
+Sitemap: https://evanyarnall.com/sitemap.xml

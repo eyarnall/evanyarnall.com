@@ -1,0 +1,62 @@
+# Evan Yarnall
+
+> Evan Yarnall is a PhD candidate in Rehabilitation Science at Boston University studying sensorimotor development in children with and at risk for cerebral palsy, using fNIRS and TMS.
+
+- Position: PhD Candidate, Rehabilitation Science, Boston University Sargent College of Health & Rehabilitation Sciences (PhD expected 2028)
+- Lab: Development, Experience, & Motor Recovery Lab (DEMR Lab): https://sites.bu.edu/demrlab/
+- Advisor: Claudio L. Ferre, PhD, Assistant Professor of Occupational Therapy: https://www.bu.edu/sargent/profile/claudio-ferre/
+- Research interests: Sensorimotor development and integration in infants and children with or at risk for cerebral palsy; development of bimanual skills and their cortical correlates; corticospinal connectivity and online motor control, using fNIRS, TMS and behavioral coding.
+- Education: PhD, Rehabilitation Science, Boston University, Sargent College, 2023–2028 (expected)
+- Education: BS, Kinesiology (Pre-Physical Therapy), Temple University, College of Public Health, 2015–2019
+- ORCID: https://orcid.org/0000-0001-9155-3070
+- LinkedIn: https://www.linkedin.com/in/evanyarnall
+- CV (PDF): https://evanyarnall.com/assets/pdf/Yarnall_CV.pdf
+
+## Pages
+
+- [About](https://evanyarnall.com/): bio, current research, news and selected work
+- [Research](https://evanyarnall.com/research/): overview of current projects
+- [Sensorimotor development in infants at risk for CP](https://evanyarnall.com/projects/1_infant_sensorimotor/): Evan Yarnall's dissertation: a longitudinal study of sensorimotor development and brain activity (fNIRS) in infants at risk for cerebral palsy, from 6 to 24 months.
+- [Reaching in unilateral CP](https://evanyarnall.com/projects/2_fnirs_tms_cp/): How children with unilateral cerebral palsy adjust a reach mid-movement, studied with fNIRS and a custom moving-target reaching board.
+- [Better ways to measure infant movement](https://evanyarnall.com/projects/3_measuring_movement/): Comparing video coding, wearable sensors (IMUs) and markerless tracking for measuring infant movement in cerebral palsy research.
+- [Publications](https://evanyarnall.com/publications/): journal articles, manuscripts and conference presentations, each with a plain-language summary
+- [CV](https://evanyarnall.com/cv/): education, research experience, publications, presentations, awards and outreach
+
+## Journal articles and manuscripts
+
+- X. Su, H. Kim, M. Kelly, Evan Yarnall, C. L. Ferre. "Comparative Effectiveness of Early Therapies for Infants and Young Children with or at-risk for Cerebral Palsy: A Network Meta-analysis." Under review, Neurorehabilitation and Neural Repair.
+  In plain words: Families of babies with or at risk for cerebral palsy can choose from many early therapies. This review pools results from published trials to compare how well those therapies work against each other.
+- X. Su, H. Kim, M. Kelly, Evan Yarnall, C. L. Ferre. "fNIRS Commons: An Open Dataset for Studying Cortical Activation during Spontaneous Movement in Infancy." Under review, Neurophotonics.
+  In plain words: A free, shared dataset that captures how brain activity changes while typically developing babies move on their own, waving their arms and kicking. It was recorded with a soft cap that measures brain activity with light (fNIRS), so other researchers can use it to answer their own questions about brain development during this time.
+- Evan Yarnall, X. Su, M. Kelly, C. L. Ferre. "Lateralized Cortical Activity during the Development of Role-Differentiated Bimanual Manipulation." In preparation.
+- C. L. Ferre, X. Su, H. Kim, Evan Yarnall, M. Kelly. "Spontaneous Movements and Development of Cortical Function: An fNIRS Study." In preparation.
+- X. Su, M. Kelly, Evan Yarnall, C. L. Ferre. "Comparison of Spontaneous Movement Measurements Using Video Observation and Inertial Measurement Units (IMUs) in Typically Developing Infants and Infants at Risk for Cerebral Palsy." In preparation.
+- H. Kim, X. Su, M. Kelly, Evan Yarnall, C. L. Ferre. "Characterizing Upper-Limb Force Control and Its Underlying Neurophysiological Correlates in Neurotypical Adults." In preparation.
+- B. R. Brenn, G. M. DiSilvio, Evan Yarnall, J. Steindler, S. Tarazi, A. Rompala, K. Akhnoukh, D. K. Choudhry. "A Comparative Evaluation of Unilateral and Bilateral Sequential Lung Isolation for Vertebral Body Tethering: A Retrospective Propensity Matched Analysis." Cureus 16(5): e59723, 2024. https://doi.org/10.7759/cureus.59723
+  In plain words: Vertebral body tethering is a spine surgery for teens with scoliosis that requires temporarily collapsing a lung. Teens who had a lung collapsed on both sides in turn needed more breathing support and stayed in the hospital about a day longer than those who had one side done, but both groups did well.
+
+## Conference presentations
+
+- Evan Yarnall, M. Kelly, H. Kim, X. Su, C. L. Ferre. "Longitudinal Trajectories of Bilateral Hand Use: Changes in Behavior and Cortical Activity." American Academy for Cerebral Palsy and Developmental Medicine (AACPDM) 80th Annual Meeting, Philadelphia, PA, September 2026. Scientific poster SP20.
+  In plain words: Between 6 and 24 months, babies spent about the same share of playtime touching toys, but more of that touching used both hands, often with each hand doing a different job. Brain activity shifted to match, from both sides of the brain toward the side opposite the active hand.
+  Poster (PDF): https://evanyarnall.com/assets/pdf/Yarnall_AACPDM2026_SP20_poster.pdf
+- Evan Yarnall, J. Zayas, C. L. Ferre. "Moving Target Board for Testing Online Motor Control." American Academy for Cerebral Palsy and Developmental Medicine (AACPDM) 80th Annual Meeting, Philadelphia, PA, September 2026. Demonstration poster DP26.
+  In plain words: A new device for testing how children correct a reach mid-movement: a real target on a motorized track jumps sideways as the child reaches for it, while a soft cap measures brain activity with light (fNIRS). It was built to understand how children control their reaches, including kids with cerebral palsy that affects one side of their body.
+  Poster (PDF): https://evanyarnall.com/assets/pdf/Yarnall_AACPDM2026_DP26_poster.pdf
+- H. Kim, Evan Yarnall, C. L. Ferre. "Moderate Intensity Upper Limb Resistance Band Training Improves Neurophysiology in a Young Adult With Spastic Diplegic Cerebral Palsy: A Single Case Design Study." American Academy for Cerebral Palsy and Developmental Medicine (AACPDM) 80th Annual Meeting, Philadelphia, PA, September 2026. Clinical observation poster CO18.
+  In plain words: A young adult with cerebral palsy did moderate-intensity arm exercises with resistance bands. Afterwards, measures of how the brain and nerves control the arm improved, a promising first result from a single person.
+- X. Su, M. Kelly, H. Kim, Evan Yarnall, C. L. Ferre. "Feasibility of Using DeepLabCut for Markerless Motion Tracking During Infant Reaching." American Academy for Cerebral Palsy and Developmental Medicine (AACPDM) 80th Annual Meeting, Philadelphia, PA, September 2026. Scientific poster SP167.
+  In plain words: Can free video-tracking software (DeepLabCut) follow babies’ arms as they reach for toys, with no markers or sensors on the body? This poster tested whether the approach is practical for infant studies.
+- Evan Yarnall, X. Su, H. Kim, M. Kelly, C. L. Ferre. "Motor Experience Drives Brain Development: A Longitudinal Study of Infant Manual Skills and Cortical Activity in Neurotypical Infants and Infants with Unilateral Cerebral Palsy." American Academy for Cerebral Palsy and Developmental Medicine (AACPDM) 79th Annual Meeting, New Orleans, LA, October 2025. Free paper R1.
+  In plain words: We followed babies’ hand use during play and their brain activity as they grew, in babies developing typically and babies with cerebral palsy affecting one side of the body. The results suggest that babies’ own movement experience helps shape how the brain develops.
+- X. Su, Evan Yarnall, M. Kelly, H. Kim, C. L. Ferre. "Comparison of Spontaneous Movement Measurements Using Video Observation and Inertial Measurement Units (IMUs) in Typically Developing Infants and Infants at Risk for Cerebral Palsy." American Academy for Cerebral Palsy and Developmental Medicine (AACPDM) 79th Annual Meeting, New Orleans, LA, October 2025. Free paper Q2.
+  In plain words: Two ways to measure babies’ spontaneous movements, compared side by side: trained observers coding video, and small wearable motion sensors. The study included babies developing typically and babies at risk for cerebral palsy. The wearable sensors captured spontaneous movement acceptably well compared with video coding.
+- X. Su, M. Kelly, H. Kim, Evan Yarnall, C. L. Ferre. "Exploring the Dynamics of Spontaneous Infant Movement: A Longitudinal Study of Movement Patterns and Cortical Activity." American Academy for Cerebral Palsy and Developmental Medicine (AACPDM) 78th Annual Meeting, Quebec City, Canada, October 2024. Scientific poster SP169.
+  In plain words: In their first months, babies wave their arms and kick on their own. This study followed babies over time to see how those movement patterns change and how they relate to brain activity.
+- X. Su, H. Kim, Evan Yarnall, M. Kelly, C. L. Ferre. "Spontaneous Movements and Cortical Activity during Early Infancy." American Society of Neurorehabilitation (ASNR) Annual Meeting, San Antonio, TX, April 2024. Poster P120.
+  In plain words: An early look at how young babies’ spontaneous movements, like waving and kicking, relate to activity in the brain during the first months of life.
+
+## For families
+
+The DEMR Lab at Boston University enrolls infants and children, including children with cerebral palsy, in its
+studies. Current studies and how to take part: https://sites.bu.edu/demrlab/we-are-recruiting-2/
