@@ -95,10 +95,10 @@ jobs:
           valueFile: "_config.yml"
           propertyPath: "giscus.repo"
           value: ${{ github.repository }}
-      - name: Install and Build 🔧
+      - name: Build 🔧
+        # No ImageMagick or nbconvert: the site uses neither (imagemagick is off in _config.yml, and there are
+        # no Jupyter notebooks), and installing them took minutes.
         run: |
-          sudo apt-get update && sudo apt-get install -y imagemagick
-          pip3 install --upgrade nbconvert
           export JEKYLL_ENV=production
           bundle exec jekyll build
       - name: Print CV PDF 📄
