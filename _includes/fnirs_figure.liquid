@@ -162,7 +162,6 @@
             el(map, "circle", { cx: c[0] + gx * 23, cy: c[1] + gy * 23, r: 10, fill: color(pv[1] * w), class: "fn-channel" });
           });
         });
-        el(map, "text", { x: c[0], y: c[1] + 52, class: "fn-tiny", "text-anchor": "middle" }, pv[0] === "L" ? "C3" : "C4");
       });
       el(map, "circle", { cx: 150, cy: 146, r: 2.5, class: "fn-cz" });
       el(map, "text", { x: 150, y: 132, class: "fn-tiny", "text-anchor": "middle" }, "Cz");
@@ -218,9 +217,9 @@
       });
       // Legend.
       el(chart, "line", { x1: PL + 4, y1: 12, x2: PL + 20, y2: 12, class: "fn-trace-left" });
-      el(chart, "text", { x: PL + 24, y: 16, class: "fn-tiny" }, "left hemisphere (C3)");
+      el(chart, "text", { x: PL + 24, y: 16, class: "fn-tiny" }, "left hemisphere");
       el(chart, "line", { x1: PL + 190, y1: 12, x2: PL + 206, y2: 12, class: "fn-trace-right" });
-      el(chart, "text", { x: PL + 210, y: 16, class: "fn-tiny" }, "right (C4)");
+      el(chart, "text", { x: PL + 210, y: 16, class: "fn-tiny" }, "right");
     }
 
     function render() {
